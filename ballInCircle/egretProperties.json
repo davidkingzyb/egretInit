@@ -1,0 +1,17 @@
+{
+    "document_class": "main",
+    "modules": [
+        {
+            "name": "core"
+        },
+        {
+            "name": "res"
+        }
+    ],
+    "native": {
+        "path_ignore": [
+
+        ]
+    },
+    "egret_version":"1.6.0"
+}
