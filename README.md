@@ -8,7 +8,8 @@ some useful tools for egret
 
 ###Render.ts
 Time-based Animation
-solve fps drop problems use Frame-based Animation
+
+solve fps drop problems when using Frame-based Animation
 ```
 var render=new Render();
 
@@ -45,6 +46,7 @@ public hello(){
 
 ###resource.py
 create resource.json automatically
+
 sprite sheet must be named "*SS.json"
 
 ###runServer.py
