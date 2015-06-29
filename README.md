@@ -56,12 +56,18 @@ a server
 a solution for iphone and android diffrent screen size
 
 android need scale stage to .5 and the tap event stageX and stageY need times 2
+
+use tool.ts setWH and getXY function set stage to .5 and get tap event stageX and Y
 ```
 if(window["client"]=="android"){
-  this.scaleX=0.5;//这里的this是Main的实例
+  this.scaleX=0.5;
   this.scaleY=0.5;
 }
 ```
+
+###tool.ts
+some egret tools
+
 
 
 
