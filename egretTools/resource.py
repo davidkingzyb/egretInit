@@ -34,5 +34,3 @@ with open('resource.json','w') as f:
 	f.write(json.dumps(jsonDict))
 
 print ('ok')
-
-

@@ -2,10 +2,10 @@ class tool{
 	static stageW;
 	static stageH;
 
-	static setWH(){
+	static setWH(that){
 		if(window["client"]=="android"){
-            this.scaleX=0.5;//这里的this是Main的实例
-            this.scaleY=0.5;
+            that.scaleX=0.5;//这里的this是Main的实例
+            that.scaleY=0.5;
         }
 		tool.stageW = window['stage_width'];
 		tool.stageH = window['stage_height'];
@@ -30,6 +30,13 @@ class tool{
         mc.anchorY=ay?ay:0;
         return mc;
     }
+    static changeMovieClipData(target,texture){
+        target.stop();
+        var data = RES.getRes(texture+"MC");
+        var txtr = RES.getRes(texture);
+        var mcf=new egret.MovieClipDataFactory(data,txtr);
+        target.movieClipData = mcf.generateMovieClipData(texture);
+    }
     static initTextField(text,x?,y?,textColor?,size?,fontFamily?){
 		var tf = new egret.TextField();
 		tf.text = text;
@@ -51,7 +58,7 @@ class tool{
 		return bt;
 
     }
-    static getXY(e){
+    static getXY(event){
     	var X=window["client"]=="android"?event.stageX*2:event.stageX;
     	var Y=window["client"]=="android"?event.stageY*2:event.stageY;
     	return X,Y;

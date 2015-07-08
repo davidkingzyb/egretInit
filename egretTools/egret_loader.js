@@ -6,6 +6,7 @@ egret_h5.startGame = function () {
     context.netContext = new egret.HTML5NetContext();
 
     // egret.StageDelegate.getInstance().setDesignSize(480, 800);
+    
     setStageSize();
     context.stage = new egret.Stage();
     var scaleMode =  egret.MainContext.deviceType == egret.MainContext.DEVICE_MOBILE ? egret.StageScaleMode.SHOW_ALL : egret.StageScaleMode.NO_SCALE;
@@ -14,7 +15,7 @@ egret_h5.startGame = function () {
     //WebGL is a Egret's beta property. It's off by default.
     //WebGL是egret的Beta特性，默认关闭
     var rendererType = 0;
-    if (rendererType == 1) {// egret.WebGLUtils.checkCanUseWebGL()) {
+    if (rendererType == 1) {
         console.log("Use WebGL mode");
         context.rendererContext = new egret.WebGLRenderer();
     }
@@ -42,15 +43,13 @@ egret_h5.startGame = function () {
         throw new Error("Document Class is not found！");
     }
 
-    //处理屏幕大小改变
-    //implement for screen size change
     var resizeTimer = null;
     var doResize = function () {
         context.stage.changeSize();
         resizeTimer = null;
     };
     window.onresize = function () {
-        if (resizeTimer == null) {
+        if (resizeTimer === null) {
             resizeTimer = setTimeout(doResize, 300);
         }
     };
@@ -62,7 +61,6 @@ function setStageSize() {
     } else {
         window["client"] = "android";
     }
-    /*全屏适配*/
     var winHeight;
     var winWidth;
     if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth) {
@@ -74,9 +72,9 @@ function setStageSize() {
     }
     var GameWin;
     if (window["client"] == "iphone") {
-        GameWin = {w: 640, h: 1136}; //i6苹果分辨率
+        GameWin = {w: 750, h: 1334};
     } else {
-        GameWin = {w: 320, h: 568};//安卓客户端考虑到性能，将分辨率降为i6分辨率的一半
+        GameWin = {w: 375, h: 667};
     }
     var Gper = GameWin.h / GameWin.w;
     var per = winHeight / winWidth;
