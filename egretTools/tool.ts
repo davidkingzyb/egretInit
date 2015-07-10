@@ -3,8 +3,9 @@ class tool{
 	static stageH;
 
 	static setWH(that){
+        //@that GameContainer
 		if(window["client"]=="android"){
-            that.scaleX=0.5;//这里的this是Main的实例
+            that.scaleX=0.5;
             that.scaleY=0.5;
         }
 		tool.stageW = window['stage_width'];
