@@ -61,6 +61,7 @@ class tool{
     static getXY(event){
     	var X=window["client"]=="android"?event.stageX*2:event.stageX;
     	var Y=window["client"]=="android"?event.stageY*2:event.stageY;
-    	return X,Y;
+        return {"x":X,"y":Y};
     }
+
 }
