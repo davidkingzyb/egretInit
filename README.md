@@ -1,6 +1,12 @@
 # egretInit
 
+by DKZ
+
 Initialize egret project quickly.
+
+##egretInit
+
+An example of egret project base on egret 1.6.0
 
 ##egretTools
 some useful tools for egret 
@@ -58,7 +64,7 @@ sprite sheet must be named like /^\w*SS.json$/
 
 ###runServer.py
 
-a server
+a python server
 
 ###egret_loader.js
 a solution for iphone and android diffrent screen size
@@ -73,34 +79,34 @@ egret tools for Initialize standard egret Object
 
 please use resourse.py to keep texture name and sourse name correct
 
-**initBitmap(texture,x?,y?,ax?,ay?)**
+**setWH(that)**
 
 scale android stage and set global screen width and screen height (use egret_loader.js)
 
 ```
 tool.setWH(gameContainer)
-var stageWidth=tool.stageW;
-var stageHeight=tool.stageH;
+stageWidth=tool.stageW;
+stageHeight=tool.stageH;
 ```
 
-**tool.initBitmap(texture,x?,y?,ax?,ay?)**
+**initBitmap(texture,x?,y?,ax?,ay?)**
 
 Initialize a Bitmap Object
 
 ```
-var bm=tool.initBitmap('bm');
-var bm2=tool.initBitmap('bm',100,100,.5,.5);
+this.bm=tool.initBitmap('bm');
+this.bm2=tool.initBitmap('bm',100,100,.5,.5);
 ```
 
-**tool.initMovieClip(texture,x?,y?,ax?,ay?)**
+**initMovieClip(texture,x?,y?,ax?,ay?)**
 
 Initialize a MovieClip Object
 
 ```
-var mc=tool.initMovieClip('mc');
-mc.play(-1);
-var mc2=tool.initMovieClip('mc2',200,100,.5,.5);
-mc.play(1);
+this.mc=tool.initMovieClip('mc');
+this.mc.play(1);
+this.mc2=tool.initMovieClip('mc2',200,100,.5,.5);
+this.mc2.play(-1);
 ```
 
 **changeMovieClipData(target,texture)**
@@ -108,8 +114,8 @@ mc.play(1);
 Change MovieClip texture
 
 ```
-tool.changeMovieClipData(mc,'mc2');
-mc.play(-1);
+tool.changeMovieClipData(this.mc2,'mc');
+this.mc.play(-1);
 ```
 
 **initTextField(text,x?,y?,textColor?,size?,fontFamily?)**
@@ -117,8 +123,8 @@ mc.play(-1);
 Initialize a TextField Object
 
 ```
-var tf=tool.initTextField('Hello World');
-var tf2=tool.initTextField('msg',100,200,0x000001,30,'SimHei');
+this.tf=tool.initTextField('Hello World');
+this.tf2=tool.initTextField('msg',100,200,0x000001,80,'SimHei');
 ```
 
 **initBitmapText(font,text,x?,y?,ax?,ay?)**
@@ -126,8 +132,8 @@ var tf2=tool.initTextField('msg',100,200,0x000001,30,'SimHei');
 Initialize a BitMapText Object
 
 ```
-var bmt=tool.initBitmapText('font','0');
-var bmt2=tool.initBitmapText('font','0',200,200,.5,.5);
+this.bmt=tool.initBitmapText('font','0');
+this.bmt2=tool.initBitmapText('font','0',200,200,.5,.5);
 ```
 
 **getXY(event)**
@@ -135,10 +141,11 @@ var bmt2=tool.initBitmapText('font','0',200,200,.5,.5);
 get Touch Coordinate
 
 ```
-obj.addEventListener(egret.TouchEvent.TOUCH_BEGIN,touchBegin,context);
+this.bm.addEventListener(egret.TouchEvent.TOUCH_BEGIN,touchBegin,this);
 function touchBegin(e){
 	var x=tool.getXY(e).x;
-	var y=tool.getXy(e).y;
+	var y=tool.getXY(e).y;
+	console.log('touchXY:',x, y);
 }
 
 ```

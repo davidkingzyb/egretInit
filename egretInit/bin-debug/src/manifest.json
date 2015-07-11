@@ -1,0 +1,8 @@
+[
+	"Render.ts",
+	"tool.ts",
+	"GameContainer.ts",
+	"LoadingUI.ts",
+	"debug.ts",
+	"Main.ts"
+]

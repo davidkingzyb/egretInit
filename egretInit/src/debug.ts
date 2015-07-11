@@ -41,7 +41,7 @@ class debug{
         function touchMove(e){
             target.x=targetStartX-(startX-tool.getXY(e).x);
             target.y=targetStartY-(startY-tool.getXY(e).y);
-            label.text='['+target.x+','+target.y+']';
+            label.text='['+parseInt(target.x)+','+parseInt(target.y)+']';
             label.x=target.x;
             label.y=target.y;
             rect.x=target.x;
