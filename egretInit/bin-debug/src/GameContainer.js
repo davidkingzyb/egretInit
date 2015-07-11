@@ -1,9 +1,3 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var GameContainer = (function (_super) {
     __extends(GameContainer, _super);
     function GameContainer() {
@@ -12,11 +6,12 @@ var GameContainer = (function (_super) {
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         tool.setWH(this);
     }
-    GameContainer.prototype.onAddToStage = function (event) {
+    var __egretProto__ = GameContainer.prototype;
+    __egretProto__.onAddToStage = function (event) {
         this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         this.createGameScene();
     };
-    GameContainer.prototype.createGameScene = function () {
+    __egretProto__.createGameScene = function () {
         this.bg = new egret.Shape();
         this.bg.graphics.beginFill(0x999999);
         this.bg.graphics.drawRect(0, 0, tool.stageW, tool.stageH);
@@ -40,6 +35,9 @@ var GameContainer = (function (_super) {
         this.addChild(this.tf2);
         this.addChild(this.bmt);
         this.addChild(this.bmt2);
+        this.system = tool.initParticle('evilParticle', 300, 300, .5, .5);
+        this.addChild(this.system);
+        this.system.start();
         this.bm.addEventListener(egret.TouchEvent.TOUCH_BEGIN, touchBegin, this);
         function touchBegin(e) {
             var x = tool.getXY(e).x;
@@ -48,12 +46,12 @@ var GameContainer = (function (_super) {
         }
         this.run();
     };
-    GameContainer.prototype.run = function () {
+    __egretProto__.run = function () {
         this.render = new Render();
         this.render.register(this.loop, this);
         this.render.start();
     };
-    GameContainer.prototype.loop = function () {
+    __egretProto__.loop = function () {
         this.mc2.y += this.v;
         if (this.mc2.y > tool.stageW - 100) {
             tool.changeMovieClipData(this.mc2, 'mc');

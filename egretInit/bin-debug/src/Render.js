@@ -11,12 +11,13 @@ var Render = (function () {
         this.acc = 0;
         this.dt = Number((1000 / Render.FPS).toFixed(1));
     }
+    var __egretProto__ = Render.prototype;
     /*
      * 注册每帧执行的并且记录在this.callbakc里面
      * @callback 回调函数
      * @context 上下文
      * */
-    Render.prototype.register = function (callback, context) {
+    __egretProto__.register = function (callback, context) {
         this.callback = callback;
         this.context = context;
         this.acc = 0;
@@ -24,7 +25,7 @@ var Render = (function () {
     /*
      * 注销监听函数
      * */
-    Render.prototype.unregister = function () {
+    __egretProto__.unregister = function () {
         this.callback = null;
         this.context = null;
         this.stop();
@@ -32,7 +33,7 @@ var Render = (function () {
     /*
      * 架桥函数
      * */
-    Render.prototype.handle = function (d) {
+    __egretProto__.handle = function (d) {
         this.acc += d;
         while (this.acc >= this.dt) {
             this.callback.call(this.context, this.dt);
@@ -42,13 +43,13 @@ var Render = (function () {
     /*
      * 开始渲染
      * */
-    Render.prototype.start = function () {
+    __egretProto__.start = function () {
         egret.Ticker.getInstance().register(this.handle, this);
     };
     /*
      * 停止渲染
      * */
-    Render.prototype.stop = function () {
+    __egretProto__.stop = function () {
         egret.Ticker.getInstance().unregister(this.handle, this);
         this.acc = 0;
         this.framerate = 60;
@@ -56,16 +57,16 @@ var Render = (function () {
     /*
      * 暂停渲染
      * */
-    Render.prototype.pause = function () {
+    __egretProto__.pause = function () {
         egret.Ticker.getInstance().unregister(this.handle, this);
     };
     /*
      * 重新开始渲染
      * */
-    Render.prototype.resume = function () {
+    __egretProto__.resume = function () {
         egret.Ticker.getInstance().register(this.handle, this);
     };
-    Object.defineProperty(Render.prototype, "framerate", {
+    Object.defineProperty(__egretProto__, "framerate", {
         /*
          * 设置帧频
          * */

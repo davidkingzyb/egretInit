@@ -1,29 +1,3 @@
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
 declare module egret {
     /**
      * @class egret.NativeDeviceContext
@@ -54,15 +28,6 @@ declare module egret_native_external_interface {
     function onReceivedPluginInfo(info: string): void;
     function init(): void;
 }
-declare module egret_native_sound {
-    function play(loop: boolean): void;
-    function pause(): void;
-    function load(): void;
-    function preload(type: any): void;
-    function setVolume(value: any): void;
-    function getVolume(): any;
-    function init(): void;
-}
 declare module egret_native_localStorage {
     var filePath: string;
     function getItem(key: string): string;
@@ -72,32 +37,7 @@ declare module egret_native_localStorage {
     function save(): void;
     function init(): void;
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.NativeRendererContext
@@ -141,6 +81,7 @@ declare module egret {
          * @param repeat {string}
          */
         drawImage(texture: Texture, sourceX: any, sourceY: any, sourceWidth: any, sourceHeight: any, destX: any, destY: any, destWidth: any, destHeight: any, repeat?: any): void;
+        private useGlow(texture, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
         /**
          * 绘制9宫图片
          * @method egret.RendererContext#drawImageScale9
@@ -199,37 +140,13 @@ declare module egret {
         drawText(textField: egret.TextField, text: string, x: number, y: number, maxWidth: number, style?: egret.ITextStyle): void;
         pushMask(mask: Rectangle): void;
         popMask(): void;
-        setGlobalColorTransform(colorTransformMatrix: Array<any>): void;
-        setGlobalFilter(filterData: Filter): void;
+        private globalColorTransformEnabled;
+        private filters;
+        setGlobalFilters(filtersData: Array<Filter>): void;
     }
 }
 declare var egret_native_graphics: any;
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @private
@@ -246,86 +163,16 @@ declare module egret_native {
     function onTouchesCancel(num: number, ids: Array<any>, xs_array: Array<any>, ys_array: Array<any>): void;
     function executeTouchCallback(num: number, ids: Array<any>, xs_array: Array<any>, ys_array: Array<any>, callback: Function): void;
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module egret {
-    /**
-     * @private
-     */
-    class PromiseObject {
-        private static promiseObjectList;
-        onSuccessFunc: Function;
-        onSuccessThisObject: any;
-        onErrorFunc: Function;
-        onErrorThisObject: any;
-        downloadingSizeFunc: Function;
-        downloadingSizeThisObject: any;
-        constructor();
-        static create(): any;
-        private onSuccess(...args);
-        private onError(...args);
-        private downloadingSize(...args);
-        private destroy();
-    }
-}
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @private
      */
     class NativeNetContext extends NetContext {
-        private _versionCtr;
-        private static __use_asyn;
+        _versionCtr: egret.IVersionController;
+        static __use_asyn: boolean;
         constructor();
+        initVersion(versionCtr: egret.IVersionController): void;
         private urlData;
         /**
          * @method egret.HTML5NetContext#proceed
@@ -336,229 +183,62 @@ declare module egret {
         private loadSound(loader);
         private loadTexture(loader);
         /**
-         * 检查文件是否是最新版本
+         * 是否是网络地址
+         * @param url
+         * @returns {boolean}
          */
-        private checkIsNewVersion(url);
+        private isNetUrl(url);
         /**
-         * 保存本地版本信息文件
+         * 获取虚拟url
+         * @param url
+         * @returns {string}
          */
-        private saveVersion(url);
-        getChangeList(): Array<any>;
-    }
-}
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module egret {
-    /**
-     * @private
-     */
-    class NativeResourceLoader extends egret.EventDispatcher {
-        private _downCount;
-        private _path;
-        private _bytesTotal;
-        load(path: string, bytesTotal: number): void;
-        private reload();
-        private downloadingProgress(bytesLoaded);
-        private downloadFileError();
-        private loadOver();
-    }
-}
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module egret {
-    /**
-     * @private
-     */
-    class VersionController extends egret.EventDispatcher {
-        constructor();
-        /**
-         * 本地版本信息文件存储路径
-         */
-        private localVersionDataPath;
-        /**
-         * 本地版本信息文件，记录了本地文件版本信息
-         */
-        private localVersionData;
-        /**
-         * 本地版本信息文件存储路径
-         */
-        private changeVersionDataPath;
-        /**
-         * 当前版本信息文件，记录了当前版本中相对于基础版本变化的文件
-         */
-        private changeVersionData;
-        /**
-         * 本地版本信息文件存储路径
-         */
-        private baseVersionDataPath;
-        /**
-         * 基础版本信息文件
-         */
-        private baseVersionData;
-        private newCode;
-        private localVersionCodePath;
-        private serverVersionCodePath;
-        private _load;
-        private fetchVersion();
-        private initLocalVersionData();
-        private loadCodeVersion();
-        private loadBaseVersion(neesUpdate);
-        private loadBaseOver();
-        private _call;
-        private loadFile(file, call?);
-        private fileLoadComplete(e);
-        private loadError(e);
-        private loadOver();
-        private getLocalData(filePath);
-        /**
-         * 获取所有有变化的文件
-         * @returns {Array<any>}
-         */
-        getChangeList(): Array<any>;
-        private compareVersion(oldVersion, newVersion, url);
+        private getVirtualUrl(url);
         /**
          * 检查文件是否是最新版本
          */
-        checkIsNewVersion(url: string): boolean;
+        private checkIsNewVersion(virtualUrl);
         /**
          * 保存本地版本信息文件
          */
-        saveVersion(url: string): void;
-    }
-}
-/**
- * Created by wander on 14-9-15.
- */
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module egret {
-    /**
-     * @classdesc
-     * @extends egret.StageText
-     * @private
-     */
-    class NativeStageText extends StageText {
-        private textValue;
-        private tf;
-        private container;
-        private textBg;
-        private textBorder;
-        private textType;
-        constructor();
-        private createText();
-        _getText(): string;
-        _setText(value: string): void;
-        _setTextType(type: string): void;
-        _getTextType(): string;
-        _open(x: number, y: number, width?: number, height?: number): void;
-        private resetText();
-        private isFinishDown;
-        private showScreenKeyboard();
-        private showPartKeyboard();
-        _show(): void;
-        _remove(): void;
-        _hide(): void;
+        private saveVersion(virtualUrl);
+        /**
+         * 获取变化列表
+         * @deprecated
+         * @returns {any}
+         */
+        getChangeList(): Array<any>;
     }
 }
 
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 
 
 declare module egret_native {
@@ -569,16 +249,18 @@ declare module egret_native {
      */
     function startGame():void;
 
+    function loglevel(logType):void;
+
     /**
      * 启动主循环
      * @param callback 主循环回调函数
      * @param thisObject
      */
-    function executeMainLoop(callback: Function, thisObject: any): void;
+    function executeMainLoop(callback:Function, thisObject:any):void;
 
-    function pauseApp(): void;
+    function pauseApp():void;
 
-    function resumeApp(): void;
+    function resumeApp():void;
 
     function readXML(filepath:string):any;
 
@@ -587,6 +269,14 @@ declare module egret_native {
     function isRecordExists(filepath:string):boolean;
 
     function readFileSync(filepath:string):any;
+
+    function readResourceFileSync(filepath:string):any;
+
+    function readUpdateFileSync(filepath:string):any;
+
+    function deleteUpdateFile(filepath:string):void;
+
+    function readFileAsync(filepath:string, promise:egret.PromiseObject):any;
 
     function writeFileSync(filepath:string, fileContent:string):any;
 
@@ -602,7 +292,7 @@ declare module egret_native {
 
     function saveRecord(filepath:string, fileContent:string):void;
 
-    function getOption(type:string):any;
+    function getOption(type:string):string;
 
     module Audio {
         function preloadBackgroundMusic(path:string):void;
@@ -613,7 +303,11 @@ declare module egret_native {
 
         function preloadEffect(path:string):void;
 
+        function preloadEffectAsync(path:string, promise:egret.PromiseObject):void;
+
         function playEffect(path:string, loop:boolean):void;
+
+        function unloadEffect(path:string):void;
 
         function stopEffect(effectId:number):void;
     }
@@ -626,6 +320,7 @@ declare module egret_native {
         function clearScreen(r:number, g:number, b:number):void;
 
         function drawImage(texture:any, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight):void;
+
         function drawImageScale9(texture:any, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, x, y, width, height):boolean;
 
         function setTransform(a:number, b:number, c:number, d:number, tx:number, ty:number):void;
@@ -660,9 +355,11 @@ declare module egret_native {
 
     module Label {
 
-        function createLabel(font:string, size:number, defaultString:string):void;
+        function createLabel(font:string, size:number, defaultString:string, defaultStroke:number):void;
 
         function setTextColor(color:number):void;
+
+        function setStrokeColor(color:number):void;
 
         function drawText(text:string, x:number, y:number):void;
 
@@ -682,7 +379,12 @@ declare module egret_native {
 
     module Texture {
 
+        function create(filePath:string):any;
+
         function addTexture(filePath:string):any;
+
+        function addTextureAsyn(filePath:string, promise:any):any;
+
         function addTextureUnsyn(filePath:string, promise:any):any;
 
         function removeTexture(filePath:string):void;
@@ -692,19 +394,23 @@ declare module egret_native {
     module TextInputOp {
 
         function setKeybordOpen(isOpen:boolean):void
+
         function isFullScreenKeyBoard():boolean
+
         function setInputTextMaxLenght(value:number):void;
 
 
     }
 
     function EGT_TextInput(text:string):void
+
     function EGT_keyboardFinish():void
 
 
     function EGT_deleteBackward():void;
 
     function EGT_keyboardDidHide():void;
+
     function EGT_keyboardDidShow():void;
 
     function EGT_getTextEditerContentText():string;
@@ -720,11 +426,170 @@ declare module egret_native {
         function setDesignSize(w:number, h:number):number;
     }
 
-    class RenderTexture{
+    class RenderTexture {
         constructor(width:number, height:number);
 
         begin();
 
         end();
     }
+
+    module rastergl {
+        function arc(x:number, y:number, radius:number, startAngle:number, endAngle:number, anticlockwise?:boolean):void;
+
+        function quadraticCurveTo(cpx:number, cpy:number, x:number, y:number):void;
+
+        function lineTo(x:number, y:number):void;
+
+        function fill(fillRule?:string):void;
+
+        function closePath():void;
+
+        function rect(x:number, y:number, w:number, h:number):void;
+
+        function moveTo(x:number, y:number):void;
+
+        function fillRect(x:number, y:number, w:number, h:number):void;
+
+        function bezierCurveTo(cp1x:number, cp1y:number, cp2x:number, cp2y:number, x:number, y:number):void;
+
+        function stroke():void;
+
+        function strokeRect(x:number, y:number, w:number, h:number):void;
+
+        function beginPath():void;
+
+        function arcTo(x1:number, y1:number, x2:number, y2:number, radius:number):void;
+
+        function transform(m11:number, m12:number, m21:number, m22:number, dx:number, dy:number):void;
+
+        function translate(x:number, y:number):void;
+
+        function scale(x:number, y:number):void;
+
+        function rotate(angle:number):void;
+
+        function save():void;
+
+        function restore():void;
+
+        export var lineWidth:number;
+        export var strokeStyle:any;
+        export var fillStyle:any;
+    }
+
+    module Game {
+        function listResource(root, promise);
+
+        function listUpdate(root, promise);
+    }
 }
+declare module egret {
+    /**
+     * @classdesc
+     * @extends egret.StageText
+     * @private
+     */
+    class NativeStageText extends StageText {
+        private textValue;
+        private tf;
+        private container;
+        private textBg;
+        private textBorder;
+        private textType;
+        constructor();
+        private createText();
+        _getText(): string;
+        _setText(value: string): void;
+        _setTextType(type: string): void;
+        _getTextType(): string;
+        private resetText();
+        private isFinishDown;
+        private showScreenKeyboard();
+        private showPartKeyboard();
+        _show(multiline: boolean, size: number, width: number, height: number): void;
+        _remove(): void;
+        _hide(): void;
+    }
+}
+
+declare module egret {
+    /**
+     * @private
+     */
+    class NativeResourceLoader extends egret.EventDispatcher {
+        private _downCount;
+        private _path;
+        private _bytesTotal;
+        load(path: string, bytesTotal: number): void;
+        private reload();
+        private downloadingProgress(bytesLoaded);
+        private downloadFileError();
+        private loadOver();
+    }
+}
+
+declare module egret {
+    /**
+     * @private
+     */
+    class NativeAudio implements IAudio {
+        /**
+         * audio音频对象
+         * @member {any} egret.Sound#audio
+         */
+        constructor();
+        private _loop;
+        private _type;
+        private _effectId;
+        private _path;
+        /**
+         * 播放声音
+         * @method egret.Sound#play
+         * @param loop {boolean} 是否循环播放，默认为false
+         */
+        _play(type?: string): void;
+        private paused;
+        /**
+         * 暂停声音
+         * @method egret.Sound#pause
+         */
+        _pause(): void;
+        /**
+         * 重新加载声音
+         * @method egret.Sound#load
+         */
+        _load(): void;
+        _preload(type: string, callback?: Function, thisObj?: any): void;
+        _setAudio(path: string): void;
+        private initStart();
+        private _listeners;
+        /**
+         * 添加事件监听
+         * @param type 事件类型
+         * @param listener 监听函数
+         */
+        _addEventListener(type: string, listener: Function, useCapture?: boolean): void;
+        /**s
+         * 移除事件监听
+         * @param type 事件类型
+         * @param listener 监听函数
+         */
+        _removeEventListener(type: string, listener: Function, useCapture?: boolean): void;
+        /**
+         * 获取当前音量值
+         * @returns number
+         */
+        _getVolume(): number;
+        _setVolume(value: number): void;
+        _setLoop(value: boolean): void;
+        private _startTime;
+        _getCurrentTime(): number;
+        _setCurrentTime(value: number): void;
+        _destroy(): void;
+    }
+}
+declare module egret_native_sound {
+    var currentPath: string;
+}
+

@@ -1,26 +1,31 @@
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 var RES;
 (function (RES) {
     /**
@@ -34,10 +39,11 @@ var RES;
             this.textureMap = {};
             this._dataFormat = egret.URLLoaderDataFormat.TEXT;
         }
+        var __egretProto__ = SheetAnalyzer.prototype;
         /**
          * @inheritDoc
          */
-        SheetAnalyzer.prototype.getRes = function (name) {
+        __egretProto__.getRes = function (name) {
             var res = this.fileDic[name];
             if (!res) {
                 res = this.textureMap[name];
@@ -55,7 +61,7 @@ var RES;
         /**
          * 一项加载结束
          */
-        SheetAnalyzer.prototype.onLoadFinish = function (event) {
+        __egretProto__.onLoadFinish = function (event) {
             var loader = (event.target);
             var data = this.resItemDic[loader.hashCode];
             delete this.resItemDic[loader.hashCode];
@@ -67,10 +73,12 @@ var RES;
                     resItem.loaded = false;
                     var imageUrl = this.analyzeConfig(resItem, loader.data);
                     if (imageUrl) {
+                        var tempUrl = resItem.url;
                         resItem.url = imageUrl;
                         this._dataFormat = egret.URLLoaderDataFormat.TEXTURE;
                         this.loadFile(resItem, compFunc, data.thisObject);
                         this._dataFormat = egret.URLLoaderDataFormat.TEXT;
+                        resItem.url = tempUrl;
                         return;
                     }
                 }
@@ -78,14 +86,13 @@ var RES;
                     this.analyzeBitmap(resItem, loader.data);
                 }
             }
-            resItem.url = resItem.data.url;
             this.recycler.push(loader);
             compFunc.call(data.thisObject, resItem);
         };
         /**
          * 解析并缓存加载成功的配置文件
          */
-        SheetAnalyzer.prototype.analyzeConfig = function (resItem, data) {
+        __egretProto__.analyzeConfig = function (resItem, data) {
             var name = resItem.name;
             var config;
             var imageUrl = "";
@@ -105,7 +112,7 @@ var RES;
         /**
          * 解析并缓存加载成功的位图数据
          */
-        SheetAnalyzer.prototype.analyzeBitmap = function (resItem, data) {
+        __egretProto__.analyzeBitmap = function (resItem, data) {
             var name = resItem.name;
             if (this.fileDic[name] || !data) {
                 return;
@@ -119,7 +126,7 @@ var RES;
         /**
          * 获取相对位置
          */
-        SheetAnalyzer.prototype.getRelativePath = function (url, file) {
+        __egretProto__.getRelativePath = function (url, file) {
             url = url.split("\\").join("/");
             var index = url.lastIndexOf("/");
             if (index != -1) {
@@ -130,7 +137,7 @@ var RES;
             }
             return url;
         };
-        SheetAnalyzer.prototype.parseSpriteSheet = function (texture, data, name) {
+        __egretProto__.parseSpriteSheet = function (texture, data, name) {
             var frames = data.frames;
             if (!frames) {
                 return null;
@@ -157,7 +164,7 @@ var RES;
         /**
          * @inheritDoc
          */
-        SheetAnalyzer.prototype.destroyRes = function (name) {
+        __egretProto__.destroyRes = function (name) {
             var sheet = this.fileDic[name];
             if (sheet) {
                 delete this.fileDic[name];
@@ -166,9 +173,13 @@ var RES;
                         delete this.textureMap[subkey];
                     }
                 }
+                this.onResourceDestroy(sheet);
                 return true;
             }
             return false;
+        };
+        __egretProto__.onResourceDestroy = function (sheet) {
+            sheet.dispose();
         };
         return SheetAnalyzer;
     })(RES.BinAnalyzer);

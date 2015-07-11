@@ -2,6 +2,7 @@
 var debug = (function () {
     function debug() {
     }
+    var __egretProto__ = debug.prototype;
     debug.showPosition = function (target, context) {
         var label = tool.initTextField('[' + target.x + ',' + target.y + ']', target.x, target.y);
         context.addChild(label);

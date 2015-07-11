@@ -1,35 +1,31 @@
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 var egret;
 (function (egret) {
     /**
@@ -74,7 +70,8 @@ var egret;
              */
             this.spriteSheet = null;
         }
-        MovieClipData.prototype._init = function (mcData, textureData, spriteSheet) {
+        var __egretProto__ = MovieClipData.prototype;
+        __egretProto__._init = function (mcData, textureData, spriteSheet) {
             this.textureData = textureData;
             this.spriteSheet = spriteSheet;
             this._setMCData(mcData);
@@ -85,7 +82,7 @@ var egret;
          * @param frame {number} 帧序号
          * @returns {any} 帧数据对象
          */
-        MovieClipData.prototype.getKeyFrameData = function (frame) {
+        __egretProto__.getKeyFrameData = function (frame) {
             var outputFrameData = this.frames[frame - 1];
             if (outputFrameData.frame) {
                 outputFrameData = this.frames[outputFrameData.frame - 1];
@@ -98,7 +95,7 @@ var egret;
          * @param frame {number} 帧序号
          * @returns {egret.Texture} Texture对象
          */
-        MovieClipData.prototype.getTextureByFrame = function (frame) {
+        __egretProto__.getTextureByFrame = function (frame) {
             var frameData = this.getKeyFrameData(frame);
             if (frameData.res) {
                 var outputTexture = this.getTextureByResName(frameData.res);
@@ -108,7 +105,7 @@ var egret;
             }
             return null;
         };
-        MovieClipData.prototype.getTextureByResName = function (resName) {
+        __egretProto__.getTextureByResName = function (resName) {
             var texture = this.spriteSheet.getTexture(resName);
             if (!texture) {
                 var textureData = this.textureData[resName];
@@ -116,18 +113,18 @@ var egret;
             }
             return texture;
         };
-        MovieClipData.prototype._isDataValid = function () {
+        __egretProto__._isDataValid = function () {
             return this.frames.length > 0;
         };
-        MovieClipData.prototype._isTextureValid = function () {
+        __egretProto__._isTextureValid = function () {
             return this.textureData != null && this.spriteSheet != null;
         };
-        MovieClipData.prototype._fillMCData = function (mcData) {
+        __egretProto__._fillMCData = function (mcData) {
             this.frameRate = mcData["frameRate"] || 24;
             this._fillFramesData(mcData.frames);
             this._fillFrameLabelsData(mcData.labels);
         };
-        MovieClipData.prototype._fillFramesData = function (framesData) {
+        __egretProto__._fillFramesData = function (framesData) {
             var frames = this.frames;
             var length = framesData ? framesData.length : 0;
             var keyFramePosition;
@@ -146,7 +143,7 @@ var egret;
             }
             this.numFrames = frames.length;
         };
-        MovieClipData.prototype._fillFrameLabelsData = function (frameLabelsData) {
+        __egretProto__._fillFrameLabelsData = function (frameLabelsData) {
             if (frameLabelsData) {
                 var length = frameLabelsData.length;
                 if (length > 0) {
@@ -158,7 +155,7 @@ var egret;
                 }
             }
         };
-        Object.defineProperty(MovieClipData.prototype, "mcData", {
+        Object.defineProperty(__egretProto__, "mcData", {
             get: function () {
                 return this._mcData;
             },
@@ -172,7 +169,7 @@ var egret;
             enumerable: true,
             configurable: true
         });
-        MovieClipData.prototype._setMCData = function (value) {
+        __egretProto__._setMCData = function (value) {
             if (this._mcData == value) {
                 return;
             }

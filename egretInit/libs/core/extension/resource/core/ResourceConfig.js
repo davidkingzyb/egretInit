@@ -1,20 +1,31 @@
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 var RES;
 (function (RES) {
     /**
@@ -33,13 +44,14 @@ var RES;
             this.groupDic = {};
             RES["configInstance"] = this;
         }
+        var __egretProto__ = ResourceConfig.prototype;
         /**
          * 根据组名获取组加载项列表
          * @method RES.ResourceConfig#getGroupByName
          * @param name {string} 组名
          * @returns {Array<egret.ResourceItem>}
          */
-        ResourceConfig.prototype.getGroupByName = function (name) {
+        __egretProto__.getGroupByName = function (name) {
             var group = new Array();
             if (!this.groupDic[name])
                 return group;
@@ -57,7 +69,7 @@ var RES;
          * @param name {string} 组名
          * @returns {Array<any>}
          */
-        ResourceConfig.prototype.getRawGroupByName = function (name) {
+        __egretProto__.getRawGroupByName = function (name) {
             if (this.groupDic[name])
                 return this.groupDic[name];
             return [];
@@ -71,7 +83,7 @@ var RES;
          * @param override {boolean} 是否覆盖已经存在的同名资源组,默认false。
          * @returns {boolean}
          */
-        ResourceConfig.prototype.createGroup = function (name, keys, override) {
+        __egretProto__.createGroup = function (name, keys, override) {
             if (override === void 0) { override = false; }
             if ((!override && this.groupDic[name]) || !keys || keys.length == 0)
                 return false;
@@ -111,7 +123,7 @@ var RES;
          * @param data {any} 配置文件数据
          * @param folder {string} 加载项的路径前缀。
          */
-        ResourceConfig.prototype.parseConfig = function (data, folder) {
+        __egretProto__.parseConfig = function (data, folder) {
             if (!data)
                 return;
             var resources = data["resources"];
@@ -150,7 +162,7 @@ var RES;
          * @param subkey {string} 要添加的二级键名
          * @param name {string} 二级键名所属的资源name属性
          */
-        ResourceConfig.prototype.addSubkey = function (subkey, name) {
+        __egretProto__.addSubkey = function (subkey, name) {
             var item = this.keyMap[name];
             if (item && !this.keyMap[subkey]) {
                 this.keyMap[subkey] = item;
@@ -159,7 +171,7 @@ var RES;
         /**
          * 添加一个加载项数据到列表
          */
-        ResourceConfig.prototype.addItemToKeyMap = function (item) {
+        __egretProto__.addItemToKeyMap = function (item) {
             if (!this.keyMap[item.name])
                 this.keyMap[item.name] = item;
             if (item.hasOwnProperty("subkeys")) {
@@ -180,7 +192,7 @@ var RES;
          * @param key {string} 对应配置文件里的name属性或sbuKeys属性的一项。
          * @returns {string}
          */
-        ResourceConfig.prototype.getName = function (key) {
+        __egretProto__.getName = function (key) {
             var data = this.keyMap[key];
             return data ? data.name : "";
         };
@@ -190,11 +202,11 @@ var RES;
          * @param key {string} 对应配置文件里的name属性或sbuKeys属性的一项。
          * @returns {string}
          */
-        ResourceConfig.prototype.getType = function (key) {
+        __egretProto__.getType = function (key) {
             var data = this.keyMap[key];
             return data ? data.type : "";
         };
-        ResourceConfig.prototype.getRawResourceItem = function (key) {
+        __egretProto__.getRawResourceItem = function (key) {
             return this.keyMap[key];
         };
         /**
@@ -203,7 +215,7 @@ var RES;
          * @param key {string} 对应配置文件里的key属性或sbuKeys属性的一项。
          * @returns {egret.ResourceItem}
          */
-        ResourceConfig.prototype.getResourceItem = function (key) {
+        __egretProto__.getResourceItem = function (key) {
             var data = this.keyMap[key];
             if (data)
                 return this.parseResourceItem(data);
@@ -212,7 +224,7 @@ var RES;
         /**
          * 转换Object数据为ResourceItem对象
          */
-        ResourceConfig.prototype.parseResourceItem = function (data) {
+        __egretProto__.parseResourceItem = function (data) {
             var resItem = new RES.ResourceItem(data.name, data.url, data.type);
             resItem.data = data;
             return resItem;

@@ -18,7 +18,9 @@ class GameContainer extends egret.DisplayObjectContainer{
     tf;
     tf2;
     bmt;
-    bmt2
+    bmt2;
+
+    system;
 
     createGameScene(){
         this.bg = new egret.Shape();
@@ -46,11 +48,17 @@ class GameContainer extends egret.DisplayObjectContainer{
         this.addChild(this.bmt);
         this.addChild(this.bmt2);
 
+        this.system = tool.initParticle('evilParticle', 300,300, .5, .5);
+
+        this.addChild(this.system);
+        this.system.start();
+
         this.bm.addEventListener(egret.TouchEvent.TOUCH_BEGIN,touchBegin,this);
         function touchBegin(e){
             var x=tool.getXY(e).x;
             var y=tool.getXY(e).y;
             console.log('touchXY:',x, y);
+
         }        
 
         this.run();
@@ -73,8 +81,5 @@ class GameContainer extends egret.DisplayObjectContainer{
             this.mc2.play(-1);
             this.v=3;
         }
-
     }
-   
-
 }

@@ -1,35 +1,31 @@
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 var egret;
 (function (egret) {
     /**
@@ -47,7 +43,8 @@ var egret;
             _super.call(this);
             this._graphics = null;
         }
-        Object.defineProperty(Sprite.prototype, "graphics", {
+        var __egretProto__ = Sprite.prototype;
+        Object.defineProperty(__egretProto__, "graphics", {
             /**
              * 获取 Sprite 中的 Graphics 对象。
              * 指定属于此 sprite 的 Graphics 对象，在此 sprite 中可执行矢量绘图命令。
@@ -63,17 +60,23 @@ var egret;
             enumerable: true,
             configurable: true
         });
-        Sprite.prototype._render = function (renderContext) {
+        __egretProto__._draw = function (renderContext) {
+            if (this._graphics && this._graphics._dirty) {
+                this._setCacheDirty();
+            }
+            _super.prototype._draw.call(this, renderContext);
+        };
+        __egretProto__._render = function (renderContext) {
             if (this._graphics)
                 this._graphics._draw(renderContext);
             _super.prototype._render.call(this, renderContext);
         };
-        Sprite.prototype._measureBounds = function () {
+        __egretProto__._measureBounds = function () {
             var minX = 0, maxX = 0, minY = 0, maxY = 0;
             var l = this._children.length;
             for (var i = 0; i < l; i++) {
                 var child = this._children[i];
-                if (!child._visible) {
+                if (!child.visible) {
                     continue;
                 }
                 var childBounds = child.getBounds(egret.Rectangle.identity, false);
@@ -115,7 +118,7 @@ var egret;
             }
             return egret.Rectangle.identity.initialize(minX, minY, maxX - minX, maxY - minY);
         };
-        Sprite.prototype.hitTest = function (x, y, ignoreTouchEnabled) {
+        __egretProto__.hitTest = function (x, y, ignoreTouchEnabled) {
             if (ignoreTouchEnabled === void 0) { ignoreTouchEnabled = false; }
             var result = _super.prototype.hitTest.call(this, x, y, ignoreTouchEnabled);
             if (result) {

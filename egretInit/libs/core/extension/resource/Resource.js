@@ -1,26 +1,31 @@
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 var RES;
 (function (RES) {
     /**
@@ -141,10 +146,11 @@ var RES;
      * 销毁单个资源文件或一组资源的缓存数据,返回是否删除成功。
      * @method RES.destroyRes
      * @param name {string} 配置文件中加载项的name属性或资源组名
+     * @param force {boolean} 销毁一个资源组时其他资源组有同样资源情况资源是否会被删除，默认值true
      * @returns {boolean}
      */
-    function destroyRes(name) {
-        return instance.destroyRes(name);
+    function destroyRes(name, force) {
+        return instance.destroyRes(name, force);
     }
     RES.destroyRes = destroyRes;
     /**
@@ -225,10 +231,11 @@ var RES;
             this.asyncDic = {};
             this.init();
         }
+        var __egretProto__ = Resource.prototype;
         /**
          * 根据type获取对应的文件解析库
          */
-        Resource.prototype.getAnalyzerByType = function (type) {
+        __egretProto__.getAnalyzerByType = function (type) {
             var analyzer = this.analyzerDic[type];
             if (!analyzer) {
                 analyzer = this.analyzerDic[type] = egret.Injector.getInstance(RES.AnalyzerBase, type);
@@ -238,7 +245,7 @@ var RES;
         /**
          * 初始化
          */
-        Resource.prototype.init = function () {
+        __egretProto__.init = function () {
             if (!egret.Injector.hasMapRule(RES.AnalyzerBase, RES.ResourceItem.TYPE_BIN))
                 egret.Injector.mapClass(RES.AnalyzerBase, RES.BinAnalyzer, RES.ResourceItem.TYPE_BIN);
             if (!egret.Injector.hasMapRule(RES.AnalyzerBase, RES.ResourceItem.TYPE_IMAGE))
@@ -269,7 +276,7 @@ var RES;
          * @param resourceRoot {string}
          * @param type {string}
          */
-        Resource.prototype.loadConfig = function (url, resourceRoot, type) {
+        __egretProto__.loadConfig = function (url, resourceRoot, type) {
             if (type === void 0) { type = "json"; }
             var configItem = { url: url, resourceRoot: resourceRoot, type: type };
             this.configItemList.push(configItem);
@@ -278,7 +285,7 @@ var RES;
                 this.callLaterFlag = true;
             }
         };
-        Resource.prototype.startLoadConfig = function () {
+        __egretProto__.startLoadConfig = function () {
             this.callLaterFlag = false;
             var configList = this.configItemList;
             this.configItemList = [];
@@ -298,7 +305,7 @@ var RES;
          * @param name {string}
          * @returns {boolean}
          */
-        Resource.prototype.isGroupLoaded = function (name) {
+        __egretProto__.isGroupLoaded = function (name) {
             return this.loadedGroups.indexOf(name) != -1;
         };
         /**
@@ -307,7 +314,7 @@ var RES;
          * @param name {string}
          * @returns {Array<egret.ResourceItem>}
          */
-        Resource.prototype.getGroupByName = function (name) {
+        __egretProto__.getGroupByName = function (name) {
             return this.resConfig.getGroupByName(name);
         };
         /**
@@ -316,7 +323,7 @@ var RES;
          * @param name {string}
          * @param priority {number}
          */
-        Resource.prototype.loadGroup = function (name, priority) {
+        __egretProto__.loadGroup = function (name, priority) {
             if (priority === void 0) { priority = 0; }
             if (this.loadedGroups.indexOf(name) != -1) {
                 RES.ResourceEvent.dispatchResourceEvent(this, RES.ResourceEvent.GROUP_COMPLETE, name);
@@ -341,7 +348,7 @@ var RES;
          * @param override {boolean} 是否覆盖已经存在的同名资源组,默认false。
          * @returns {boolean}
          */
-        Resource.prototype.createGroup = function (name, keys, override) {
+        __egretProto__.createGroup = function (name, keys, override) {
             if (override === void 0) { override = false; }
             if (override) {
                 var index = this.loadedGroups.indexOf(name);
@@ -354,7 +361,7 @@ var RES;
         /**
          * 队列加载完成事件
          */
-        Resource.prototype.onGroupComp = function (event) {
+        __egretProto__.onGroupComp = function (event) {
             if (event.groupName == Resource.GROUP_CONFIG) {
                 var length = this.loadingConfigList.length;
                 for (var i = 0; i < length; i++) {
@@ -377,7 +384,7 @@ var RES;
         /**
          * 启动延迟的组加载
          */
-        Resource.prototype.loadDelayGroups = function () {
+        __egretProto__.loadDelayGroups = function () {
             var groupNameList = this.groupNameList;
             this.groupNameList = [];
             var length = groupNameList.length;
@@ -389,7 +396,7 @@ var RES;
         /**
          * 队列加载失败事件
          */
-        Resource.prototype.onGroupError = function (event) {
+        __egretProto__.onGroupError = function (event) {
             if (event.groupName == Resource.GROUP_CONFIG) {
                 this.loadingConfigList = null;
                 RES.ResourceEvent.dispatchResourceEvent(this, RES.ResourceEvent.CONFIG_LOAD_ERROR);
@@ -404,7 +411,7 @@ var RES;
          * @param key {string} 对应配置文件里的name属性或sbuKeys属性的一项。
          * @returns {boolean}
          */
-        Resource.prototype.hasRes = function (key) {
+        __egretProto__.hasRes = function (key) {
             var type = this.resConfig.getType(key);
             if (type == "") {
                 var prefix = RES.AnalyzerBase.getStringPrefix(key);
@@ -420,7 +427,7 @@ var RES;
          * @param data {any} 配置文件数据，请参考resource.json的配置文件格式。传入对应的json对象即可。
          * @param folder {string} 加载项的路径前缀。
          */
-        Resource.prototype.parseConfig = function (data, folder) {
+        __egretProto__.parseConfig = function (data, folder) {
             this.resConfig.parseConfig(data, folder);
             if (!this.configComplete && !this.loadingConfigList) {
                 this.configComplete = true;
@@ -433,7 +440,7 @@ var RES;
          * @param key {string}
          * @returns {any}
          */
-        Resource.prototype.getRes = function (key) {
+        __egretProto__.getRes = function (key) {
             var type = this.resConfig.getType(key);
             if (type == "") {
                 var prefix = RES.AnalyzerBase.getStringPrefix(key);
@@ -452,7 +459,7 @@ var RES;
          * @param compFunc {Function} 回调函数。示例：compFunc(data,url):void。
          * @param thisObject {any}
          */
-        Resource.prototype.getResAsync = function (key, compFunc, thisObject) {
+        __egretProto__.getResAsync = function (key, compFunc, thisObject) {
             var type = this.resConfig.getType(key);
             var name = this.resConfig.getName(key);
             if (type == "") {
@@ -487,7 +494,7 @@ var RES;
          * @param thisObject {any}
          * @param type {string}
          */
-        Resource.prototype.getResByUrl = function (url, compFunc, thisObject, type) {
+        __egretProto__.getResByUrl = function (url, compFunc, thisObject, type) {
             if (type === void 0) { type = ""; }
             if (!url) {
                 compFunc.call(thisObject, null);
@@ -515,7 +522,7 @@ var RES;
         /**
          * 通过url获取文件类型
          */
-        Resource.prototype.getTypeByUrl = function (url) {
+        __egretProto__.getTypeByUrl = function (url) {
             var suffix = url.substr(url.lastIndexOf(".") + 1);
             if (suffix) {
                 suffix = suffix.toLowerCase();
@@ -560,7 +567,7 @@ var RES;
         /**
          * 一个加载项加载完成
          */
-        Resource.prototype.onResourceItemComp = function (item) {
+        __egretProto__.onResourceItemComp = function (item) {
             var argsList = this.asyncDic[item.name];
             delete this.asyncDic[item.name];
             var analyzer = this.getAnalyzerByType(item.type);
@@ -575,11 +582,13 @@ var RES;
          * 销毁单个资源文件或一组资源的缓存数据,返回是否删除成功。
          * @method RES.destroyRes
          * @param name {string} 配置文件中加载项的name属性或资源组名
+         * @param force {boolean} 销毁一个资源组时其他资源组有同样资源情况资源是否会被删除，默认值true
          * @returns {boolean}
          */
-        Resource.prototype.destroyRes = function (name) {
+        __egretProto__.destroyRes = function (name, force) {
+            if (force === void 0) { force = true; }
             var group = this.resConfig.getRawGroupByName(name);
-            if (group) {
+            if (group && group.length > 0) {
                 var index = this.loadedGroups.indexOf(name);
                 if (index != -1) {
                     this.loadedGroups.splice(index, 1);
@@ -587,9 +596,14 @@ var RES;
                 var length = group.length;
                 for (var i = 0; i < length; i++) {
                     var item = group[i];
-                    item.loaded = false;
-                    var analyzer = this.getAnalyzerByType(item.type);
-                    analyzer.destroyRes(item.name);
+                    if (!force && this.isResInLoadedGroup(item.name)) {
+                    }
+                    else {
+                        item.loaded = false;
+                        var analyzer = this.getAnalyzerByType(item.type);
+                        analyzer.destroyRes(item.name);
+                        this.removeLoadedGroupsByItemName(item.name);
+                    }
                 }
                 return true;
             }
@@ -600,15 +614,49 @@ var RES;
                 item = this.resConfig.getRawResourceItem(name);
                 item.loaded = false;
                 analyzer = this.getAnalyzerByType(type);
-                return analyzer.destroyRes(name);
+                var result = analyzer.destroyRes(name);
+                this.removeLoadedGroupsByItemName(item.name);
+                return result;
             }
+        };
+        __egretProto__.removeLoadedGroupsByItemName = function (name) {
+            var loadedGroups = this.loadedGroups;
+            var loadedGroupLength = loadedGroups.length;
+            for (var i = 0; i < loadedGroupLength; i++) {
+                var group = this.resConfig.getRawGroupByName(loadedGroups[i]);
+                var length = group.length;
+                for (var j = 0; j < length; j++) {
+                    var item = group[j];
+                    if (item.name == name) {
+                        loadedGroups.splice(i, 1);
+                        i--;
+                        loadedGroupLength = loadedGroups.length;
+                        break;
+                    }
+                }
+            }
+        };
+        __egretProto__.isResInLoadedGroup = function (name) {
+            var loadedGroups = this.loadedGroups;
+            var loadedGroupLength = loadedGroups.length;
+            for (var i = 0; i < loadedGroupLength; i++) {
+                var group = this.resConfig.getRawGroupByName(loadedGroups[i]);
+                var length = group.length;
+                for (var j = 0; j < length; j++) {
+                    var item = group[j];
+                    if (item.name == name) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         };
         /**
          * 设置最大并发加载线程数量，默认值是2.
          * @method RES.setMaxLoadingThread
          * @param thread {number} 要设置的并发加载数。
          */
-        Resource.prototype.setMaxLoadingThread = function (thread) {
+        __egretProto__.setMaxLoadingThread = function (thread) {
             if (thread < 1) {
                 thread = 1;
             }
@@ -618,7 +666,7 @@ var RES;
          * 设置资源加载失败时的重试次数。
          * @param retry 要设置的重试次数。
          */
-        Resource.prototype.setMaxRetryTimes = function (retry) {
+        __egretProto__.setMaxRetryTimes = function (retry) {
             retry = Math.max(retry, 0);
             this.resLoader.maxRetryTimes = retry;
         };
