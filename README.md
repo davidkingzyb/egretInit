@@ -6,7 +6,7 @@ Initialize egret project quickly.
 
 ##egretInit
 
-An example of egret project base on egret 1.6.0
+An example of egret project base on egret 2.0.0
 
 ##egretTools
 some useful tools for egret 
@@ -67,6 +67,7 @@ sprite sheet must be named like /^\w*SS.json$/
 a python server
 
 ###egret_loader.js
+
 a solution for iphone and android diffrent screen size
 
 android need scale stage to .5 and the tap event stageX and stageY need times 2
@@ -150,6 +151,14 @@ function touchBegin(e){
 
 ```
 
+**initParticle(texture,x?,y?,ax?,ay?)**
+
+Initialize a Particle object (need the third party library particle support <https://github.com/egret-labs/egret-game-library>)
+
+```
+this.system = tool.initParticle('evilParticle', 300,300, .5, .5);
+```
+
 ###debug.ts
 
 debug egret project
@@ -157,6 +166,12 @@ debug egret project
 **showPosition(target,context)**
 
 show DisplayObject position and console log it infomation
+
+press ctrl and drag the object to change it's position
+
+press shift and drag the object to change it's size
+
+press alt and click the object to console log it's infomation
 
 ```
 debug.showPosition(target,this);

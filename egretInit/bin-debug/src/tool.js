@@ -1,4 +1,4 @@
-//create by DKZ 2015/7/10
+//created by DKZ on 2015/7/10
 var tool = (function () {
     function tool() {
     }

@@ -1,4 +1,4 @@
-//create by DKZ 2015/7/10
+//created by DKZ on 2015/7/10
 class tool{
 	static stageW;
 	static stageH;
@@ -64,6 +64,16 @@ class tool{
     	var X=window["client"]=="android"?event.stageX*2:event.stageX;
     	var Y=window["client"]=="android"?event.stageY*2:event.stageY;
         return {"x":X,"y":Y};
+    }
+    static initParticle(texture,x?,y?,ax?,ay?){
+        var txtr = RES.getRes(texture);
+        var config = RES.getRes(texture + 'MC');
+        var system = new particle.GravityParticleSystem(txtr, config);
+        system.x = x ? x : 0;
+        system.y = y ? y : 0;
+        system.anchorX = ax ? ax : 0;
+        system.anchorY = ay ? ay : 0;
+        return system;
     }
 
 }

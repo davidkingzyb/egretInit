@@ -33,7 +33,7 @@ class Main extends egret.DisplayObjectContainer{
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE,this.onResourceLoadComplete,this);
             var gameContainer=new GameContainer();
             this.addChild(gameContainer);
-            debug.showAllPosition(gameContainer);
+            // debug.showAllPosition(gameContainer);
             //FPS
             egret.Profiler.getInstance().run();
         }

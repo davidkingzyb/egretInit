@@ -1,8 +1,8 @@
 var game_file_list = [
-	"Render.js",
 	"tool.js",
+	"Render.js",
+	"debug.js",
 	"GameContainer.js",
 	"LoadingUI.js",
-	"debug.js",
 	"Main.js"
 ];

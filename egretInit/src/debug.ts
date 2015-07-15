@@ -1,6 +1,7 @@
-//create by DKZ 2015/7/10
+//created by DKZ on 2015/7/10
 class debug{
     static showPosition(target,context){
+                  
         var label=tool.initTextField('['+target.x+','+target.y+']',target.x,target.y);
         context.addChild(label);
 
@@ -24,30 +25,106 @@ class debug{
 
         console.log("stageW=",tool.stageW,'stageH=',tool.stageH);
 
+        
         target.touchEnabled=true;
         target.addEventListener(egret.TouchEvent.TOUCH_BEGIN,touchBegin,context);
         target.addEventListener(egret.TouchEvent.TOUCH_MOVE,touchMove,context);
+        target.addEventListener(egret.TouchEvent.TOUCH_END, touchEnd, context);
+        target.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, touchOutside, context);
         var startX;
         var startY;
         var targetStartX;
         var targetStartY;
+        var keydown = 'null';
         function touchBegin(e){
-            console.log('index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorX:',target.anchorX,'anchorY:',target.anchorY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
             startX=tool.getXY(e).x;
             startY=tool.getXY(e).y;
             targetStartX=target.x;
             targetStartY=target.y;
+            
+                document.onkeydown = function(event) {
+                if(event.altKey){
+                    keydown = 'alt';
+                }else if(event.ctrlKey){
+                    keydown = 'ctrl';
+                }else if(event.shiftKey){
+                    keydown = 'shift';
+                }else{
+                    keydown = 'null';
+                }
+                }
         }
         function touchMove(e){
-            target.x=targetStartX-(startX-tool.getXY(e).x);
-            target.y=targetStartY-(startY-tool.getXY(e).y);
-            label.text='['+parseInt(target.x)+','+parseInt(target.y)+']';
-            label.x=target.x;
-            label.y=target.y;
-            rect.x=target.x;
-            rect.y=target.y;
-            point.x=target.x-1;
-            point.y=target.y-1;
+            if(keydown==='ctrl'){
+                target.x=targetStartX+(tool.getXY(e).x - startX);
+                target.y=targetStartY+(tool.getXY(e).y - startY);
+                label.text='['+parseInt(target.x)+','+parseInt(target.y)+']';
+                label.x=target.x;
+                label.y=target.y;
+                rect.x=target.x;
+                rect.y=target.y;
+                point.x=target.x-1;
+                point.y=target.y-1;
+            }   
+   
+        }
+        function touchEnd(e){
+            if(keydown==='shift'){
+                var w = tool.getXY(e).x - target.x;
+                var h = tool.getXY(e).y - target.y
+                if(w<0){
+                    target.scaleX = -1;
+                    rect.scaleX = -1;
+                    w = Math.abs(w);
+                }
+                if(h<0){
+                    target.scaleY = -1;
+                    rect.scaleY = -1;
+                    h = Math.abs(h);
+                }
+                target.width = w;
+                target.height = h;
+                rect.graphics.drawRect(0,0,target.width,target.height);
+            }
+            else if(keydown==='ctrl'){
+                keydown = 'ctrl';
+            }
+            else if(keydown==='alt'){
+                console.log('index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorX:',target.anchorX,'anchorY:',target.anchorY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
+                keydown ='null';
+            }
+        }
+        function touchOutside(e){
+            if(keydown==='shift'){
+                var w = tool.getXY(e).x - target.x;
+                var h = tool.getXY(e).y - target.y
+                if(w<0){
+                    target.scaleX = -1;
+                    rect.scaleX = -1;
+                    w = Math.abs(w);
+                }else{
+                    target.scaleX = 1;
+                    rect.scaleX = 1;
+                }
+                if(h<0){
+                    target.scaleY = -1;
+                    rect.scaleY = -1;
+                    h = Math.abs(h);
+                }else{
+                    target.scaleY = 1;
+                    rect.scaleY = 1;
+                }
+                target.width = w;
+                target.height = h;
+                rect.graphics.drawRect(0,0,target.width,target.height);
+            }
+            else if(keydown='ctrl'){
+                keydown = 'ctrl';
+            }
+            else if(keydown==='alt'){
+                console.log('index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorX:',target.anchorX,'anchorY:',target.anchorY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
+                keydown ='null';
+            }
         }
     }
     static showAllPosition(context){
