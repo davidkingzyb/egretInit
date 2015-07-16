@@ -41,7 +41,7 @@ class tool{
     }
     static initTextField(text,x?,y?,textColor?,size?,fontFamily?){
 		var tf = new egret.TextField();
-		tf.text = text;
+		tf.text = text+'';
 		tf.x = x ? x : 0;
 		tf.y = y ? y : 0;
 		tf.textColor = textColor ? textColor : 0xffffff;
@@ -52,7 +52,7 @@ class tool{
     static initBitmapText(font,text,x?,y?,ax?,ay?){
 		var bt = new egret.BitmapText();
 		bt.font = RES.getRes(font + 'Font');
-		bt.text = text;
+		bt.text = ''+text;
 		bt.x = x ? x : 0;
 		bt.y = y ? y : 0;
 		bt.anchorX = ax ? ax : 0;
@@ -75,5 +75,25 @@ class tool{
         system.anchorY = ay ? ay : 0;
         return system;
     }
-
+    static addChildren(arr,context){
+        for(var i=0;i<arr.length;i++){
+            context.addChild(arr[i]);
+        }
+    }
+    static removeChildren(arr,context){
+        for(var i=0;i<arr.length;i++){
+            context.removeChild(arr[i]);
+        }
+    }
+    static initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,x?,y?,ax?,ay?){
+        var bm = new egret.Bitmap();
+        bm.texture = RES.getRes(texture);
+        var rect=new egret.Rectangle(Rsw,Rsh,Rw,Rh);
+        bm.scale9Grid=rect;
+        bm.x = x?x:0;
+        bm.y = y?y:0;
+        bm.anchorX = ax?ax:0;
+        bm.anchorY = ay?ay:0;
+        return bm;
+    }
 }

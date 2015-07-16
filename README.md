@@ -159,6 +159,31 @@ Initialize a Particle object (need the third party library particle support <htt
 this.system = tool.initParticle('evilParticle', 300,300, .5, .5);
 ```
 
+**addChildren(arr,context)**
+
+add a group to stage
+
+```
+tool.addChildren([this.bm,this.mc],this);
+```
+
+**removeChildren(arr,context)**
+
+remove a group from stage
+
+```
+tool.removeChildren([this.bm,this.mc],this);
+```
+
+**initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,x?,y?,ax?,ay?)**
+
+Initialize a Scale 9 Grid Bitmap object
+
+```
+this.s9g=tool.initScale9GridBitmap("scale9grid",50,50,100,100);
+```
+
+
 ###debug.ts
 
 debug egret project
@@ -183,6 +208,14 @@ show DisplayObjectContainer's all children position and console log them infomat
 
 ```
 debug.showAllPosition(gameContainer);
+```
+
+**showGroupPosition(group,context)**
+
+show a group position
+
+```
+debug.showGroupPosition([this.bm,this.mc],this);
 ```
 
 **pause() resume()**
