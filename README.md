@@ -175,7 +175,7 @@ remove a group from stage
 tool.removeChildren([this.bm,this.mc],this);
 ```
 
-**initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,x?,y?,ax?,ay?)**
+**initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,width?,height?,x?,y?,ax?,ay?)**
 
 Initialize a Scale 9 Grid Bitmap object
 

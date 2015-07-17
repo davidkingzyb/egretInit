@@ -85,11 +85,13 @@ class tool{
             context.removeChild(arr[i]);
         }
     }
-    static initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,x?,y?,ax?,ay?){
+    static initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,width?,height?,x?,y?,ax?,ay?){
         var bm = new egret.Bitmap();
         bm.texture = RES.getRes(texture);
         var rect=new egret.Rectangle(Rsw,Rsh,Rw,Rh);
         bm.scale9Grid=rect;
+        bm.width=width?width:0;
+        bm.height=height?height:0;
         bm.x = x?x:0;
         bm.y = y?y:0;
         bm.anchorX = ax?ax:0;
