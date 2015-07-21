@@ -98,4 +98,7 @@ class tool{
         bm.anchorY = ay?ay:0;
         return bm;
     }
+    static test2RectHit(obj1,obj2){
+        return Math.max(obj1.x,obj2.x) <= Math.min(obj1.x+obj1.width,obj2.x+obj2.width) && Math.max(obj1.y,obj2.y) <= Math.min(obj1.y+obj1.height,obj2.y+obj2.height);
+    }
 }

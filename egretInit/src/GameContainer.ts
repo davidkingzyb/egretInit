@@ -30,7 +30,7 @@ class GameContainer extends egret.DisplayObjectContainer{
         this.addChild(this.bg);
 
         this.bm=tool.initBitmap('bm');
-        this.bm2=tool.initBitmap('bm2',100,100,.5,.5);
+        this.bm2=tool.initBitmap('bm2',300,300,.5,.5);
         this.mc=tool.initMovieClip('mc');
         this.mc.play(1);
         this.mc2=tool.initMovieClip('mc2',500,500,.5,.5);
@@ -49,6 +49,15 @@ class GameContainer extends egret.DisplayObjectContainer{
         this.addChild(this.bmt2);
 
         debug.showPosition(this.bm, this);
+
+        this.bm2.anchorX = 0;
+        this.bm2.anchorY = 0;
+
+        this.bm2.touchEnabled = true;
+        this.bm2.addEventListener(egret.TouchEvent.TOUCH_TAP, consoleHit, this);
+        function consoleHit(){
+            console.log(tool.test2RectHit(this.bm, this.bm2));
+        }
 
         this.system = tool.initParticle('evilParticle', 300,300, .5, .5);
 

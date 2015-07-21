@@ -24,10 +24,10 @@ var debug = (function () {
         context.addChild(point);
         console.log("stageW=", tool.stageW, 'stageH=', tool.stageH);
         target.touchEnabled = true;
-        target.addEventListener(egret.TouchEvent.TOUCH_BEGIN, touchBegin, context);
-        target.addEventListener(egret.TouchEvent.TOUCH_MOVE, touchMove, context);
-        target.addEventListener(egret.TouchEvent.TOUCH_END, touchEnd, context);
-        target.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, touchOutside, context);
+        target.addEventListener(egret.TouchEvent.TOUCH_BEGIN, touchBegin, context, false);
+        target.addEventListener(egret.TouchEvent.TOUCH_MOVE, touchMove, context, false);
+        target.addEventListener(egret.TouchEvent.TOUCH_END, touchEnd, context, false);
+        target.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, touchOutside, context, false);
         var startX;
         var startY;
         var targetStartX;
@@ -88,7 +88,7 @@ var debug = (function () {
                 keydown = 'ctrl';
             }
             else if (keydown === 'alt') {
-                console.log('index:', context.getChildIndex(target), 'width:', target.width, 'height', target.height, 'anchorX:', target.anchorX, 'anchorY:', target.anchorY, 'rotation:', target.rotation, 'scaleX:', target.scaleX, 'scaleY:', target.scaleY, 'alpha:', target.alpha);
+                console.log('x', target.x, 'y', target.y, 'index:', context.getChildIndex(target), 'width:', target.width, 'height', target.height, 'anchorX:', target.anchorX, 'anchorY:', target.anchorY, 'rotation:', target.rotation, 'scaleX:', target.scaleX, 'scaleY:', target.scaleY, 'alpha:', target.alpha);
                 keydown = 'null';
             }
         }
@@ -132,6 +132,11 @@ var debug = (function () {
         for (var i = 0; i < length; i++) {
             var t = context.getChildAt(i);
             debug.showPosition(t, context);
+        }
+    };
+    debug.showGroupPosition = function (group, context) {
+        for (var i = 0; i < group.length; i++) {
+            debug.showPosition(group[i], context);
         }
     };
     debug.pause = function () {

@@ -183,6 +183,14 @@ Initialize a Scale 9 Grid Bitmap object
 this.s9g=tool.initScale9GridBitmap("scale9grid",50,50,100,100);
 ```
 
+**test2RectHit(obj1,obj2)**
+
+2 displayObject collision detection(anchor must be 0)
+
+```
+tool.test2RectHit(this.bm, this.bm2);
+```
+
 
 ###debug.ts
 

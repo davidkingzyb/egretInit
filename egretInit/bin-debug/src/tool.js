@@ -41,7 +41,7 @@ var tool = (function () {
     };
     tool.initTextField = function (text, x, y, textColor, size, fontFamily) {
         var tf = new egret.TextField();
-        tf.text = text;
+        tf.text = text + '';
         tf.x = x ? x : 0;
         tf.y = y ? y : 0;
         tf.textColor = textColor ? textColor : 0xffffff;
@@ -52,7 +52,7 @@ var tool = (function () {
     tool.initBitmapText = function (font, text, x, y, ax, ay) {
         var bt = new egret.BitmapText();
         bt.font = RES.getRes(font + 'Font');
-        bt.text = text;
+        bt.text = '' + text;
         bt.x = x ? x : 0;
         bt.y = y ? y : 0;
         bt.anchorX = ax ? ax : 0;
@@ -73,6 +73,32 @@ var tool = (function () {
         system.anchorX = ax ? ax : 0;
         system.anchorY = ay ? ay : 0;
         return system;
+    };
+    tool.addChildren = function (arr, context) {
+        for (var i = 0; i < arr.length; i++) {
+            context.addChild(arr[i]);
+        }
+    };
+    tool.removeChildren = function (arr, context) {
+        for (var i = 0; i < arr.length; i++) {
+            context.removeChild(arr[i]);
+        }
+    };
+    tool.initScale9GridBitmap = function (texture, Rsw, Rsh, Rw, Rh, width, height, x, y, ax, ay) {
+        var bm = new egret.Bitmap();
+        bm.texture = RES.getRes(texture);
+        var rect = new egret.Rectangle(Rsw, Rsh, Rw, Rh);
+        bm.scale9Grid = rect;
+        bm.width = width ? width : 0;
+        bm.height = height ? height : 0;
+        bm.x = x ? x : 0;
+        bm.y = y ? y : 0;
+        bm.anchorX = ax ? ax : 0;
+        bm.anchorY = ay ? ay : 0;
+        return bm;
+    };
+    tool.test2RectHit = function (obj1, obj2) {
+        return Math.max(obj1.x, obj2.x) <= Math.min(obj1.x + obj1.width, obj2.x + obj2.width) && Math.max(obj1.y, obj2.y) <= Math.min(obj1.y + obj1.height, obj2.y + obj2.height);
     };
     return tool;
 })();
