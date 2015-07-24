@@ -1,9 +1,7 @@
 //created by DKZ on 2015/7/10
-var debug = (function () {
-    function debug() {
-    }
-    var __egretProto__ = debug.prototype;
-    debug.showPosition = function (target, context) {
+var debug;
+(function (debug) {
+    function showPosition(target, context) {
         var label = tool.initTextField('[' + target.x + ',' + target.y + ']', target.x, target.y);
         context.addChild(label);
         var rect = new egret.Shape();
@@ -126,25 +124,28 @@ var debug = (function () {
                 keydown = 'null';
             }
         }
-    };
-    debug.showAllPosition = function (context) {
+    }
+    debug.showPosition = showPosition;
+    function showAllPosition(context) {
         var length = context.numChildren;
         for (var i = 0; i < length; i++) {
             var t = context.getChildAt(i);
             debug.showPosition(t, context);
         }
-    };
-    debug.showGroupPosition = function (group, context) {
+    }
+    debug.showAllPosition = showAllPosition;
+    function showGroupPosition(group, context) {
         for (var i = 0; i < group.length; i++) {
             debug.showPosition(group[i], context);
         }
-    };
-    debug.pause = function () {
+    }
+    debug.showGroupPosition = showGroupPosition;
+    function pause() {
         egret.Ticker.getInstance().pause();
-    };
-    debug.resume = function () {
+    }
+    debug.pause = pause;
+    function resume() {
         egret.Ticker.getInstance().resume();
-    };
-    return debug;
-})();
-debug.prototype.__class__ = "debug";
+    }
+    debug.resume = resume;
+})(debug || (debug = {}));
