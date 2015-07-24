@@ -2,7 +2,7 @@
 
 by DKZ
 
-Initialize egret project quickly.
+Build egret project quickly.
 
 ##egretInit
 
@@ -35,24 +35,6 @@ public loop(){
 }
 ```
 
-###Timer.ts
-
-setTimeout and setInterval function in egret
-
-```
-var timer=new Timer();
-
-timer.setTimeout(this.hello,this,500);
-timer.clearTimeout();
-
-timer.setInterval(this.hello,this,500);
-timer.clearInterval();
-
-
-public hello(){
-    
-}
-```
 
 ###resource.py
 

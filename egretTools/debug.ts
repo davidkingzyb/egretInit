@@ -1,6 +1,6 @@
 //created by DKZ on 2015/7/10
-class debug{
-    static showPosition(target,context){
+module debug{
+    export function showPosition(target,context){
                   
         var label=tool.initTextField('['+target.x+','+target.y+']',target.x,target.y);
         context.addChild(label);
@@ -127,22 +127,22 @@ class debug{
             }
         }
     }
-    static showAllPosition(context){
+    export function showAllPosition(context){
         var length=context.numChildren;
         for(var i=0;i<length;i++){
             var t=context.getChildAt(i);
             debug.showPosition(t,context);
         }
     }
-    static showGroupPosition(group,context){
+    export function showGroupPosition(group,context){
         for(var i=0;i<group.length;i++){
             debug.showPosition(group[i],context);
         }
     }
-    static pause() {
+    export function pause() {
         egret.Ticker.getInstance().pause();
     }
-    static resume() {
+    export function resume() {
         egret.Ticker.getInstance().resume();
     }
 
