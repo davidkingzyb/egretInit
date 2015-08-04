@@ -43,7 +43,7 @@ var egret;
             gl.attachShader(shaderProgram, fragmentShader);
             gl.linkProgram(shaderProgram);
             if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-                egret.Logger.infoWithErrorId(1020);
+                egret.$warn(1020);
             }
             return shaderProgram;
         };

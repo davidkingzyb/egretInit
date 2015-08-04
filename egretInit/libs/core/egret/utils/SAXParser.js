@@ -79,7 +79,7 @@ var egret;
                 xmlDoc.loadXML(textxml);
             }
             if (xmlDoc == null) {
-                egret.Logger.infoWithErrorId(1015);
+                egret.$warn(1015);
             }
             return xmlDoc;
         };

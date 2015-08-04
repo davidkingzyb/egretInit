@@ -34,7 +34,7 @@ var egret;
      * @classdesc
      * DisplayObjectContainer 类是可用作显示列表中显示对象容器的所有对象的基类。
      * 该显示列表管理运行时中显示的所有对象。使用 DisplayObjectContainer 类排列显示列表中的显示对象。每个 DisplayObjectContainer 对象都有自己的子级列表，用于组织对象的 Z 轴顺序。Z 轴顺序是由前至后的顺序，可确定哪个对象绘制在前，哪个对象绘制在后等。
-     * @link http://docs.egret-labs.org/post/manual/displaycon/aboutdisplaycon.html 显示容器的概念与实现
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=108&terms1_id=25&terms2_id=28 显示容器的概念与实现
      */
     var DisplayObjectContainer = (function (_super) {
         __extends(DisplayObjectContainer, _super);
@@ -86,7 +86,7 @@ var egret;
         __egretProto__.doSetChildIndex = function (child, index) {
             var lastIdx = this._children.indexOf(child);
             if (lastIdx < 0) {
-                egret.Logger.fatalWithErrorId(1006);
+                egret.$error(1006);
             }
             //从原来的位置删除
             this._children.splice(lastIdx, 1);
@@ -125,7 +125,7 @@ var egret;
             if (child == this)
                 return child;
             if (index < 0 || index > this._children.length) {
-                egret.Logger.fatalWithErrorId(1007);
+                egret.$error(1007);
                 return child;
             }
             var host = child.parent;
@@ -169,7 +169,7 @@ var egret;
                 return this._doRemoveChild(index);
             }
             else {
-                egret.Logger.fatalWithErrorId(1008);
+                egret.$error(1008);
                 return null;
             }
         };
@@ -184,7 +184,7 @@ var egret;
                 return this._doRemoveChild(index);
             }
             else {
-                egret.Logger.fatalWithErrorId(1007);
+                egret.$error(1007);
                 return null;
             }
         };
@@ -222,7 +222,7 @@ var egret;
                 return this._children[index];
             }
             else {
-                egret.Logger.fatalWithErrorId(1007);
+                egret.$error(1007);
                 return null;
             }
         };
@@ -252,7 +252,7 @@ var egret;
                 this._swapChildrenAt(index1, index2);
             }
             else {
-                egret.Logger.fatalWithErrorId(1007);
+                egret.$error(1007);
             }
         };
         /**
@@ -265,7 +265,7 @@ var egret;
             var index1 = this._children.indexOf(child1);
             var index2 = this._children.indexOf(child2);
             if (index1 == -1 || index2 == -1) {
-                egret.Logger.fatalWithErrorId(1008);
+                egret.$error(1008);
             }
             else {
                 this._swapChildrenAt(index1, index2);

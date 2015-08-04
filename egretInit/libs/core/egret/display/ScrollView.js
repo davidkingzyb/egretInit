@@ -233,7 +233,8 @@ var egret;
             var size = this.getBounds(egret.Rectangle.identity);
             var height = size.height;
             var width = size.width;
-            this.scrollRect = new egret.Rectangle(this._ScrV_Props_._scrollLeft, this._ScrV_Props_._scrollTop, width, height);
+            //这里将坐标取整，避免有些浏览器精度低产生“黑线”问题
+            this.scrollRect = new egret.Rectangle(Math.round(this._ScrV_Props_._scrollLeft), Math.round(this._ScrV_Props_._scrollTop), width, height);
             this.dispatchEvent(new egret.Event(egret.Event.CHANGE));
         };
         __egretProto__._checkScrollPolicy = function () {
@@ -424,10 +425,16 @@ var egret;
         __egretProto__._getContentHeight = function () {
             return this._content.explicitHeight || this._content.height;
         };
+        /**
+         * @private
+         */
         __egretProto__.getMaxScrollLeft = function () {
             var max = this._getContentWidth() - this.width;
             return Math.max(0, max);
         };
+        /**
+         * @private
+         */
         __egretProto__.getMaxScrollTop = function () {
             var max = this._getContentHeight() - this.height;
             return Math.max(0, max);
@@ -474,6 +481,9 @@ var egret;
             this._ScrV_Props_._isVTweenPlaying = false;
             this.dispatchEvent(new egret.Event(egret.Event.COMPLETE));
         };
+        /**
+         * @private
+         */
         __egretProto__.setScrollTop = function (scrollTop, duration) {
             if (duration === void 0) { duration = 0; }
             var finalPosition = Math.min(this.getMaxScrollTop(), Math.max(scrollTop, 0));
@@ -492,6 +502,9 @@ var egret;
                 this._onScrollStarted();
             return vtween;
         };
+        /**
+         * @private
+         */
         __egretProto__.setScrollLeft = function (scrollLeft, duration) {
             if (duration === void 0) { duration = 0; }
             var finalPosition = Math.min(this.getMaxScrollLeft(), Math.max(scrollLeft, 0));
@@ -553,9 +566,10 @@ var egret;
             return evt;
         };
         __egretProto__.throwNotSupportedError = function () {
-            throw new Error(egret.getString(1023));
+            egret.$error(1023);
         };
         /**
+         * @private
          * @method egret.ScrollView#addChild
          * @deprecated
          * @param child {DisplayObject}
@@ -566,6 +580,7 @@ var egret;
             return null;
         };
         /**
+         * @private
          * @method egret.ScrollView#addChildAt
          * @deprecated
          * @param child {DisplayObject}
@@ -577,6 +592,7 @@ var egret;
             return null;
         };
         /**
+         * @private
          * @method egret.ScrollView#removeChild
          * @deprecated
          * @param child {DisplayObject}
@@ -587,6 +603,7 @@ var egret;
             return null;
         };
         /**
+         * @private
          * @method egret.ScrollView#removeChildAt
          * @deprecated
          * @param index {number}
@@ -597,6 +614,7 @@ var egret;
             return null;
         };
         /**
+         * @private
          * @method egret.ScrollView#setChildIndex
          * @deprecated
          * @param child {DisplayObject}
@@ -606,6 +624,7 @@ var egret;
             this.throwNotSupportedError();
         };
         /**
+         * @private
          * @method egret.ScrollView#swapChildren
          * @deprecated
          * @param child1 {DisplayObject}
@@ -615,6 +634,7 @@ var egret;
             this.throwNotSupportedError();
         };
         /**
+         * @private
          * @method egret.ScrollView#swapChildrenAt
          * @deprecated
          * @param index1 {number}
@@ -623,6 +643,9 @@ var egret;
         __egretProto__.swapChildrenAt = function (index1, index2) {
             this.throwNotSupportedError();
         };
+        /**
+         * @inheritDoc
+         */
         __egretProto__.hitTest = function (x, y, ignoreTouchEnabled) {
             if (ignoreTouchEnabled === void 0) { ignoreTouchEnabled = false; }
             var childTouched = _super.prototype.hitTest.call(this, x, y, ignoreTouchEnabled);

@@ -72,7 +72,7 @@ var egret;
             this._designWidth = width;
             this._designHeight = height;
             if (arguments[2]) {
-                egret.Logger.warningWithErrorId(1001);
+                egret.$warn(1001);
                 var resolutionPolicy = arguments[2];
                 this._setResolutionPolicy(resolutionPolicy);
             }

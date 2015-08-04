@@ -54,7 +54,7 @@ var egret;
              * @returns {boolean}
              */
             get: function () {
-                egret.Logger.warningWithErrorId(1000);
+                egret.$warn(1000);
                 return egret.MainContext.deviceType == egret.MainContext.DEVICE_MOBILE;
             },
             enumerable: true,

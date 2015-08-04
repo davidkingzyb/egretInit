@@ -105,11 +105,12 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/getTimer.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/Ticker.ts": [
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/MainContext.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/setTimeout.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/events/EventDispatcher.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/getTimer.ts"
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/getTimer.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/layout/HorizontalAlign.ts": [],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/layout/VerticalAlign.ts": [],
@@ -132,12 +133,14 @@
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/toColorString.ts": [],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Matrix.ts": [
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/HashObject.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Point.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/jslib/NumberUtils.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Point.ts"
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/HashObject.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Point.ts": [
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/HashObject.ts"
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/HashObject.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/jslib/NumberUtils.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Matrix.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Rectangle.ts": [
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/HashObject.ts",
@@ -153,8 +156,8 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/ColorTransform.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/SAXParser.ts": [
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/HashObject.ts"
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/HashObject.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts": [
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/Browser.ts",
@@ -226,10 +229,10 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Transform.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/DisplayObjectContainer.ts": [
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/DisplayObject.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Rectangle.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Matrix.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/events/Event.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/RenderCommand.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/RendererContext.ts",
@@ -240,7 +243,6 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/StageScaleMode.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts",
@@ -249,10 +251,12 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/DisplayObjectContainer.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/events/Event.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/MainContext.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/DisplayObject.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Matrix.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Rectangle.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts"
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/ScrollViewProperties.ts": [
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Point.ts",
@@ -285,16 +289,20 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/RenderFilter.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/text/BitmapText.ts": [
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Rectangle.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/DisplayObject.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/text/BitmapFont.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/RendererContext.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/RenderFilter.ts"
 		],
+		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/GradientType.ts": [],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Graphics.ts": [
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Matrix.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/MainContext.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Rectangle.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/player/RenderContext.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/GradientType.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/RendererContext.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Shape.ts": [
@@ -436,13 +444,13 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Matrix.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/text/ITextElement.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/text/TextField.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/HashObject.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Profiler.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Texture.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Rectangle.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/filters/Filter.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/BlendMode.ts"
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/BlendMode.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/interactive/InteractionMode.ts": [],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/interactive/TouchContext.ts": [
@@ -540,11 +548,11 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/BlendMode.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/jslib/NumberUtils.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/text/ITextElement.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Matrix.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Graphics.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/webgl/WebGLShaderManager.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Texture.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/HTML5CanvasRenderer.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/geom/Matrix.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Stage.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/filters/Filter.ts",
@@ -557,6 +565,7 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/filters/ColorMatrixFilter.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/webgl/WebGLUtils.ts": [
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/webgl/shaders/EgretShader.ts": [
@@ -622,7 +631,6 @@
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/audio/Html5Audio.ts": [
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/callLater.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/media/IAudio.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/Html5Capatibility.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/Html5Capatibility.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/audio/WebAudio.ts": [
@@ -646,6 +654,7 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/StageDelegate.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/MainContext.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/events/Event.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/RenderTexture.ts",
@@ -677,7 +686,6 @@
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/net/NativeNetContext.ts": [
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/net/IVersionController.ts",
-			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/PromiseObject.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/net/URLRequestHeader.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/events/IOErrorEvent.ts",
@@ -692,6 +700,7 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/net/URLRequestMethod.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/net/URLVariables.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/callLater.ts",
+			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/audio/NativeAudio.ts"
 		],
 		"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/display/NativeStageText.ts": [
@@ -860,6 +869,8 @@
 		"__extends": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/extends.ts",
 		"egret.Logger": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 		"egret.getString": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
+		"egret.$error": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
+		"egret.$warn": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Logger.ts",
 		"egret.IHashObject": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/IHashObject.ts",
 		"egret.HashObject": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/HashObject.ts",
 		"egret.Recycler": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Recycler.ts",
@@ -925,9 +936,6 @@
 		"egret.RenderFilter": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/RenderFilter.ts",
 		"egret.RenderData": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/RenderFilter.ts",
 		"egret.Injector": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/utils/Injector.ts",
-		"egret.BitmapFilterQuality.LOW": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/filters/BitmapFilterQuality.ts",
-		"egret.BitmapFilterQuality.MEDIUM": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/filters/BitmapFilterQuality.ts",
-		"egret.BitmapFilterQuality.HIGH": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/filters/BitmapFilterQuality.ts",
 		"egret.Filter": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/filters/Filter.ts",
 		"egret.BlurFilter": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/filters/BlurFilter.ts",
 		"egret.ColorMatrixFilter": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/filters/ColorMatrixFilter.ts",
@@ -945,6 +953,7 @@
 		"egret.BitmapFillMode": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/BitmapFillMode.ts",
 		"egret.Bitmap": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Bitmap.ts",
 		"egret.BitmapText": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/text/BitmapText.ts",
+		"egret.GradientType": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/GradientType.ts",
 		"egret.Graphics": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Graphics.ts",
 		"egret.Command": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Graphics.ts",
 		"egret.Shape": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Shape.ts",
@@ -1007,9 +1016,11 @@
 		"egret_html5_localStorage.clear": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/devices/HTML5DeviceContext.ts",
 		"egret_html5_localStorage.init": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/devices/HTML5DeviceContext.ts",
 		"egret.HTML5CanvasRenderer": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/HTML5CanvasRenderer.ts",
+		"originCanvas2DFill": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/HTML5CanvasRenderer.ts",
 		"egret.IWebGLTemplate": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/IWebGLTemplate.ts",
 		"egret.WebGLRenderer": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/WebGLRenderer.ts",
 		"egret_webgl_graphics.beginFill": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/WebGLRenderer.ts",
+		"egret_webgl_graphics.beginGradientFill": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/WebGLRenderer.ts",
 		"egret_webgl_graphics.drawRect": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/WebGLRenderer.ts",
 		"egret_webgl_graphics.drawCircle": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/WebGLRenderer.ts",
 		"egret_webgl_graphics.drawRoundRect": "C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/WebGLRenderer.ts",

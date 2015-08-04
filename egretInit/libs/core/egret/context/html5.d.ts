@@ -14,6 +14,7 @@ declare module egret {
          * @method egret.HTML5DeviceContext#constructor
          */
         constructor(frameRate?: number);
+        setFrameRate(frameRate: any): void;
         static requestAnimationFrame: Function;
         static cancelAnimationFrame: Function;
         static _thisObject: any;
@@ -53,12 +54,6 @@ declare module egret {
          * @member egret.HTML5CanvasRenderer#canvasContext
          */
         private canvasContext;
-        private _matrixA;
-        private _matrixB;
-        private _matrixC;
-        private _matrixD;
-        private _matrixTx;
-        private _matrixTy;
         _transformTx: number;
         _transformTy: number;
         private blendValue;
@@ -85,8 +80,11 @@ declare module egret {
         onRenderStart(): void;
         onRenderFinish(): void;
         drawCursor(x1: number, y1: number, x2: number, y2: number): void;
+        createLinearGradient(x0: number, y0: number, x1: number, y1: number): CanvasGradient;
+        createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number): CanvasGradient;
     }
 }
+declare var originCanvas2DFill: (fillRule?: string) => void;
 
 declare module egret {
     /**
@@ -182,6 +180,7 @@ declare module egret {
 }
 declare module egret_webgl_graphics {
     function beginFill(color: number, alpha?: number): void;
+    function beginGradientFill(type: string, colors: Array<number>, alphas: Array<number>, ratios: Array<number>, matrix?: egret.Matrix): void;
     function drawRect(x: number, y: number, width: number, height: number): void;
     function drawCircle(x: number, y: number, r: number): void;
     function drawRoundRect(x: number, y: number, width: number, height: number, ellipseWidth: number, ellipseHeight?: number): void;
@@ -409,6 +408,9 @@ declare module egret {
          */
         _resetStageText(): void;
     }
+    /**
+     * @private
+     */
     class HTMLInput {
         private _stageText;
         private _simpleElement;
@@ -645,11 +647,17 @@ declare module egret {
 }
 
 declare module egret {
+    /**
+     * @private
+     */
     class AudioType {
         static QQ_AUDIO: number;
         static WEB_AUDIO: number;
         static HTML5_AUDIO: number;
     }
+    /**
+     * @private
+     */
     class SystemOSType {
         static WPHONE: number;
         static IOS: number;
@@ -663,6 +671,7 @@ declare module egret {
         static _canUseBlob: boolean;
         static _audioType: number;
         static _AudioClass: any;
+        static _audioMustLoad: boolean;
         static _QQRootPath: string;
         static _System_OS: number;
         constructor();

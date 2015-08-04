@@ -81,6 +81,8 @@ var egret;
             this._numLines = 0;
             //输入文本是否是多行
             this._multiline = false;
+            //换行是否按单词换行
+            this._wordWrap = false;
         }
         var __egretProto__ = TextFieldProperties.prototype;
         return TextFieldProperties;

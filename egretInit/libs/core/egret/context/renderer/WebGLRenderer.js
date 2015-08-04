@@ -418,7 +418,7 @@ var egret;
                 }
             }
             if (!gl) {
-                throw new Error(egret.getString(1021));
+                egret.$error(1021);
             }
             WebGLRenderer.glID++;
             this.glID = WebGLRenderer.glID;
@@ -972,6 +972,10 @@ var egret_webgl_graphics;
         this._pushCommand(new Command(this._setStyle, this, [_colorRed, _colorGreen, _colorBlue, alpha]));
     }
     egret_webgl_graphics.beginFill = beginFill;
+    function beginGradientFill(type, colors, alphas, ratios, matrix) {
+        if (matrix === void 0) { matrix = null; }
+    }
+    egret_webgl_graphics.beginGradientFill = beginGradientFill;
     function drawRect(x, y, width, height) {
         this._pushCommand(new Command(function (data) {
             var rendererContext = this.renderContext;
@@ -1039,6 +1043,9 @@ var egret_webgl_graphics;
         }
     }
     egret_webgl_graphics._draw = _draw;
+    /**
+     * @private
+     */
     var Command = (function () {
         function Command(method, thisObject, args) {
             this.method = method;

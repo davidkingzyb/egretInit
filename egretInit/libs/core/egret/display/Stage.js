@@ -34,7 +34,7 @@ var egret;
      * * Stage 类代表主绘图区，表示显示 Egret 内容的整个区域。
      * 可以以全局方式访问 Stage 对象(egret.MainContext.instance.stage)。也可以利用 DisplayObject 实例的 stage 属性进行访问。
      * Stage 类具有多个祖代类 -- DisplayObjectContainer、DisplayObject 和 EventDispatcher，属性和方法便是从这些类继承而来的。从这些继承的许多属性和方法不适用于 Stage 对象。
-     * @link http://docs.egret-labs.org/jksubj/scalemode.html 理解Egret中的各种屏幕适配策略并做出选择
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=202&terms1_id=59&terms2_id=69 深入了解屏幕适配
      */
     var Stage = (function (_super) {
         __extends(Stage, _super);
@@ -54,6 +54,7 @@ var egret;
             this._scaleMode = "";
             this._stageWidth = NaN;
             this._stageHeight = NaN;
+            this._frameRate = 60;
             this.touchEnabled = true;
             this._DO_Props_._stage = this;
             this._stageWidth = width;
@@ -109,7 +110,7 @@ var egret;
         __egretProto__.setResolutionPolicy = function () {
             var content = Stage.SCALE_MODE_ENUM[this._scaleMode];
             if (!content) {
-                throw new Error(egret.getString(1024));
+                egret.$error(1024);
             }
             var container = new egret.EqualToFrame();
             var policy = new egret.ResolutionPolicy(container, content);
@@ -139,12 +140,29 @@ var egret;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(__egretProto__, "frameRate", {
+            get: function () {
+                return this._frameRate;
+            },
+            /**
+             * 获取并设置舞台的帧速率。帧速率是指每秒显示的帧数。
+             * 注意：需设置为可以被60整除的数
+             * @member {number} egret.Stage#frameRate
+             */
+            set: function (value) {
+                this._frameRate = value;
+                egret.MainContext.instance.deviceContext.setFrameRate(value);
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * @member egret.Stage#hitTest
          * @see egret.DisplayObject#hitTest
          * @param x
          * @param y
          * @returns {egret.DisplayObject}
+         * @private
          */
         __egretProto__.hitTest = function (x, y, ignoreTouchEnabled) {
             if (ignoreTouchEnabled === void 0) { ignoreTouchEnabled = false; }
@@ -195,6 +213,9 @@ var egret;
             }
         };
         Object.defineProperty(__egretProto__, "focus", {
+            /**
+             * @private
+             */
             get: function () {
                 return null;
             },
@@ -211,13 +232,16 @@ var egret;
          */
         Stage.registerScaleMode = function (key, value, override) {
             if (Stage.SCALE_MODE_ENUM[key] && !override) {
-                egret.Logger.warningWithErrorId(1009, key);
+                egret.$warn(1009, key);
             }
             else {
                 Stage.SCALE_MODE_ENUM[key] = value;
             }
         };
         Stage._invalidateRenderFlag = false;
+        /**
+         * @private
+         */
         Stage.SCALE_MODE_ENUM = {};
         return Stage;
     })(egret.DisplayObjectContainer);

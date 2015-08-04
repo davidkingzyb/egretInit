@@ -48,7 +48,7 @@ var RES;
                 this.fileDic[name] = JSON.parse(str);
             }
             catch (e) {
-                egret.Logger.warningWithErrorId(1017, resItem.url, data);
+                egret.$warn(1017, resItem.url, data);
             }
         };
         return JsonAnalyzer;

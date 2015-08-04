@@ -35,12 +35,12 @@ var egret;
      * 当用户与带有触摸屏的移动电话或平板电脑等设备交互时，用户通常使用手指或指针设备接触屏幕。可使用 TouchEvent 类开发响应基本触摸事件（如单个手指点击）的应用程序。
      * 使用此类中定义的事件类型创建事件侦听器。
      * 注意：当对象嵌套在显示列表中时，触摸事件的目标将是显示列表中可见的最深的可能嵌套对象。此对象称为目标节点。要使目标节点的祖代（祖代是一个包含显示列表中所有目标节点的对象，从舞台到目标节点的父节点均包括在内）接收触摸事件的通知，请对祖代节点使用 EventDispatcher.addEventListener() 并将 type 参数设置为要检测的特定触摸事件。
-     * @link http://docs.egret-labs.org/post/manual/event/touchevent.html 触摸事件
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=117&terms1_id=25&terms2_id=29 触摸事件
      */
     var TouchEvent = (function (_super) {
         __extends(TouchEvent, _super);
         /**
-         * 创建一个 egret.TouchEvent 对象，其中包含有关Touch事件的信息
+         * 创建一个 egret.TouchEvent 对象，其中包含有关Touch事件的信息。
          * @constructor egret.TouchEvent
          * @param type {string} 事件的类型，可以作为 Event.type 访问。
          * @param bubbles {boolean} 确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
@@ -48,10 +48,10 @@ var egret;
          * @param touchPointID {number} 分配给触摸点的唯一标识号
          * @param stageX {number} 事件发生点在全局舞台坐标中的水平坐标
          * @param stageY {number} 事件发生点在全局舞台坐标中的垂直坐标
-         * @param ctrlKey {boolean}
-         * @param altKey {boolean}
-         * @param shiftKey {boolean}
-         * @param touchDown {boolean}
+         * @param ctrlKey {boolean} 事件发生时ctrl键是否被按下
+         * @param altKey {boolean} 事件发生时shift键是否被按下
+         * @param shiftKey {boolean} 事件发生时shift键是否被按下
+         * @param touchDown {boolean} 表示触摸是否已按下
          */
         function TouchEvent(type, bubbles, cancelable, touchPointID, stageX, stageY, ctrlKey, altKey, shiftKey, touchDown) {
             if (bubbles === void 0) { bubbles = true; }
@@ -158,10 +158,10 @@ var egret;
          * @param touchPointID {number} 分配给触摸点的唯一标识号
          * @param stageX {number} 事件发生点在全局舞台坐标中的水平坐标
          * @param stageY {number} 事件发生点在全局舞台坐标中的垂直坐标
-         * @param ctrlKey {boolean}
-         * @param altKey {boolean}
-         * @param shiftKey {boolean}
-         * @param touchDown {boolean}
+         * @param ctrlKey {boolean} 事件发生时ctrl键是否被按下
+         * @param altKey {boolean} 事件发生时shift键是否被按下
+         * @param shiftKey {boolean} 事件发生时shift键是否被按下
+         * @param touchDown {boolean} 表示触摸是否已按下
          */
         TouchEvent.dispatchTouchEvent = function (target, type, touchPointID, stageX, stageY, ctrlKey, altKey, shiftKey, touchDown) {
             if (touchPointID === void 0) { touchPointID = 0; }
@@ -208,18 +208,22 @@ var egret;
          */
         TouchEvent.TOUCH_RELEASE_OUTSIDE = "touchReleaseOutside";
         /**
+         * 此功能已被废弃
          * @deprecated
          */
         TouchEvent.TOUCH_ROLL_OUT = "touchRollOut";
         /**
+         * 此功能已被废弃
          * @deprecated
          */
         TouchEvent.TOUCH_ROLL_OVER = "touchRollOver";
         /**
+         * 此功能已被废弃
          * @deprecated
          */
         TouchEvent.TOUCH_OUT = "touchOut";
         /**
+         * 此功能已被废弃
          * @deprecated
          */
         TouchEvent.TOUCH_OVER = "touchOver";

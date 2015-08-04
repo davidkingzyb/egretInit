@@ -31,18 +31,18 @@ var egret;
     /**
      * @class egret.Sound
      * @classdesc Sound 类允许您在应用程序中使用声音。
-     * @link http://docs.egret-labs.org/post/manual/sound/playsound.html 播放音频
-     *
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=157&terms1_id=25&terms2_id=36 播放音频
      * @event egret.SoundEvent.SOUND_COMPLETE 在声音完成播放后调度。
      */
     var Sound = (function (_super) {
         __extends(Sound, _super);
         /**
-         * 创建 egret.Sound 对象
+         * 创建一个 egret.Sound 对象
          */
         function Sound() {
             _super.call(this);
             /**
+             * @private
              * @deprecated
              * @type {string}
              */
@@ -67,6 +67,7 @@ var egret;
              * 当播放声音时，position 属性表示声音文件中当前播放的位置（以毫秒为单位）。
              * h5支持，native不支持
              * @returns {number}
+             * @platform Web
              */
             get: function () {
                 return this.audio ? Math.floor(this.audio._getCurrentTime() * 1000) : 0;
@@ -116,6 +117,7 @@ var egret;
         /**
          * 继续从上次暂停的位置播放
          * h5支持，native不支持
+         * @platform Web
          */
         __egretProto__.resume = function () {
             var sound = this.audio;
@@ -127,7 +129,9 @@ var egret;
             sound._play(this.type);
         };
         /**
+         * @private
          * 重新加载声音
+         * @deprecated
          */
         __egretProto__.load = function () {
             var sound = this.audio;
@@ -142,6 +146,7 @@ var egret;
          * @param type 事件类型
          * @param listener 监听函数
          * @param thisObj 侦听函数绑定的this对象
+         * @platform Web
          */
         __egretProto__.addEventListener = function (type, listener, thisObject) {
             _super.prototype.addEventListener.call(this, type, listener, thisObject);
@@ -173,6 +178,7 @@ var egret;
          * @param type 事件类型
          * @param listener 监听函数
          * @param thisObj 侦听函数绑定的this对象
+         * @platform Web
          */
         __egretProto__.removeEventListener = function (type, listener, thisObject) {
             _super.prototype.removeEventListener.call(this, type, listener, thisObject);
@@ -209,6 +215,7 @@ var egret;
              * 音量范围从 0（静音）至 1（最大音量）。
              * h5支持，native不支持
              * @returns number
+             * @platform Web
              */
             set: function (value) {
                 var sound = this.audio;
@@ -221,21 +228,23 @@ var egret;
             configurable: true
         });
         /**
+         * @private
          * @deprecated
          * 设置音量
          * @param value 值需大于0 小于等于 1
          */
         __egretProto__.setVolume = function (value) {
-            egret.Logger.warningWithErrorId(1031);
+            egret.$warn(1031);
             this.volume = value;
         };
         /**
+         * @private
          * @deprecated
          * 获取当前音量值
          * @returns number
          */
         __egretProto__.getVolume = function () {
-            egret.Logger.warningWithErrorId(1032);
+            egret.$warn(1032);
             return this.volume;
         };
         /**

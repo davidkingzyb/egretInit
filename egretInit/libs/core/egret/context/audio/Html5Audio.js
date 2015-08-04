@@ -52,13 +52,13 @@ var egret;
          */
         __egretProto__._play = function (type) {
             this.removeListeners();
-            if (egret.Html5Capatibility._System_OS != egret.SystemOSType.WPHONE) {
-                this._audio = this._audio.cloneNode();
+            if (egret.Html5Capatibility._audioMustLoad) {
+                //this._audio = this._audio.cloneNode();
+                this._audio.load();
             }
             this.paused = false;
             this._audio.autoplay = true;
             this._audio.volume = this._volume;
-            //this._audio.load();
             var self = this;
             var func = function (e) {
                 self._audio.removeEventListener("ended", func);

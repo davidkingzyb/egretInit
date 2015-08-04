@@ -29,6 +29,10 @@
 var egret;
 (function (egret) {
     /**
+     * @class egret.Transform
+     * @classdesc
+     * 利用 Transform 类，可以访问可应用于显示对象的颜色调整属性和二维转换对象。
+     * @extends egret.HashObject
      * @private
      */
     var Transform = (function (_super) {
@@ -50,6 +54,10 @@ var egret;
                 this._matrix2.identityMatrix(this._matrix);
                 return this._matrix2;
             },
+            /**
+             * 一个 Matrix 对象，其中包含更改显示对象的缩放、旋转和平移的值。
+             * @member {number} egret.Transform#matrix
+             */
             set: function (value) {
                 this._setMatrix(value);
             },
@@ -68,6 +76,10 @@ var egret;
                 this._colorTransform2.identityColorTransform(this._colorTransform);
                 return this._colorTransform2;
             },
+            /**
+             * 一个 ColorTransform 对象，其中包含整体调整显示对象颜色的值。
+             * @member {egret.ColorTransform} egret.Transform#colorTransform
+             */
             set: function (value) {
                 this._setColorTransform(value);
             },

@@ -34,9 +34,8 @@ var egret;
      * 在HTML5中，资源是一个HTMLElement对象
      * 在OpenGL / WebGL中，资源是一个提交GPU后获取的纹理id
      * Texture类封装了这些底层实现的细节，开发者只需要关心接口即可
-     * @link
-        * http://docs.egret-labs.org/post/manual/bitmap/textures.html 纹理集的使用
-     * http://docs.egret-labs.org/post/manual/loader/getres.html 获取资源的几种方式
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=135&terms1_id=25&terms2_id=31 纹理集的使用
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=123&terms1_id=25&terms2_id=30 获取资源的几种方式
      */
     var Texture = (function (_super) {
         __extends(Texture, _super);
@@ -127,11 +126,16 @@ var egret;
          * @param x {number} 像素点的X轴坐标
          * @param y {number} 像素点的Y轴坐标
          * @returns {number} 指定像素点的颜色值
+         * @platform Web
          */
         __egretProto__.getPixel32 = function (x, y) {
             var result = this._bitmapData.getContext("2d").getImageData(x, y, 1, 1);
             return result.data;
         };
+        /**
+         * 销毁纹理对象
+         * @method egret.Texture#dispose
+         */
         __egretProto__.dispose = function () {
             var bitmapData = this._bitmapData;
             if (bitmapData.dispose) {
@@ -143,6 +147,9 @@ var egret;
             texture._bitmapData = this._bitmapData;
             return texture;
         };
+        /**
+         * @private
+         */
         __egretProto__.draw = function (context, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, renderType) {
         };
         __egretProto__._drawForCanvas = function (context, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, renderType) {
@@ -218,6 +225,9 @@ var egret;
             bitmapData["avaliable"] = false;
             console.log("_disposeForNative");
         };
+        /**
+         * @private
+         */
         Texture.deleteWebGLTexture = function (texture) {
             var bitmapData = texture._bitmapData;
             if (bitmapData) {
@@ -232,6 +242,9 @@ var egret;
                 bitmapData.webGLTexture = null;
             }
         };
+        /**
+         * @private
+         */
         Texture.createBitmapData = function (url, callback) {
         };
         Texture._createBitmapDataForCanvasAndWebGl = function (url, callback) {

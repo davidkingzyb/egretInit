@@ -37,6 +37,8 @@ var egret;
     var URLRequestHeader = (function () {
         /**
          * 创建一个 egret.URLRequestHeader 对象
+         * @param name HTTP 请求标头名称
+         * @param value 与 name 属性相关联的值
          */
         function URLRequestHeader(name, value) {
             /**

@@ -69,16 +69,19 @@ var egret;
                 return this._text;
             },
             set: function (value) {
-                if (this._text == value) {
-                    return;
-                }
-                this._textChanged = true;
-                this._text = value;
-                this._setSizeDirty();
+                this.$setText(value);
             },
             enumerable: true,
             configurable: true
         });
+        __egretProto__.$setText = function (value) {
+            if (this._text == value) {
+                return;
+            }
+            this._textChanged = true;
+            this._text = value;
+            this._setSizeDirty();
+        };
         Object.defineProperty(__egretProto__, "font", {
             /**
              * BitmapFont对象，缓存了所有文本的位图纹理
@@ -88,15 +91,18 @@ var egret;
                 return this._font;
             },
             set: function (value) {
-                if (this._font == value)
-                    return;
-                this._font = value;
-                this._fontChanged = true;
-                this._setSizeDirty();
+                this.$setFont(value);
             },
             enumerable: true,
             configurable: true
         });
+        __egretProto__.$setFont = function (value) {
+            if (this._font == value)
+                return;
+            this._font = value;
+            this._fontChanged = true;
+            this._setSizeDirty();
+        };
         Object.defineProperty(__egretProto__, "letterSpacing", {
             get: function () {
                 return this._letterSpacing;
@@ -169,7 +175,7 @@ var egret;
                             xPos += emptyWidth;
                         }
                         else {
-                            egret.Logger.warningWithErrorId(1011, character);
+                            egret.$warn(1011, character);
                         }
                         continue;
                     }
@@ -238,7 +244,7 @@ var egret;
                             textureHeight = emptyHeight;
                         }
                         else {
-                            egret.Logger.warningWithErrorId(1011, character);
+                            egret.$warn(1011, character);
                             if (isFirstChar) {
                                 isFirstChar = false;
                             }
@@ -287,6 +293,9 @@ var egret;
             self._textOffsetY = textStartY;
             return textLines;
         };
+        /**
+         * @private
+         */
         BitmapText.EMPTY_FACTOR = 0.33;
         return BitmapText;
     })(egret.DisplayObject);

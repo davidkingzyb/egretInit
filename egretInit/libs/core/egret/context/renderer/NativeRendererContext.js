@@ -487,3 +487,22 @@ if (egret_native.rastergl) {
 else {
     egret_native_graphics.init();
 }
+//var originNativeFill = egret_native.rastergl.fill;
+//egret_native.rastergl.fill = function () {
+//    var style = egret.Graphics._currentFillStyle;
+//    if (!(typeof style == "string")) {
+//        var matrix:egret.Matrix = style["matrix"];
+//        if (matrix) {
+//            egret_native.rastergl.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
+//            originNativeFill.call(egret_native.rastergl);
+//            var context = egret.MainContext.instance.rendererContext;
+//            egret_native.Graphics.setTransform(context._matrixA, context._matrixB, context._matrixC, context._matrixD, context._matrixTx, context._matrixTy);
+//        }
+//    }
+//    else {
+//        originNativeFill.call(egret_native.rastergl);
+//    }
+//};
+egret.Graphics.prototype.beginGradientFill = function (type, colors, alphas, ratios, matrix) {
+    if (matrix === void 0) { matrix = null; }
+};

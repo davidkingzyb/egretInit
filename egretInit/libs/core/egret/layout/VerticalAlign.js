@@ -31,7 +31,7 @@ var egret;
     /**
      * @class egret.VerticalAlign
      * @classdesc 垂直对齐方式
-     * @link http://docs.egret-labs.org/post/manual/text/textlayout.html 文本布局
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=144&terms1_id=25&terms2_id=33 文本布局
      */
     var VerticalAlign = (function () {
         function VerticalAlign() {

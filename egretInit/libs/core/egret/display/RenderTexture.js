@@ -43,6 +43,9 @@ var egret;
             _super.call(this);
         }
         var __egretProto__ = RenderTexture.prototype;
+        /**
+         * @private
+         */
         __egretProto__.init = function () {
             this._bitmapData = document.createElement("canvas");
             this._bitmapData["avaliable"] = true;
@@ -145,6 +148,9 @@ var egret;
             //            document.documentElement.appendChild(cacheCanvas);
             return true;
         };
+        /**
+         * @private
+         */
         __egretProto__.setSize = function (width, height) {
             var cacheCanvas = this._bitmapData;
             cacheCanvas.width = width;
@@ -156,25 +162,44 @@ var egret;
                 this.renderContext._cacheCanvas.height = height;
             }
         };
+        /**
+         * @private
+         */
         __egretProto__.begin = function () {
         };
+        /**
+         * @private
+         */
         __egretProto__.end = function () {
         };
+        /**
+         * 销毁 RenderTexture 对象
+         * @method egret.RenderTexture#dispose
+         */
         __egretProto__.dispose = function () {
             if (this._bitmapData) {
                 this._bitmapData = null;
                 this.renderContext = null;
             }
         };
+        /**
+         * @private
+         */
         RenderTexture.create = function () {
             if (RenderTexture._pool.length) {
                 return RenderTexture._pool.pop();
             }
             return new RenderTexture();
         };
+        /**
+         * @private
+         */
         RenderTexture.release = function (value) {
             RenderTexture._pool.push(value);
         };
+        /**
+         * @private
+         */
         RenderTexture.identityRectangle = new egret.Rectangle();
         RenderTexture._pool = [];
         return RenderTexture;

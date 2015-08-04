@@ -94,6 +94,7 @@ var RES;
         /**
          * 二进制流文件
          * @constant {string} RES.ResourceItem.TYPE_BIN
+         * @platform Web
          */
         ResourceItem.TYPE_BIN = "bin";
         /**

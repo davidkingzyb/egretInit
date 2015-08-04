@@ -108,7 +108,7 @@ var RES;
                             group.push(item);
                     }
                     else {
-                        egret.Logger.warningWithErrorId(2000, key);
+                        egret.$warn(2000, key);
                     }
                 }
             }

@@ -28,6 +28,9 @@
 //////////////////////////////////////////////////////////////////////////////////////
 var egret;
 (function (egret) {
+    /**
+     * @private
+     */
     var FrameLabel = (function (_super) {
         __extends(FrameLabel, _super);
         function FrameLabel(name, frame /*int*/) {

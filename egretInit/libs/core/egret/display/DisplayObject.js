@@ -42,7 +42,14 @@ var egret;
      * 不允许重写以下方法
      * _draw();
      * getBounds();
-     * @link http://docs.egret-labs.org/post/manual/displayobj/aboutdisplayobj.html 显示对象的基本概念
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=102&terms1_id=25&terms2_id=27 显示对象的基本概念
+     *
+     * @event egret.Event.ADDED 将显示对象添加到显示列表中时调度。
+     * @event egret.Event.ADDED_TO_STAGE 在将显示对象直接添加到舞台显示列表或将包含显示对象的子树添加至舞台显示列表中时调度。
+     * @event egret.Event.REMOVED 将要从显示列表中删除显示对象时调度。
+     * @event egret.Event.REMOVED_FROM_STAGE 在从显示列表中直接删除显示对象或删除包含显示对象的子树时调度。
+     * @event egret.Event.ENTER_FRAME [广播事件] 播放头进入新帧时调度。
+     * @event egret.Event.RENDER [广播事件] 将要更新和呈现显示列表时调度。
      */
     var DisplayObject = (function (_super) {
         __extends(DisplayObject, _super);
@@ -77,6 +84,9 @@ var egret;
         __egretProto__._setDirty = function () {
             this._DO_Props_._normalDirty = true;
         };
+        /**
+         * @private
+         */
         __egretProto__.getDirty = function () {
             return this._DO_Props_._normalDirty || this._DO_Props_._sizeDirty;
         };
@@ -364,7 +374,7 @@ var egret;
              * 表示指定对象的 Alpha 透明度值。
              * 有效值为 0（完全透明）到 1（完全不透明）。alpha 设置为 0 的显示对象是活动的，即使它们不可见。
              * @member {number} egret.DisplayObject#alpha
-             *  @default 1 默认值为 1。
+             * @default 1
              */
             get: function () {
                 return this._DO_Props_._alpha;
@@ -907,6 +917,7 @@ var egret;
          * @param y {number}  要测试的此对象的 y 坐标。
          * @param shapeFlag {boolean} 是检查对象 (true) 的实际像素，还是检查边框 (false) 的实际像素。
          * @returns {boolean} 如果显示对象与指定的点重叠或相交，则为 true；否则为 false。
+         * @platform Web
          */
         __egretProto__.hitTestPoint = function (x, y, shapeFlag) {
             var self = this;
@@ -1030,6 +1041,9 @@ var egret;
             enumerable: true,
             configurable: true
         });
+        /**
+         * @inheritDoc
+         */
         __egretProto__.addEventListener = function (type, listener, thisObject, useCapture, priority) {
             if (useCapture === void 0) { useCapture = false; }
             if (priority === void 0) { priority = 0; }
@@ -1040,6 +1054,9 @@ var egret;
                 this._insertEventBin(list, listener, thisObject, priority, this);
             }
         };
+        /**
+         * @inheritDoc
+         */
         __egretProto__.removeEventListener = function (type, listener, thisObject, useCapture) {
             if (useCapture === void 0) { useCapture = false; }
             _super.prototype.removeEventListener.call(this, type, listener, thisObject, useCapture);
@@ -1049,6 +1066,9 @@ var egret;
                 this._removeEventBin(list, listener, thisObject, this);
             }
         };
+        /**
+         * @inheritDoc
+         */
         __egretProto__.dispatchEvent = function (event) {
             if (!event._bubbles) {
                 return _super.prototype.dispatchEvent.call(this, event);
@@ -1097,6 +1117,9 @@ var egret;
                 }
             }
         };
+        /**
+         * @inheritDoc
+         */
         __egretProto__.willTrigger = function (type) {
             var parent = this;
             while (parent) {
@@ -1145,6 +1168,9 @@ var egret;
             if (dirty === void 0) { dirty = true; }
             this._DO_Privs_._cacheDirty = dirty;
         };
+        /**
+         * @private
+         */
         DisplayObject.getTransformBounds = function (bounds, mtx) {
             var x = bounds.x, y = bounds.y;
             //            var x, y;
@@ -1209,6 +1235,9 @@ var egret;
             configurable: true
         });
         Object.defineProperty(__egretProto__, "transform", {
+            /**
+             * @private
+             */
             get: function () {
                 if (!this._transform) {
                     this._transform = new egret.Transform(this);

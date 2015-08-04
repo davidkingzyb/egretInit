@@ -58,6 +58,7 @@ var egret;
             egret.Event._dispatchByTarget(eventClass, target, IOErrorEvent.IO_ERROR);
         };
         /**
+         * 定义 ioError 事件对象的 type 属性值。
          * @constant {string} egret.IOErrorEvent.IO_ERROR
          */
         IOErrorEvent.IO_ERROR = "ioError";

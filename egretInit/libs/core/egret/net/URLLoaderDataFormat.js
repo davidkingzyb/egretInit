@@ -31,7 +31,7 @@ var egret;
     /**
      * @class egret.URLLoaderDataFormat
      * @classdesc URLLoaderDataFormat 类提供了一些用于指定如何接收已下载数据的值。
-     * @link http://docs.egret-labs.org/post/manual/net/netformat.html 读取不同数据格式
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=161&terms1_id=25&terms2_id=37 读取不同数据格式
      */
     var URLLoaderDataFormat = (function () {
         function URLLoaderDataFormat() {
@@ -40,6 +40,7 @@ var egret;
         /**
          * 指定以原始二进制数据形式接收下载的数据。
          * @constant {string} egret.URLLoaderDataFormat.BINARY
+         * @platform Web
          */
         URLLoaderDataFormat.BINARY = "binary";
         /**

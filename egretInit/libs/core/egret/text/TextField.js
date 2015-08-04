@@ -34,10 +34,15 @@ var egret;
      * TextField是egret的文本渲染类，采用浏览器/设备的API进行渲染，在不同的浏览器/设备中由于字体渲染方式不一，可能会有渲染差异
      * 如果开发者希望所有平台完全无差异，请使用BitmapText
      * @extends egret.DisplayObject
-     * @link http://docs.egret-labs.org/post/manual/text/createtext.html 创建文本
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=141&terms1_id=25&terms2_id=33 创建文本
+     *
+     * @event egret.TextEvent.LINK 点击链接后调度。
      */
     var TextField = (function (_super) {
         __extends(TextField, _super);
+        /**
+         * 创建一个 egret.TextField 对象
+         */
         function TextField() {
             _super.call(this);
             this._inputEnabled = false;
@@ -246,6 +251,7 @@ var egret;
              * 如果值为 true，则文本为斜体；false，则为不使用斜体。
              * 默认值为 false。
              * @member {boolean} egret.TextField#italic
+             * @platform Web
              */
             set: function (value) {
                 this._setItalic(value);
@@ -268,6 +274,7 @@ var egret;
              * 如果值为 true，则文本为粗体字；false，则为非粗体字。
              * 默认值为 false。
              * @member {boolean} egret.TextField#bold
+             * @platform Web
              */
             set: function (value) {
                 this._setBold(value);
@@ -443,6 +450,9 @@ var egret;
             configurable: true
         });
         Object.defineProperty(__egretProto__, "selectionBeginIndex", {
+            /**
+             * @private
+             */
             get: function () {
                 return 0;
             },
@@ -450,6 +460,9 @@ var egret;
             configurable: true
         });
         Object.defineProperty(__egretProto__, "selectionEndIndex", {
+            /**
+             * @private
+             */
             get: function () {
                 return 0;
             },
@@ -457,6 +470,9 @@ var egret;
             configurable: true
         });
         Object.defineProperty(__egretProto__, "caretIndex", {
+            /**
+             * @private
+             */
             get: function () {
                 return 0;
             },
@@ -618,9 +634,12 @@ var egret;
                 graphics.endFill();
             }
         };
+        /**
+         * @private
+         */
         __egretProto__.setFocus = function () {
             //todo:
-            egret.Logger.warningWithErrorId(1013);
+            egret.$warn(1013);
         };
         __egretProto__._onRemoveFromStage = function () {
             _super.prototype._onRemoveFromStage.call(this);
@@ -747,6 +766,10 @@ var egret;
             this._setSizeDirty();
         };
         Object.defineProperty(__egretProto__, "textWidth", {
+            /**
+             * 文本的宽度，以像素为单位。
+             * @member {number} egret.TextField#textWidth
+             */
             get: function () {
                 return this._TF_Props_._textMaxWidth;
             },
@@ -754,18 +777,41 @@ var egret;
             configurable: true
         });
         Object.defineProperty(__egretProto__, "textHeight", {
+            /**
+             * 文本的高度，以像素为单位。
+             * @member {number} egret.TextField#textHeight
+             */
             get: function () {
                 return egret.TextFieldUtils._getTextHeight(this);
             },
             enumerable: true,
             configurable: true
         });
-        __egretProto__.appendText = function (text) {
-            this.appendElement({ text: text });
+        /**
+         * 将 newText 参数指定的字符串追加到文本字段的文本的末尾。
+         * @method {number} egret.TextField#appendText
+         * @param newText {string} 要追加到现有文本末尾的字符串
+         */
+        __egretProto__.appendText = function (newText) {
+            this.appendElement({ text: newText });
         };
-        __egretProto__.appendElement = function (element) {
-            this._textArr.push(element);
-            this.setMiddleStyle(this._textArr);
+        /**
+         * 将 newElement 参数指定的文本内容追加到文本字段的文本的末尾。
+         * @method {number} egret.TextField#appendElement
+         * @param newElement {egret.ITextElement} 要追加到现有文本末尾的文本内容
+         */
+        __egretProto__.appendElement = function (newElement) {
+            var self = this;
+            var properties = self._TF_Props_;
+            var text = properties._text + newElement.text;
+            if (properties._displayAsPassword) {
+                self._setBaseText(text);
+            }
+            else {
+                properties._text = text;
+                self._textArr.push(newElement);
+                self.setMiddleStyle(self._textArr);
+            }
         };
         __egretProto__._getLinesArr = function () {
             var self = this;
@@ -844,22 +890,42 @@ var egret;
                                 var k = 0;
                                 var ww = 0;
                                 var word = textArr[j];
-                                var wl = word.length;
+                                if (this._TF_Props_._wordWrap) {
+                                    var words = word.split(/\b/);
+                                }
+                                else {
+                                    words = word.match(/./g);
+                                }
+                                var wl = words.length;
+                                var charNum = 0;
                                 for (; k < wl; k++) {
-                                    w = renderContext.measureText(word.charAt(k));
-                                    if (lineW + w > self._DO_Props_._explicitWidth && lineW + k != 0) {
+                                    w = renderContext.measureText(words[k]);
+                                    if (lineW != 0 && lineW + w > self._DO_Props_._explicitWidth && lineW + k != 0) {
                                         break;
                                     }
+                                    charNum += words[k].length;
                                     ww += w;
                                     lineW += w;
-                                    lineCharNum += 1;
+                                    lineCharNum += charNum;
                                 }
                                 if (k > 0) {
-                                    lineElement.elements.push({ width: ww, text: word.substring(0, k), style: element.style });
-                                    textArr[j] = word.substring(k);
+                                    lineElement.elements.push({
+                                        width: ww,
+                                        text: word.substring(0, charNum),
+                                        style: element.style
+                                    });
+                                    var leftWord = word.substring(charNum);
+                                    for (var m = 0, lwleng = leftWord.length; m < lwleng; m++) {
+                                        if (leftWord.charAt(m) != " ") {
+                                            break;
+                                        }
+                                    }
+                                    textArr[j] = leftWord.substring(m);
                                 }
-                                j--;
-                                isNextLine = false;
+                                if (textArr[j] != "") {
+                                    j--;
+                                    isNextLine = false;
+                                }
                             }
                         }
                     }
@@ -891,6 +957,22 @@ var egret;
             properties._numLines = linesArr.length;
             return linesArr;
         };
+        Object.defineProperty(__egretProto__, "wordWrap", {
+            /**
+             * @private
+             */
+            get: function () {
+                return this._TF_Props_._wordWrap;
+            },
+            /**
+             * @private
+             */
+            set: function (value) {
+                this._TF_Props_._wordWrap = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * @private
          * @param renderContext
@@ -964,6 +1046,9 @@ var egret;
                 }
             }
         };
+        /**
+         * @private
+         */
         TextField.default_fontFamily = "Arial";
         return TextField;
     })(egret.DisplayObject);

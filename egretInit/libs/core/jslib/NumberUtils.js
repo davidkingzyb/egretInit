@@ -32,6 +32,9 @@ var egret;
         function NumberUtils() {
         }
         var __egretProto__ = NumberUtils.prototype;
+        /**
+         * @private
+         */
         NumberUtils.isNumber = function (value) {
             return typeof (value) === "number" && !isNaN(value);
         };
@@ -106,7 +109,8 @@ for (var NumberUtils_i = 0; NumberUtils_i <= 90; NumberUtils_i++) {
 if (!Function.prototype.bind) {
     Function.prototype.bind = function (oThis) {
         if (typeof this !== "function") {
-            throw new TypeError(egret.getString(1029));
+            // closest thing possible to the ECMAScript 5 internal IsCallable function
+            egret.$error(1029);
         }
         var aArgs = Array.prototype.slice.call(arguments, 1), fToBind = this, fNOP = function () {
         }, fBound = function () {

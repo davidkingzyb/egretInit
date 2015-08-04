@@ -81,7 +81,7 @@ var egret;
                     egret.callLater(egret.Event.dispatchEvent, egret.Event, loader, egret.Event.COMPLETE);
                 };
                 promise.onErrorFunc = function (error_code) {
-                    egret.Logger.infoWithErrorId(1019, error_code);
+                    egret.$warn(1019, error_code);
                     egret.IOErrorEvent.dispatchIOErrorEvent(loader);
                 };
                 egret_native.requireHttp(virtualUrl, self.urlData, promise);

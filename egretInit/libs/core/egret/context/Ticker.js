@@ -33,6 +33,9 @@ var egret;
      */
     var Ticker = (function (_super) {
         __extends(Ticker, _super);
+        /**
+         * 创建一个Ticker对象，不可以创建
+         */
         function Ticker() {
             _super.call(this);
             this._timeScale = 1;
@@ -40,7 +43,7 @@ var egret;
             this._callIndex = -1;
             this.callBackList = [];
             if (Ticker.instance != null) {
-                egret.Logger.fatalWithErrorId(1002);
+                egret.$error(1002);
             }
         }
         var __egretProto__ = Ticker.prototype;
@@ -60,7 +63,6 @@ var egret;
                 return;
             }
             var frameTime = advancedTime * this._timeScale;
-            frameTime *= this._timeScale;
             this._callList = this.callBackList.concat();
             this._callIndex = 0;
             for (; this._callIndex < this._callList.length; this._callIndex++) {
@@ -111,35 +113,41 @@ var egret;
             for (var _i = 3; _i < arguments.length; _i++) {
                 parameters[_i - 3] = arguments[_i];
             }
-            egret.Logger.warningWithErrorId(1003);
+            egret.$warn(1003);
             egret.setTimeout.apply(null, [listener, thisObject, delay].concat(parameters));
         };
         /**
-         * @method egret.Ticker#setTimeScale
+         * @deprecated
          * @param timeScale {number}
+         * @private
          */
         __egretProto__.setTimeScale = function (timeScale) {
             this._timeScale = timeScale;
         };
         /**
+         * @deprecated
          * @method egret.Ticker#getTimeScale
+         * @private
          */
         __egretProto__.getTimeScale = function () {
             return this._timeScale;
         };
         /**
+         * 暂停
          * @method egret.Ticker#pause
          */
         __egretProto__.pause = function () {
             this._paused = true;
         };
         /**
+         * 继续
          * @method egret.Ticker#resume
          */
         __egretProto__.resume = function () {
             this._paused = false;
         };
         /**
+         * 获取Ticker当前单例
          * @method egret.Ticker.getInstance
          * @returns {Ticker}
          */

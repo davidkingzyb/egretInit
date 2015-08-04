@@ -102,7 +102,7 @@ var egret;
                 delete this.mapClassDic[requestName];
                 return instance;
             }
-            throw new Error(egret.getString(1028, requestName));
+            egret.$error(1028, requestName);
         };
         /**
          * 储存类的映射规则

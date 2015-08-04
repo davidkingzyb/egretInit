@@ -31,13 +31,34 @@ var egret;
     /**
      * @class egret.HtmlTextParser
      * @classdesc 将html格式文本转换为可赋值给 egret.TextField#textFlow 属性的对象
-     * @link http://docs.egret-labs.org/jkdoc/manual-text-multiformat.html 多种样式文本混合
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=146&terms1_id=25&terms2_id=33&t3_id=146 多种样式文本混合
      */
     var HtmlTextParser = (function () {
+        /**
+         * 创建一个 egret.HtmlTextParser 对象
+         */
         function HtmlTextParser() {
+            this._replaceArr = [];
             this.resutlArr = [];
+            this.initReplaceArr();
         }
         var __egretProto__ = HtmlTextParser.prototype;
+        __egretProto__.initReplaceArr = function () {
+            this._replaceArr = [];
+            this._replaceArr.push([/&lt;/g, "<"]);
+            this._replaceArr.push([/&gt;/g, ">"]);
+            this._replaceArr.push([/&amp;/g, "&"]);
+            this._replaceArr.push([/&quot;/g, "\""]);
+            this._replaceArr.push([/&apos;/g, "\'"]);
+        };
+        __egretProto__.replaceSpecial = function (value) {
+            for (var i = 0; i < this._replaceArr.length; i++) {
+                var k = this._replaceArr[i][0];
+                var v = this._replaceArr[i][1];
+                value = value.replace(k, v);
+            }
+            return value;
+        };
         /**
          * 将html格式文本转换为可赋值给 egret.TextField#textFlow 属性的对象
          * @param htmltext {string} html文本
@@ -73,18 +94,7 @@ var egret;
             if (value == "") {
                 return;
             }
-            var resutlArr = [];
-            resutlArr.push(["&lt;", "<"]);
-            resutlArr.push(["&gt;", ">"]);
-            resutlArr.push(["&amp;", "&"]);
-            resutlArr.push(["&quot;", "\""]);
-            resutlArr.push(["&apos;;", "\'"]);
-            for (var i = 0; i < resutlArr.length; i++) {
-                var k = resutlArr[i][0];
-                var v = resutlArr[i][1];
-                var reg = new RegExp(k, "g");
-                value.replace(reg, v);
-            }
+            value = this.replaceSpecial(value);
             if (this.stackArray.length > 0) {
                 this.resutlArr.push({ text: value, style: this.stackArray[this.stackArray.length - 1] });
             }
@@ -94,45 +104,73 @@ var egret;
         };
         //将字符数据转成Json数据
         __egretProto__.changeStringToObject = function (str) {
+            str = str.trim();
             var info = {};
-            var array = str.replace(/( )+/g, " ").split(" ");
-            for (var i = 0; i < array.length; i++) {
-                this.addProperty(info, array[i]);
+            var header = [];
+            if (str.charAt(0) == "i" || str.charAt(0) == "b") {
+                this.addProperty(info, str, "true");
+            }
+            else if (header = str.match(/^(font|a)\s/)) {
+                str = str.substring(header[0].length).trim();
+                var next = 0;
+                var titles;
+                while (titles = str.match(this.getHeadReg())) {
+                    var title = titles[0];
+                    var value = "";
+                    var str = str.substring(title.length).trim();
+                    if (str.charAt(0) == "\"") {
+                        var next = str.indexOf("\"", 1);
+                        value = str.substring(1, next);
+                        next += 1;
+                    }
+                    else if (str.charAt(0) == "\'") {
+                        var next = str.indexOf("\'", 1);
+                        value = str.substring(1, next);
+                        next += 1;
+                    }
+                    else {
+                        value = str.match(/(\S)+/)[0];
+                        next = value.length;
+                    }
+                    this.addProperty(info, title.substring(0, title.length - 1).trim(), value.trim());
+                    str = str.substring(next).trim();
+                }
             }
             return info;
         };
-        __egretProto__.addProperty = function (info, prV) {
-            var valueArr = prV.replace(/( )*=( )*/g, "=").split("=");
-            if (valueArr[1]) {
-                valueArr[1] = valueArr[1].replace(/(\"|\')/g, "");
-            }
-            switch (valueArr[0].toLowerCase()) {
+        __egretProto__.getHeadReg = function () {
+            return /^(color|textcolor|strokecolor|stroke|b|bold|i|italic|size|fontfamily|href)(\s)*=/;
+        };
+        __egretProto__.addProperty = function (info, head, value) {
+            switch (head.toLowerCase()) {
                 case "color":
                 case "textcolor":
-                    valueArr[1] = valueArr[1].replace(/#/, "0x");
-                    info.textColor = parseInt(valueArr[1]);
+                    value = value.replace(/#/, "0x");
+                    info.textColor = parseInt(value);
                     break;
                 case "strokecolor":
-                    valueArr[1] = valueArr[1].replace(/#/, "0x");
-                    info.strokeColor = parseInt(valueArr[1]);
+                    value = value.replace(/#/, "0x");
+                    info.strokeColor = parseInt(value);
                     break;
                 case "stroke":
-                    info.stroke = parseInt(valueArr[1]);
+                    info.stroke = parseInt(value);
                     break;
                 case "b":
-                    info.bold = (valueArr[1] || "true") == "true";
+                case "bold":
+                    info.bold = value == "true";
                     break;
                 case "i":
-                    info.italic = (valueArr[1] || "true") == "true";
+                case "italic":
+                    info.italic = value == "true";
                     break;
                 case "size":
-                    info.size = parseInt(valueArr[1]);
+                    info.size = parseInt(value);
                     break;
                 case "fontfamily":
-                    info.fontFamily = valueArr[1];
+                    info.fontFamily = value;
                     break;
                 case "href":
-                    info.href = valueArr[1];
+                    info.href = this.replaceSpecial(value);
                     break;
             }
         };

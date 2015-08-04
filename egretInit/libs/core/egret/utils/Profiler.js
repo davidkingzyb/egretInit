@@ -59,6 +59,10 @@ var egret;
             }
             return Profiler.instance;
         };
+        /**
+         * 停止Profiler
+         * @method egret.Profiler#stop
+         */
         __egretProto__.stop = function () {
             if (!this._isRunning) {
                 return;

@@ -32,13 +32,13 @@ var egret;
      * @class egret.MovieClip
      * @classdesc 影片剪辑，可以通过影片剪辑播放序列帧动画。MovieClip 类从以下类继承而来：DisplayObject 和 EventDispatcher。不同于 DisplayObject 对象，MovieClip 对象拥有一个时间轴。
      * @extends egret.DisplayObject
-     * @link http://docs.egret-labs.org/post/manual/displaycon/movieclip.html  MovieClip序列帧动画
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=151&terms1_id=25&terms2_id=34 MovieClip序列帧动画
      */
     var MovieClip = (function (_super) {
         __extends(MovieClip, _super);
         //Construct Function
         /**
-         * 创建新的 MovieClip 实例。创建 MovieClip 之后，调用舞台上的显示对象容器的addElement方法。
+         * 创建一个 egret.MovieClip 对象。创建 MovieClip 之后，调用舞台上的显示对象容器的addElement方法。
          * @method egret.MovieClip#constructor
          * @param movieClipData {MovieClipData} 被引用的 MovieClipData 对象
          */
@@ -239,7 +239,7 @@ var egret;
         __egretProto__.gotoAndPlay = function (frame, playTimes) {
             if (playTimes === void 0) { playTimes = 0; }
             if (arguments.length === 0 || arguments.length > 2) {
-                throw new Error(egret.getString(1022, "MovieClip.gotoAndPlay()"));
+                egret.$error(1022, "MovieClip.gotoAndPlay()");
             }
             this.play(playTimes);
             this._gotoFrame(frame);
@@ -251,7 +251,7 @@ var egret;
          */
         __egretProto__.gotoAndStop = function (frame) {
             if (arguments.length != 1) {
-                throw new Error(egret.getString(1022, "MovieClip.gotoAndStop()"));
+                egret.$error(1022, "MovieClip.gotoAndStop()");
             }
             this.stop();
             this._gotoFrame(frame);
@@ -264,7 +264,7 @@ var egret;
             else {
                 frameNum = parseInt(frame + '', 10);
                 if (frameNum != frame) {
-                    throw new Error(egret.getString(1022, "Frame Label Not Found"));
+                    egret.$error(1022, "Frame Label Not Found");
                 }
             }
             if (frameNum < 1) {

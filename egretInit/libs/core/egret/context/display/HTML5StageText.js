@@ -167,6 +167,9 @@ var egret;
     })(egret.StageText);
     egret.HTML5StageText = HTML5StageText;
     HTML5StageText.prototype.__class__ = "egret.HTML5StageText";
+    /**
+     * @private
+     */
     var HTMLInput = (function () {
         function HTMLInput() {
             this._needShow = false;

@@ -41,8 +41,6 @@ var egret;
          * @param type {string} 事件类型
          * @param bubbles {boolean}
          * @param cancelable {boolean}
-         * @param bytesLoaded {number}
-         * @param bytesTotal {number}
          */
         function SoundEvent(type, bubbles, cancelable) {
             if (bubbles === void 0) { bubbles = false; }

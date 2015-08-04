@@ -29,11 +29,7 @@
 var egret;
 (function (egret) {
     /**
-     * @class egret.Logger
-     * @classdesc
-     * Logger是引擎的日志处理模块入口
-     * @stable B 目前Logger的接口设计没有问题，但是考虑到跨平台，需要将其改为一个Context，并且允许开发者自由扩展以实现自身游戏的日志分析收集需求
-     * todo:GitHub文档，如何利用日志帮助游戏持续改进
+     * @private
      */
     var Logger = (function () {
         function Logger() {
@@ -85,7 +81,6 @@ var egret;
          */
         Logger.fatal = function (actionCode, value) {
             if (value === void 0) { value = null; }
-            egret.Logger.traceToConsole("Fatal", actionCode, value);
             throw new Error(egret.Logger.getTraceCode("Fatal", actionCode, value));
         };
         /**
@@ -107,48 +102,6 @@ var egret;
         Logger.warning = function (actionCode, value) {
             if (value === void 0) { value = null; }
             egret.Logger.traceToConsole("Warning", actionCode, value);
-        };
-        Logger.fatalWithErrorId = function (errorId) {
-            var args = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args[_i - 1] = arguments[_i];
-            }
-            args.unshift(errorId);
-            var actionCode = getString.apply(null, args);
-            if (actionCode) {
-                Logger.fatal(actionCode);
-            }
-            else {
-                Logger.warning(getString(-1, errorId));
-            }
-        };
-        Logger.infoWithErrorId = function (errorId) {
-            var args = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args[_i - 1] = arguments[_i];
-            }
-            args.unshift(errorId);
-            var actionCode = getString.apply(null, args);
-            if (actionCode) {
-                Logger.info(actionCode);
-            }
-            else {
-                Logger.warning(getString(-1, errorId));
-            }
-        };
-        Logger.warningWithErrorId = function (errorId) {
-            var args = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args[_i - 1] = arguments[_i];
-            }
-            args.unshift(errorId);
-            var actionCode = getString.apply(null, args);
-            if (actionCode) {
-                Logger.warning(actionCode);
-            }
-            else {
-                Logger.warning(getString(-1, errorId));
-            }
         };
         /**
          * @private
@@ -179,6 +132,9 @@ var egret;
     })();
     egret.Logger = Logger;
     Logger.prototype.__class__ = "egret.Logger";
+    /**
+     * @private
+     */
     function getString(id) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
@@ -194,4 +150,40 @@ var egret;
         return message;
     }
     egret.getString = getString;
+    /**
+     * @private
+     */
+    function $error(code) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        args.unshift(code);
+        var actionCode = getString.apply(null, args);
+        if (actionCode) {
+            Logger.fatal(actionCode);
+        }
+        else {
+            Logger.fatal(getString(-1, code));
+        }
+    }
+    egret.$error = $error;
+    /**
+     * @private
+     */
+    function $warn(code) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        args.unshift(code);
+        var actionCode = getString.apply(null, args);
+        if (actionCode) {
+            Logger.warning(actionCode);
+        }
+        else {
+            Logger.warning(getString(-1, code));
+        }
+    }
+    egret.$warn = $warn;
 })(egret || (egret = {}));

@@ -180,6 +180,12 @@ var egret;
         };
         __egretProto__.onRenderFinish = function () {
         };
+        __egretProto__.createLinearGradient = function (x0, y0, x1, y1) {
+            return null;
+        };
+        __egretProto__.createRadialGradient = function (x0, y0, r0, x1, y1, r1) {
+            return null;
+        };
         __egretProto__.setGlobalFilters = function (filterData) {
         };
         __egretProto__.drawCursor = function (x1, y1, x2, y2) {
@@ -204,7 +210,7 @@ var egret;
          */
         RendererContext.registerBlendModeForGL = function (key, src, dst, override) {
             if (RendererContext.blendModesForGL[key] && !override) {
-                egret.Logger.warningWithErrorId(1005, key);
+                egret.$warn(1005, key);
             }
             else {
                 RendererContext.blendModesForGL[key] = [src, dst];
@@ -213,6 +219,7 @@ var egret;
         /**
          * 是否对图像使用平滑处理
          * 该特性目前只支持Canvas
+         * @platform Web
          */
         RendererContext.imageSmoothingEnabled = true;
         RendererContext.blendModesForGL = null;

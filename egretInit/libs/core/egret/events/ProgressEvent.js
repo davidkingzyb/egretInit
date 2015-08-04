@@ -79,10 +79,12 @@ var egret;
             egret.Event._dispatchByTarget(ProgressEvent, target, type, { "bytesLoaded": bytesLoaded, "bytesTotal": bytesTotal });
         };
         /**
+         * 定义 progress 事件对象的 type 属性值。
          * @constant {string} egret.ProgressEvent.PROGRESS
          */
         ProgressEvent.PROGRESS = "progress";
         /**
+         * 定义 socketData 事件对象的 type 属性值。
          * @constant {string} egret.ProgressEvent.SOCKET_DATA
          */
         ProgressEvent.SOCKET_DATA = "socketData";

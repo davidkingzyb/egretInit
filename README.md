@@ -1,8 +1,10 @@
 # egretInit
 
-by DKZ
+**Build egret project quickly.**
 
-Build egret project quickly.
+2015/8/4 by DKZ
+
+
 
 ##egretInit
 
@@ -62,7 +64,7 @@ egret tools for Initialize standard egret Object
 
 please use resourse.py to keep texture name and sourse name correct
 
-**setWH(that)**
+####setWH(that)
 
 scale android stage and set global screen width and screen height (use egret_loader.js)
 
@@ -72,7 +74,7 @@ stageWidth=tool.stageW;
 stageHeight=tool.stageH;
 ```
 
-**initBitmap(texture,x?,y?,ax?,ay?)**
+####initBitmap(texture,x?,y?,ax?,ay?)
 
 Initialize a Bitmap Object
 
@@ -81,7 +83,7 @@ this.bm=tool.initBitmap('bm');
 this.bm2=tool.initBitmap('bm',100,100,.5,.5);
 ```
 
-**initMovieClip(texture,x?,y?,ax?,ay?)**
+####initMovieClip(texture,x?,y?,ax?,ay?)
 
 Initialize a MovieClip Object
 
@@ -92,7 +94,7 @@ this.mc2=tool.initMovieClip('mc2',200,100,.5,.5);
 this.mc2.play(-1);
 ```
 
-**changeMovieClipData(target,texture)**
+####changeMovieClipData(target,texture)
 
 Change MovieClip texture
 
@@ -101,7 +103,7 @@ tool.changeMovieClipData(this.mc2,'mc');
 this.mc.play(-1);
 ```
 
-**initTextField(text,x?,y?,textColor?,size?,fontFamily?)**
+####initTextField(text,x?,y?,textColor?,size?,fontFamily?)
 
 Initialize a TextField Object
 
@@ -110,7 +112,7 @@ this.tf=tool.initTextField('Hello World');
 this.tf2=tool.initTextField('msg',100,200,0x000001,80,'SimHei');
 ```
 
-**initBitmapText(font,text,x?,y?,ax?,ay?)**
+####initBitmapText(font,text,x?,y?,ax?,ay?)
 
 Initialize a BitMapText Object
 
@@ -119,7 +121,7 @@ this.bmt=tool.initBitmapText('font','0');
 this.bmt2=tool.initBitmapText('font','0',200,200,.5,.5);
 ```
 
-**getXY(event)**
+####getXY(event)
 
 get Touch Coordinate
 
@@ -133,7 +135,7 @@ function touchBegin(e){
 
 ```
 
-**initParticle(texture,x?,y?,ax?,ay?)**
+####initParticle(texture,x?,y?,ax?,ay?)
 
 Initialize a Particle object (need the third party library particle support <https://github.com/egret-labs/egret-game-library>)
 
@@ -141,7 +143,7 @@ Initialize a Particle object (need the third party library particle support <htt
 this.system = tool.initParticle('evilParticle', 300,300, .5, .5);
 ```
 
-**addChildren(arr,context)**
+####addChildren(arr,context)
 
 add a group to stage
 
@@ -149,7 +151,7 @@ add a group to stage
 tool.addChildren([this.bm,this.mc],this);
 ```
 
-**removeChildren(arr,context)**
+####removeChildren(arr,context)
 
 remove a group from stage
 
@@ -157,7 +159,7 @@ remove a group from stage
 tool.removeChildren([this.bm,this.mc],this);
 ```
 
-**initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,width?,height?,x?,y?,ax?,ay?)**
+####initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,width?,height?,x?,y?,ax?,ay?)**
 
 Initialize a Scale 9 Grid Bitmap object
 
@@ -165,7 +167,7 @@ Initialize a Scale 9 Grid Bitmap object
 this.s9g=tool.initScale9GridBitmap("scale9grid",50,50,100,100);
 ```
 
-**test2RectHit(obj1,obj2)**
+####test2RectHit(obj1,obj2)
 
 2 displayObject collision detection(anchor must be 0)
 
@@ -178,7 +180,7 @@ tool.test2RectHit(this.bm, this.bm2);
 
 debug egret project
 
-**showPosition(target,context)**
+####showPosition(target,context)
 
 show DisplayObject position and console log it infomation
 
@@ -192,7 +194,7 @@ press alt and click the object to console log it's infomation
 debug.showPosition(target,this);
 ```
 
-**showAllPosition(context)**
+####showAllPosition(context)
 
 show DisplayObjectContainer's all children position and console log them infomation
 
@@ -200,7 +202,7 @@ show DisplayObjectContainer's all children position and console log them infomat
 debug.showAllPosition(gameContainer);
 ```
 
-**showGroupPosition(group,context)**
+####showGroupPosition(group,context)
 
 show a group position
 
@@ -208,7 +210,7 @@ show a group position
 debug.showGroupPosition([this.bm,this.mc],this);
 ```
 
-**pause() resume()**
+####pause() resume()
 
 pause game and resume game
 

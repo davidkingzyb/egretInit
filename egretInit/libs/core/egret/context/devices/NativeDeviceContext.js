@@ -59,6 +59,9 @@ var egret;
         __egretProto__.onEnterFrame = function (advancedTime) {
             this.callback.call(this.thisObject, advancedTime);
         };
+        __egretProto__.setFrameRate = function (frameRate) {
+            egret_native.setFrameRate(frameRate);
+        };
         return NativeDeviceContext;
     })(egret.HashObject);
     egret.NativeDeviceContext = NativeDeviceContext;
@@ -87,7 +90,7 @@ var egret_native_external_interface;
             listener.call(null, value);
         }
         else {
-            egret.Logger.warningWithErrorId(1004, functionName);
+            egret.$warn(1004, functionName);
         }
     }
     egret_native_external_interface.onReceivedPluginInfo = onReceivedPluginInfo;
@@ -114,7 +117,7 @@ var egret_native_localStorage;
             return true;
         }
         catch (e) {
-            egret.Logger.infoWithErrorId(1018, key, value);
+            egret.$warn(1018, key, value);
             return false;
         }
     }

@@ -96,6 +96,7 @@ declare module RES {
         /**
          * 二进制流文件
          * @constant {string} RES.ResourceItem.TYPE_BIN
+         * @platform Web
          */
         static TYPE_BIN: string;
         /**

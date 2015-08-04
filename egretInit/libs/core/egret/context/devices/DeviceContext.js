@@ -35,23 +35,13 @@ var egret;
      */
     var DeviceContext = (function (_super) {
         __extends(DeviceContext, _super);
-        /**
-         * @method egret.DeviceContext#constructor
-         */
         function DeviceContext() {
             _super.call(this);
-            /**
-             * @member egret.DeviceContext#frameRate
-             */
-            this.frameRate = 60;
         }
         var __egretProto__ = DeviceContext.prototype;
-        /**
-         * @method egret.DeviceContext#executeMainLoop
-         * @param callback {Function}
-         * @param thisObject {any}
-         */
         __egretProto__.executeMainLoop = function (callback, thisObject) {
+        };
+        __egretProto__.setFrameRate = function (frameRate) {
         };
         return DeviceContext;
     })(egret.HashObject);

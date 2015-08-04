@@ -46,12 +46,8 @@ var egret;
             this._time = 0;
             this._requestAnimationId = NaN;
             this._isActivate = true;
-            HTML5DeviceContext.countTime = 0;
-            if ((60 % frameRate) == 0) {
-                HTML5DeviceContext.countTime = 60 / frameRate - 1;
-                HTML5DeviceContext.requestAnimationFrame = window["requestAnimationFrame"] || window["webkitRequestAnimationFrame"] || window["mozRequestAnimationFrame"] || window["oRequestAnimationFrame"] || window["msRequestAnimationFrame"];
-                HTML5DeviceContext.cancelAnimationFrame = window["cancelAnimationFrame"] || window["msCancelAnimationFrame"] || window["mozCancelAnimationFrame"] || window["webkitCancelAnimationFrame"] || window["oCancelAnimationFrame"] || window["cancelRequestAnimationFrame"] || window["msCancelRequestAnimationFrame"] || window["mozCancelRequestAnimationFrame"] || window["oCancelRequestAnimationFrame"] || window["webkitCancelRequestAnimationFrame"];
-            }
+            HTML5DeviceContext.requestAnimationFrame = window["requestAnimationFrame"] || window["webkitRequestAnimationFrame"] || window["mozRequestAnimationFrame"] || window["oRequestAnimationFrame"] || window["msRequestAnimationFrame"];
+            HTML5DeviceContext.cancelAnimationFrame = window["cancelAnimationFrame"] || window["msCancelAnimationFrame"] || window["mozCancelAnimationFrame"] || window["webkitCancelAnimationFrame"] || window["oCancelAnimationFrame"] || window["cancelRequestAnimationFrame"] || window["msCancelRequestAnimationFrame"] || window["mozCancelRequestAnimationFrame"] || window["oCancelRequestAnimationFrame"] || window["webkitCancelRequestAnimationFrame"];
             if (!HTML5DeviceContext.requestAnimationFrame) {
                 HTML5DeviceContext.requestAnimationFrame = function (callback) {
                     return window.setTimeout(callback, 1000 / frameRate);
@@ -66,6 +62,11 @@ var egret;
             this.registerListener();
         }
         var __egretProto__ = HTML5DeviceContext.prototype;
+        __egretProto__.setFrameRate = function (frameRate) {
+            if ((60 % frameRate) == 0) {
+                HTML5DeviceContext.countTime = 60 / frameRate - 1;
+            }
+        };
         __egretProto__.enterFrame = function () {
             var context = HTML5DeviceContext.instance;
             var thisObject = HTML5DeviceContext._thisObject;
@@ -206,7 +207,7 @@ var egret_html5_localStorage;
             return true;
         }
         catch (e) {
-            egret.Logger.infoWithErrorId(1018, key, value);
+            egret.$warn(1018, key, value);
             return false;
         }
     }

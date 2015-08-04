@@ -28,6 +28,9 @@
 //////////////////////////////////////////////////////////////////////////////////////
 var egret;
 (function (egret) {
+    /**
+     * @private
+     */
     var AudioType = (function () {
         function AudioType() {
         }
@@ -39,6 +42,9 @@ var egret;
     })();
     egret.AudioType = AudioType;
     AudioType.prototype.__class__ = "egret.AudioType";
+    /**
+     * @private
+     */
     var SystemOSType = (function () {
         function SystemOSType() {
         }
@@ -66,11 +72,16 @@ var egret;
             Html5Capatibility._canUseBlob = false;
             Html5Capatibility._audioType = AudioType.HTML5_AUDIO;
             Html5Capatibility._AudioClass = egret.Html5Audio;
+            Html5Capatibility._audioMustLoad = true;
             if (ua.indexOf("windows phone") >= 0) {
                 Html5Capatibility._System_OS = SystemOSType.WPHONE;
+                Html5Capatibility._audioMustLoad = false;
             }
             else if (ua.indexOf("android") >= 0) {
                 Html5Capatibility._System_OS = SystemOSType.ADNROID;
+                if (ua.indexOf("ucbrowser") >= 0) {
+                    Html5Capatibility._audioMustLoad = false;
+                }
                 if (window.hasOwnProperty("QZAppExternal") && ua.indexOf("qzone") >= 0) {
                     Html5Capatibility._AudioClass = egret.QQAudio;
                     Html5Capatibility._audioType = AudioType.QQ_AUDIO;
@@ -119,6 +130,7 @@ var egret;
         Html5Capatibility._canUseBlob = false;
         //当前浏览器版本是否支持webaudio
         Html5Capatibility._audioType = 0;
+        Html5Capatibility._audioMustLoad = false;
         Html5Capatibility._QQRootPath = "";
         Html5Capatibility._System_OS = 0;
         Html5Capatibility.ua = "";

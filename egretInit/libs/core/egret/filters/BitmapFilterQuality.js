@@ -26,24 +26,3 @@
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //////////////////////////////////////////////////////////////////////////////////////
-var egret;
-(function (egret) {
-    var BitmapFilterQuality;
-    (function (BitmapFilterQuality) {
-        /**
-         * 定义低品质滤镜设置
-         * @private
-         */
-        BitmapFilterQuality.LOW = 1;
-        /**
-         * 定义中等品质滤镜设置
-         * @private
-         */
-        BitmapFilterQuality.MEDIUM = 2;
-        /**
-         * 定义高品质滤镜设置
-         * @private
-         */
-        BitmapFilterQuality.HIGH = 3;
-    })(BitmapFilterQuality = egret.BitmapFilterQuality || (egret.BitmapFilterQuality = {}));
-})(egret || (egret = {}));

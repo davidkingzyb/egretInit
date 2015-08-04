@@ -117,7 +117,7 @@ var RES;
             if (this.itemListDic[groupName] || !groupName)
                 return;
             if (!list || list.length == 0) {
-                egret.Logger.warningWithErrorId(2001, groupName);
+                egret.$warn(2001, groupName);
                 var event = new RES.ResourceEvent(RES.ResourceEvent.GROUP_LOAD_ERROR);
                 event.groupName = groupName;
                 this.dispatchEvent(event);

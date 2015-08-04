@@ -61,6 +61,10 @@ var egret;
      * 注意：ByteArray 类适用于需要在字节层访问数据的高级 开发人员。
      */
     var ByteArray = (function () {
+        /**
+         * 创建一个 egret.ByteArray 对象以引用指定的 ArrayBuffer 对象
+         * @param buffer {ArrayBuffer} 数据源
+         */
         function ByteArray(buffer) {
             this.BUFFER_EXT_SIZE = 0; //Buffer expansion size
             this.EOF_byte = -1;
@@ -74,23 +78,10 @@ var egret;
             this.data = new DataView(buffer);
             this._position = 0;
         };
-        /**
-         * @deprecated
-         */
-        __egretProto__.setArrayBuffer = function (buffer) {
-        };
         Object.defineProperty(__egretProto__, "buffer", {
-            // getter setter
             get: function () {
                 return this.data.buffer;
             },
-            //public get bufferCopy():ArrayBuffer {
-            //    var newarraybuffer = new ArrayBuffer(this.length);
-            //    var view = new Uint8Array(this.data.buffer, 0, this.length);
-            //    var newview = new Uint8Array(newarraybuffer, 0, this.length);
-            //    newview.set(view);      // memcpy
-            //    return newarraybuffer;
-            //}
             /**
              * @private
              */
@@ -115,9 +106,9 @@ var egret;
             configurable: true
         });
         Object.defineProperty(__egretProto__, "bufferOffset", {
-            //public get phyPosition():number {
-            //    return this._position + this.data.byteOffset;
-            //}
+            /**
+             * @private
+             */
             get: function () {
                 return this.data.byteOffset;
             },
@@ -172,7 +163,10 @@ var egret;
             enumerable: true,
             configurable: true
         });
-        //end
+        /**
+         * 清除字节数组的内容，并将 length 和 position 属性重置为 0。
+         * @method egret.ByteArray#clear
+         */
         __egretProto__.clear = function () {
             //this._position = 0;
             this._setArrayBuffer(new ArrayBuffer(this.BUFFER_EXT_SIZE));
@@ -590,13 +584,16 @@ var egret;
                 this.data.setUint8(this.position++, bytes[i]);
             }
         };
+        /**
+         * @private
+         */
         __egretProto__.validate = function (len) {
             //len += this.data.byteOffset;
             if (this.data.byteLength > 0 && this._position + len <= this.data.byteLength) {
                 return true;
             }
             else {
-                throw egret.getString(1025);
+                egret.$error(1025);
             }
         };
         /**********************/
@@ -745,11 +742,11 @@ var egret;
             return result;
         };
         __egretProto__.encoderError = function (code_point) {
-            throw egret.getString(1026, code_point);
+            egret.$error(1026, code_point);
         };
         __egretProto__.decoderError = function (fatal, opt_code_point) {
             if (fatal) {
-                throw egret.getString(1027);
+                egret.$error(1027);
             }
             return opt_code_point || 0xFFFD;
         };

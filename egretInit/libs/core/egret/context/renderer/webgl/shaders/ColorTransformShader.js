@@ -35,7 +35,7 @@ var egret;
         __extends(ColorTransformShader, _super);
         function ColorTransformShader(gl) {
             _super.call(this, gl);
-            this.fragmentSrc = "precision mediump float;\n" + "varying vec2 vTextureCoord;\n" + "varying vec4 vColor;\n" + "uniform float invert;\n" + "uniform mat4 matrix;\n" + "uniform vec4 colorAdd;\n" + "uniform sampler2D uSampler;\n" + "void main(void) {\n" + "vec4 texColor = texture2D(uSampler, vTextureCoord);\n" + "vec4 locColor = texColor * matrix;\n" + "if(texColor.a != 0.0){\n" + "locColor += colorAdd;\n" + "}\n" + "gl_FragColor = vec4(locColor.rgb*locColor.a,locColor.a);\n" + "}";
+            this.fragmentSrc = "precision mediump float;\n" + "varying vec2 vTextureCoord;\n" + "varying vec4 vColor;\n" + "uniform float invert;\n" + "uniform mat4 matrix;\n" + "uniform vec4 colorAdd;\n" + "uniform sampler2D uSampler;\n" + "void main(void) {\n" + "vec4 texColor = texture2D(uSampler, vTextureCoord);\n" + "vec4 locColor = texColor * matrix;\n" + "if(texColor.a != 0.0){\n" + "locColor += colorAdd;\n" + "}\n" + "gl_FragColor = vColor*vec4(locColor.rgb*locColor.a,locColor.a);\n" + "}";
             this.uniforms = {
                 matrix: { type: 'mat4', value: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] },
                 colorAdd: { type: '4f', value: { x: 0, y: 0, z: 0, w: 0 } }

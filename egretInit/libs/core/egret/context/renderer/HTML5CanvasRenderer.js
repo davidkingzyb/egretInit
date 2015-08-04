@@ -287,6 +287,12 @@ var egret;
             this.drawCanvasContext.closePath();
             this.drawCanvasContext.stroke();
         };
+        __egretProto__.createLinearGradient = function (x0, y0, x1, y1) {
+            return this.drawCanvasContext.createLinearGradient(x0, y0, x1, y1);
+        };
+        __egretProto__.createRadialGradient = function (x0, y0, r0, x1, y1, r1) {
+            return this.drawCanvasContext.createRadialGradient(x0, y0, r0, x1, y1, r1);
+        };
         return HTML5CanvasRenderer;
     })(egret.RendererContext);
     egret.HTML5CanvasRenderer = HTML5CanvasRenderer;
@@ -601,5 +607,25 @@ egret.Graphics.prototype._endDraw = function (renderContext) {
     var _transformTy = renderContext._transformTy;
     if (_transformTx != 0 || _transformTy != 0) {
         self._renderContext.translate(-_transformTx, -_transformTy);
+    }
+};
+var originCanvas2DFill = CanvasRenderingContext2D.prototype.fill;
+CanvasRenderingContext2D.prototype.fill = function () {
+    var style = this.fillStyle;
+    if (!(typeof style == "string")) {
+        var matrix = style["matrix"];
+        if (matrix) {
+            this.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
+            originCanvas2DFill.call(this);
+            var context = egret.MainContext.instance.rendererContext;
+            context._transformTx = context._transformTy = 0;
+            this.setTransform(context._matrixA, context._matrixB, context._matrixC, context._matrixD, context._matrixTx, context._matrixTy);
+        }
+        else {
+            originCanvas2DFill.call(this);
+        }
+    }
+    else {
+        originCanvas2DFill.call(this);
     }
 };

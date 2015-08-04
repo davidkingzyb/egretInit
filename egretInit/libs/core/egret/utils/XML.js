@@ -57,7 +57,8 @@ var egret;
          * 解析一个XML字符串为JSON对象。
          * @method egret.XML.parse
          * @param value {string} 要解析的XML字符串。
-         * @returns {any}
+         * @returns {any} 解析完后的JSON对象
+         * @platform Web
          */
         XML.parse = function (value) {
             var xmlDoc = egret.SAXParser.getInstance().parserXML(value);
@@ -122,12 +123,14 @@ var egret;
             return xml;
         };
         /**
+         *
          * 查找xml上符合节点路径的所有子节点。
          * @method egret.XML.findChildren
          * @param xml {any} 要查找的XML节点。
          * @param path {string} 子节点路径，例如"item.node"
          * @param result {egret.Array<any>} 可选参数，传入一个数组用于存储查找的结果。这样做能避免重复创建对象。
-         * @returns {any}
+         * @returns {any} 节点路径的所有子节点
+         * @platform Web
          */
         XML.findChildren = function (xml, path, result) {
             if (!result) {
@@ -140,10 +143,12 @@ var egret;
             return result;
         };
         /**
+         * @private
          * @method egret.XML.findByPath
          * @param xml {any}
          * @param path {string}
          * @param result {egret.Array<any>}
+         * @platform Web
          */
         XML.findByPath = function (xml, path, result) {
             var index = path.indexOf(".");
@@ -180,7 +185,8 @@ var egret;
          * @method egret.XML.getAttributes
          * @param xml {any} 要查找的XML节点。
          * @param result {egret.Array<any>} 可选参数，传入一个数组用于存储查找的结果。这样做能避免重复创建对象。
-         * @returns {string}
+         * @returns {string} 节点上的所有属性名列表
+         * @platform Web
          */
         XML.getAttributes = function (xml, result) {
             if (!result) {
