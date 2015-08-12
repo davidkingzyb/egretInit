@@ -11,7 +11,56 @@ class tool{
         }
 		tool.stageW = window['stage_width'];
 		tool.stageH = window['stage_height'];
+        tool.stinger(that);
 	}
+
+    static stinger(context){
+        var stingerD=false;
+        var stingerK=false;
+        var stingerZ=false;
+        function tb(e){
+            stingerD=false;
+            stingerK=false;
+            stingerZ=false;
+            var x=tool.getXY(e).x;
+            var y=tool.getXY(e).y;
+            if(x>tool.stageW/2-25&&x<tool.stageW/2+25&&y<50){
+                context.addEventListener(egret.TouchEvent.TOUCH_MOVE,tm,context);
+                context.addEventListener(egret.TouchEvent.TOUCH_END,te,context);
+            }
+        }
+        function tm(e){
+            var x=tool.getXY(e).x;
+            var y=tool.getXY(e).y;
+            if(x<50&&y>tool.stageH-50){
+                stingerK=true;
+            }
+            if(x>tool.stageW-50&&y>tool.stageH-50&&stingerK){
+                stingerZ=true;
+            }
+            if(x>tool.stageW/2-25&&x<tool.stageW/2+25&&y<50&&stingerK&&stingerZ){
+                stingerD=true;
+            }
+        }
+        function te(e){
+            if(stingerD&&stingerK&&stingerZ){
+                doStinger(context);
+            }
+        }
+        function doStinger(context){
+            var length=context.numChildren;
+            for(var i=0;i<length;i++){
+                var t=context.getChildAt(0);
+                context.removeChild(t);
+            }
+            var stingerText=tool.initTextField('by DKZ\nfrom meiriq',tool.stageW/2,tool.stageH/2,0xffffff,40);
+            stingerText.anchorX=.5;
+            stingerText.anchorY=.5;
+            context.addChild(stingerText);
+        }
+        context.addEventListener(egret.TouchEvent.TOUCH_BEGIN,tb,context);        
+    }
+    
 	static initBitmap(texture,x?,y?,ax?,ay?){
         var bm = new egret.Bitmap();
         bm.texture = RES.getRes(texture);
