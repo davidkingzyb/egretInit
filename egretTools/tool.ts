@@ -24,7 +24,7 @@ class tool{
             stingerZ=false;
             var x=tool.getXY(e).x;
             var y=tool.getXY(e).y;
-            if(x>tool.stageW/2-25&&x<tool.stageW/2+25&&y<50){
+            if(x>tool.stageW/2-50&&x<tool.stageW/2+50&&y<100){
                 context.addEventListener(egret.TouchEvent.TOUCH_MOVE,tm,context);
                 context.addEventListener(egret.TouchEvent.TOUCH_END,te,context);
             }
@@ -32,13 +32,13 @@ class tool{
         function tm(e){
             var x=tool.getXY(e).x;
             var y=tool.getXY(e).y;
-            if(x<50&&y>tool.stageH-50){
+            if(x<100&&y>tool.stageH-100){
                 stingerK=true;
             }
-            if(x>tool.stageW-50&&y>tool.stageH-50&&stingerK){
+            if(x>tool.stageW-100&&y>tool.stageH-100&&stingerK){
                 stingerZ=true;
             }
-            if(x>tool.stageW/2-25&&x<tool.stageW/2+25&&y<50&&stingerK&&stingerZ){
+            if(x>tool.stageW/2-50&&x<tool.stageW/2+50&&y<100&&stingerK&&stingerZ){
                 stingerD=true;
             }
         }
