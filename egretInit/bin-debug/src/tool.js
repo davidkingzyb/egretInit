@@ -9,8 +9,14 @@ var tool = (function () {
             that.scaleX = 0.5;
             that.scaleY = 0.5;
         }
-        tool.stageW = window['stage_width'];
-        tool.stageH = window['stage_height'];
+        if (window['stage_width'] && window['stage_height']) {
+            tool.stageW = window['stage_width'];
+            tool.stageH = window['stage_height'];
+        }
+        else {
+            tool.stageW = that.stage.stageWidth;
+            tool.stageH = that.stage.stageHeight;
+        }
         tool.stinger(that);
     };
     tool.stinger = function (context) {
@@ -52,11 +58,12 @@ var tool = (function () {
                 var t = context.getChildAt(0);
                 context.removeChild(t);
             }
-            var stingerText = tool.initTextField('by DKZ\nfrom meiriq', tool.stageW / 2, tool.stageH / 2, 0xffffff, 40);
+            var stingerText = tool.initTextField('Δ by DKZ\nfrom meiriq', tool.stageW / 2, tool.stageH / 2, 0xffffff, 40);
             stingerText.anchorX = .5;
             stingerText.anchorY = .5;
             context.addChild(stingerText);
         }
+        context.touchEnabled = true;
         context.addEventListener(egret.TouchEvent.TOUCH_BEGIN, tb, context);
     };
     tool.initBitmap = function (texture, x, y, ax, ay) {
@@ -111,16 +118,16 @@ var tool = (function () {
         var Y = window["client"] == "android" ? event.stageY * 2 : event.stageY;
         return { "x": X, "y": Y };
     };
-    tool.initParticle = function (texture, x, y, ax, ay) {
-        var txtr = RES.getRes(texture);
-        var config = RES.getRes(texture + 'MC');
-        var system = new particle.GravityParticleSystem(txtr, config);
-        system.x = x ? x : 0;
-        system.y = y ? y : 0;
-        system.anchorX = ax ? ax : 0;
-        system.anchorY = ay ? ay : 0;
-        return system;
-    };
+    // static initParticle(texture,x?,y?,ax?,ay?){
+    //     var txtr = RES.getRes(texture);
+    //     var config = RES.getRes(texture + 'MC');
+    //     var system = new particle.GravityParticleSystem(txtr, config);
+    //     system.x = x ? x : 0;
+    //     system.y = y ? y : 0;
+    //     system.anchorX = ax ? ax : 0;
+    //     system.anchorY = ay ? ay : 0;
+    //     return system;
+    // }
     tool.addChildren = function (arr, context) {
         for (var i = 0; i < arr.length; i++) {
             context.addChild(arr[i]);
@@ -146,6 +153,24 @@ var tool = (function () {
     };
     tool.test2RectHit = function (obj1, obj2) {
         return Math.max(obj1.x, obj2.x) <= Math.min(obj1.x + obj1.width, obj2.x + obj2.width) && Math.max(obj1.y, obj2.y) <= Math.min(obj1.y + obj1.height, obj2.y + obj2.height);
+    };
+    tool.getData = function (url, reqdata, callback) {
+        function onComplete(e) {
+            callback(urlloader.data);
+        }
+        var urlloader = new egret.URLLoader();
+        //urlloader.dataFormat = egret.URLLoaderDataFormat.VARIABLES;
+        urlloader.addEventListener(egret.Event.COMPLETE, onComplete, this);
+        var urlreq = new egret.URLRequest();
+        urlreq.url = url;
+        urlreq.requestHeaders = [
+            new egret.URLRequestHeader("Access-Control-Allow-Origin", "*")
+        ];
+        if (reqdata) {
+            urlreq.method = egret.URLRequestMethod.POST;
+            urlreq.data = new egret.URLVariables(reqdata);
+        }
+        urlloader.load(urlreq);
     };
     return tool;
 })();

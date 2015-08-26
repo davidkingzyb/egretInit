@@ -39,13 +39,19 @@ var GameContainer = (function (_super) {
         this.bm2.anchorX = 0;
         this.bm2.anchorY = 0;
         this.bm2.touchEnabled = true;
-        this.bm2.addEventListener(egret.TouchEvent.TOUCH_TAP, consoleHit, this);
+        this.bm2.addEventListener(egret.TouchEvent.TOUCH_TAP, testgetData, this);
+        function testgetData() {
+            tool.getData('http://127.0.0.1:8888/cgi-bin/response.py', 'data=dkz', function (data) {
+                console.log(data);
+            });
+        }
+        //this.bm2.addEventListener(egret.TouchEvent.TOUCH_TAP, consoleHit, this);
         function consoleHit() {
             console.log(tool.test2RectHit(this.bm, this.bm2));
         }
-        this.system = tool.initParticle('evilParticle', 300, 300, .5, .5);
-        this.addChild(this.system);
-        this.system.start();
+        //this.system = tool.initParticle('evilParticle', 300,300, .5, .5);
+        //this.addChild(this.system);
+        //this.system.start();
         this.bg.touchEnabled = true;
         this.bg.addEventListener(egret.TouchEvent.TOUCH_BEGIN, touchBegin, this);
         function touchBegin(e) {

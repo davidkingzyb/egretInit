@@ -156,4 +156,23 @@ class tool{
     static test2RectHit(obj1,obj2){
         return Math.max(obj1.x,obj2.x) <= Math.min(obj1.x+obj1.width,obj2.x+obj2.width) && Math.max(obj1.y,obj2.y) <= Math.min(obj1.y+obj1.height,obj2.y+obj2.height);
     }
+    static getData(url,reqdata?,callback?){
+        function onComplete(e){
+            callback(urlloader.data);
+        }
+        var urlloader=new egret.URLLoader();
+        //urlloader.dataFormat = egret.URLLoaderDataFormat.VARIABLES;
+        urlloader.addEventListener(egret.Event.COMPLETE,onComplete,this);
+
+        var urlreq=new egret.URLRequest();
+        urlreq.url=url;
+        urlreq.requestHeaders = [
+            new egret.URLRequestHeader("Access-Control-Allow-Origin", "*")
+        ];
+        if(reqdata){
+            urlreq.method = egret.URLRequestMethod.POST;
+            urlreq.data = new egret.URLVariables(reqdata);
+        }
+        urlloader.load(urlreq);
+    }
 }
