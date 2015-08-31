@@ -175,4 +175,7 @@ class tool{
         }
         urlloader.load(urlreq);
     }
+    static randomInt(n){
+        return Math.floor(Math.random()*n);
+    }
 }
