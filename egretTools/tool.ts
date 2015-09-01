@@ -94,15 +94,19 @@ class tool{
         var mcf=new egret.MovieClipDataFactory(data,txtr);
         target.movieClipData = mcf.generateMovieClipData(texture);
     }
-    static initTextField(text,x?,y?,textColor?,size?,fontFamily?){
-		var tf = new egret.TextField();
-		tf.text = text+'';
-		tf.x = x ? x : 0;
-		tf.y = y ? y : 0;
-		tf.textColor = textColor ? textColor : 0xffffff;
-		tf.size = size ? size : 30;
-		tf.fontFamily = fontFamily ? fontFamily : 'SimHei';
-		return tf;
+    static initTextField(text,x?,y?,textColor?,size?,fontFamily?,align?,ax?,ay?,lineSpacing?){
+        var tf = new egret.TextField();
+        tf.text = text+'';
+        tf.x = x ? x : 0;
+        tf.y = y ? y : 0;
+        tf.textColor = textColor ? textColor : 0xffffff;
+        tf.size = size ? size : 30;
+        tf.fontFamily = fontFamily ? fontFamily : 'SimHei';
+        tf.textAlign=align||egret.HorizontalAlign.LEFT;
+        tf.anchorX=ax||0;
+        tf.anchorY=ay||0;
+        tf.lineSpacing=lineSpacing||0;
+        return tf;
     }
     static initBitmapText(font,text,x?,y?,ax?,ay?){
 		var bt = new egret.BitmapText();
