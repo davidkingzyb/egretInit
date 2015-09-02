@@ -141,7 +141,9 @@ class tool{
     }
     static removeChildren(arr,context){
         for(var i=0;i<arr.length;i++){
-            context.removeChild(arr[i]);
+            if(context.contains(arr[i])){
+                context.removeChild(arr[i]);
+            }
         }
     }
     static initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,width?,height?,x?,y?,ax?,ay?){
