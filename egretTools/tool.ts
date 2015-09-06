@@ -184,4 +184,23 @@ class tool{
     static randomInt(n){
         return Math.floor(Math.random()*n);
     }
+    static btnPress(btn,presstexture,texture,endfunc,that,startfunc?){
+        function begin(){
+            btn.texture=RES.getRes(presstexture);
+            if(startfunc){
+                startfunc.call(that);
+            }
+        }
+        function end(){
+            btn.texture=RES.getRes(texture);
+            endfunc.call(that);
+        }
+        function releaseoutside(){
+            btn.texture=RES.getRes(texture);
+        }
+        btn.touchEnabled=true;
+        btn.addEventListener(egret.TouchEvent.TOUCH_BEGIN,begin,that);
+        btn.addEventListener(egret.TouchEvent.TOUCH_END,end,that);
+        btn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,releaseoutside,that);
+    }
 }

@@ -2,9 +2,11 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/9/2
+2015/8/4 by DKZ update 2015/9/6
 
 
+
+[github](https://github.com/davidkingzyb/egretInit)
 
 ##egretInit
 
@@ -358,6 +360,29 @@ return a random int between 0 to n-1
 var r=tool.randomInt(10);
 ```
 
+#####btnPress(btn,presstexture,texture,endfunc,that,startfunc?)
+
+button press effect
+
+* btn:egret.DisplayObject the button
+
+* presstexture:string texture when button press
+
+* texture:string normal texture
+
+* endfunc:function touch end function
+
+* that:egret.DisplayObjectContainer this context
+
+* startfunc:function touch start function
+
+* void
+
+```
+tool.btnPress(this.leftBtn,'left_btn_press','left_btn',this.doright,this);
+```
+
+
 ###Render.ts
 
 Time-based Animation
@@ -381,7 +406,7 @@ render.unregister();
 render.framerate=30;
 
 loop(){
-	//enterFrame
+    //enterFrame
 }
 ```
 
@@ -531,15 +556,11 @@ egret isometric projection library.
 
 create by may
 
+[how to use?](http://davidkingzyb.github.io/blogmd/8.html)
+
 ##meiriqInit
 
 contain meiriq Game common 
-
-
-
-
-
-
 
 
 
