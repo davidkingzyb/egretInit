@@ -1,4 +1,5 @@
 /**
+ * update by DKZ on 2015/9/2.
  * 基于时间算法的enterframe
  * 每个Render只能注册一个回调函数
  *
@@ -81,3 +82,27 @@ var Render = (function () {
     return Render;
 })();
 Render.prototype.__class__ = "Render";
+// Animation Observer
+// render;
+// animateArr=[];
+// run(){
+//     this.render=new Render();
+//     this.render.register(this.loop,this);
+//     this.render.start();
+// }
+// loop(){
+//     for(var i=0;i<this.animateArr.length;i++){
+//         this.animateArr[i].call(this);
+//     }
+// }
+// animateRegister(func){
+//     if(this.animateArr.indexOf(func)===-1){
+//         this.animateArr.push(func);
+//     }
+// }
+// animateUnregister(func){
+//     var index=this.animateArr.indexOf(func);
+//     if(index!==-1){
+//         this.animateArr.splice(index,1);
+//     }
+// }

@@ -558,10 +558,6 @@ create by may
 
 [how to use?](http://davidkingzyb.github.io/blogmd/8.html)
 
-##meiriqInit
-
-contain meiriq Game common 
-
 
 
 

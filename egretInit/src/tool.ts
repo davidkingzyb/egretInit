@@ -94,15 +94,19 @@ class tool{
         var mcf=new egret.MovieClipDataFactory(data,txtr);
         target.movieClipData = mcf.generateMovieClipData(texture);
     }
-    static initTextField(text,x?,y?,textColor?,size?,fontFamily?){
-		var tf = new egret.TextField();
-		tf.text = text+'';
-		tf.x = x ? x : 0;
-		tf.y = y ? y : 0;
-		tf.textColor = textColor ? textColor : 0xffffff;
-		tf.size = size ? size : 30;
-		tf.fontFamily = fontFamily ? fontFamily : 'SimHei';
-		return tf;
+    static initTextField(text,x?,y?,textColor?,size?,fontFamily?,align?,ax?,ay?,lineSpacing?){
+        var tf = new egret.TextField();
+        tf.text = text+'';
+        tf.x = x ? x : 0;
+        tf.y = y ? y : 0;
+        tf.textColor = textColor ? textColor : 0xffffff;
+        tf.size = size ? size : 30;
+        tf.fontFamily = fontFamily ? fontFamily : 'SimHei';
+        tf.textAlign=align||egret.HorizontalAlign.LEFT;
+        tf.anchorX=ax||0;
+        tf.anchorY=ay||0;
+        tf.lineSpacing=lineSpacing||0;
+        return tf;
     }
     static initBitmapText(font,text,x?,y?,ax?,ay?){
 		var bt = new egret.BitmapText();
@@ -137,7 +141,9 @@ class tool{
     }
     static removeChildren(arr,context){
         for(var i=0;i<arr.length;i++){
-            context.removeChild(arr[i]);
+            if(context.contains(arr[i])){
+                context.removeChild(arr[i]);
+            }
         }
     }
     static initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,width?,height?,x?,y?,ax?,ay?){
@@ -174,5 +180,27 @@ class tool{
             urlreq.data = new egret.URLVariables(reqdata);
         }
         urlloader.load(urlreq);
+    }
+    static randomInt(n){
+        return Math.floor(Math.random()*n);
+    }
+    static btnPress(btn,presstexture,texture,endfunc,that,startfunc?){
+        function begin(){
+            btn.texture=RES.getRes(presstexture);
+            if(startfunc){
+                startfunc.call(that);
+            }
+        }
+        function end(){
+            btn.texture=RES.getRes(texture);
+            endfunc.call(that);
+        }
+        function releaseoutside(){
+            btn.texture=RES.getRes(texture);
+        }
+        btn.touchEnabled=true;
+        btn.addEventListener(egret.TouchEvent.TOUCH_BEGIN,begin,that);
+        btn.addEventListener(egret.TouchEvent.TOUCH_END,end,that);
+        btn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,releaseoutside,that);
     }
 }

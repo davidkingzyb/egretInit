@@ -1,9 +1,0 @@
-{
-  "name": "meiriq.egret.common2015",
-  "dependence": ["core"],
-  "source":".",
-  "file_list": [
-    "meiriq.egret.common2015.js",
-    "meiriq.egret.common2015.d.ts"
-  ]
-}

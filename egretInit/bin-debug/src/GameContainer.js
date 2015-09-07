@@ -2,6 +2,7 @@ var GameContainer = (function (_super) {
     __extends(GameContainer, _super);
     function GameContainer() {
         _super.call(this);
+        this.animateArr = [];
         this.v = 3;
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         tool.setWH(this);
@@ -17,29 +18,21 @@ var GameContainer = (function (_super) {
         this.bg.graphics.drawRect(0, 0, tool.stageW, tool.stageH);
         this.bg.graphics.endFill();
         this.addChild(this.bg);
-        this.bm = tool.initBitmap('bm');
-        this.bm2 = tool.initBitmap('bm2', 300, 300, .5, .5);
-        this.mc = tool.initMovieClip('mc');
+        this.bm = tool.initBitmap('bm', 100, 100);
+        this.bm2 = tool.initBitmap('bm2', 0, 500, .5, .5);
+        this.mc = tool.initMovieClip('mc', 0, 200);
         this.mc.play(1);
         this.mc2 = tool.initMovieClip('mc2', 500, 500, .5, .5);
         this.mc2.play(-1);
-        this.tf = tool.initTextField('Hello World');
-        this.tf2 = tool.initTextField('msg', 100, 200, 0x000001, 80, 'SimHei');
-        this.bmt = tool.initBitmapText('font', '0');
-        this.bmt2 = tool.initBitmapText('font', '0', 200, 200, .5, .5);
-        this.addChild(this.bm);
-        this.addChild(this.bm2);
-        this.addChild(this.mc);
-        this.addChild(this.mc2);
-        this.addChild(this.tf);
-        this.addChild(this.tf2);
-        this.addChild(this.bmt);
-        this.addChild(this.bmt2);
+        this.tf = tool.initTextField('Hello World', 0, 300);
+        this.tf2 = tool.initTextField('msg', 100, 300, 0x000001, 80, 'SimHei');
+        this.bmt = tool.initBitmapText('font', '0', 0, 400);
+        tool.addChildren([this.bm, this.bm2, this.mc, this.mc2, this.tf, this.tf2, this.bmt], this);
         debug.showPosition(this.bm, this);
         this.bm2.anchorX = 0;
         this.bm2.anchorY = 0;
-        this.bm2.touchEnabled = true;
-        this.bm2.addEventListener(egret.TouchEvent.TOUCH_TAP, testgetData, this);
+        //this.bm2.touchEnabled = true;
+        //this.bm2.addEventListener(egret.TouchEvent.TOUCH_TAP, testgetData, this);
         function testgetData() {
             tool.getData('http://127.0.0.1:8888/cgi-bin/response.py', 'data=dkz', function (data) {
                 console.log(data);
@@ -52,22 +45,40 @@ var GameContainer = (function (_super) {
         //this.system = tool.initParticle('evilParticle', 300,300, .5, .5);
         //this.addChild(this.system);
         //this.system.start();
-        this.bg.touchEnabled = true;
-        this.bg.addEventListener(egret.TouchEvent.TOUCH_BEGIN, touchBegin, this);
+        //this.bg.touchEnabled = true;
+        //this.bg.addEventListener(egret.TouchEvent.TOUCH_BEGIN,touchBegin,this);
         function touchBegin(e) {
             var x = tool.getXY(e).x;
             var y = tool.getXY(e).y;
             this.system.x = x;
             this.system.y = y;
         }
+        //TODO initScale9GridBitmap btnPress randomInt iso LoadingUI     
         this.run();
     };
     __egretProto__.run = function () {
         this.render = new Render();
         this.render.register(this.loop, this);
         this.render.start();
+        this.animateRegister(this.mc2animation);
     };
     __egretProto__.loop = function () {
+        for (var i = 0; i < this.animateArr.length; i++) {
+            this.animateArr[i].call(this);
+        }
+    };
+    __egretProto__.animateRegister = function (func) {
+        if (this.animateArr.indexOf(func) === -1) {
+            this.animateArr.push(func);
+        }
+    };
+    __egretProto__.animateUnregister = function (func) {
+        var index = this.animateArr.indexOf(func);
+        if (index !== -1) {
+            this.animateArr.splice(index, 1);
+        }
+    };
+    __egretProto__.mc2animation = function () {
         this.mc2.y += this.v;
         if (this.mc2.y > tool.stageW - 100) {
             tool.changeMovieClipData(this.mc2, 'mc');

@@ -9,10 +9,6 @@
 		},
 		{
 			"name": "res"
-		},
-		{
-			"name": "particle",
-			"path": "../particle/particle"
 		}
 	],
 	"native": {
