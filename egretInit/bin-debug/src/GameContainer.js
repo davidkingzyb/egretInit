@@ -3,13 +3,13 @@ var GameContainer = (function (_super) {
     function GameContainer() {
         _super.call(this);
         this.animateArr = [];
-        this.v = 3;
+        this.v = tool.randomInt(5);
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-        tool.setWH(this);
     }
     var __egretProto__ = GameContainer.prototype;
     __egretProto__.onAddToStage = function (event) {
         this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
+        tool.setWH(this);
         this.createGameScene();
     };
     __egretProto__.createGameScene = function () {
@@ -19,7 +19,8 @@ var GameContainer = (function (_super) {
         this.bg.graphics.endFill();
         this.addChild(this.bg);
         this.bm = tool.initBitmap('bm', 100, 100);
-        this.bm2 = tool.initBitmap('bm2', 0, 500, .5, .5);
+        //this.bm2=tool.initBitmap('bm2',0,500,.5,.5);
+        //this.addChild(this.bm2);
         this.mc = tool.initMovieClip('mc', 0, 200);
         this.mc.play(1);
         this.mc2 = tool.initMovieClip('mc2', 500, 500, .5, .5);
@@ -27,10 +28,10 @@ var GameContainer = (function (_super) {
         this.tf = tool.initTextField('Hello World', 0, 300);
         this.tf2 = tool.initTextField('msg', 100, 300, 0x000001, 80, 'SimHei');
         this.bmt = tool.initBitmapText('font', '0', 0, 400);
-        tool.addChildren([this.bm, this.bm2, this.mc, this.mc2, this.tf, this.tf2, this.bmt], this);
+        tool.addChildren([this.bm, this.mc, this.mc2, this.tf, this.tf2, this.bmt], this);
         debug.showPosition(this.bm, this);
-        this.bm2.anchorX = 0;
-        this.bm2.anchorY = 0;
+        // this.bm2.anchorX = 0;
+        // this.bm2.anchorY = 0;
         //this.bm2.touchEnabled = true;
         //this.bm2.addEventListener(egret.TouchEvent.TOUCH_TAP, testgetData, this);
         function testgetData() {
@@ -53,14 +54,22 @@ var GameContainer = (function (_super) {
             this.system.x = x;
             this.system.y = y;
         }
-        //TODO initScale9GridBitmap btnPress randomInt iso LoadingUI     
-        this.run();
+        this.s9gb = tool.initScale9GridBitmap('start_btn', 5, 5, 90, 40, 150, 50, tool.stageW / 2, tool.stageH / 2 + 200, .5);
+        this.addChild(this.s9gb);
+        tool.btnPress(this.s9gb, 'start_btn_press', 'start_btn', this.run, this);
+        this.isoworld = new Iso.IsoWorld();
+        this.addChild(this.isoworld);
+        this.isobitmap = new Iso.BitmapTile('bm2');
+        this.isobitmap.setPosition(800, 0, 100);
+        this.isoworld.addChildToWorld(this.isobitmap);
+        this.isobitmap.vz = this.v;
     };
     __egretProto__.run = function () {
         this.render = new Render();
         this.render.register(this.loop, this);
         this.render.start();
         this.animateRegister(this.mc2animation);
+        this.animateRegister(this.isobitmapanimation);
     };
     __egretProto__.loop = function () {
         for (var i = 0; i < this.animateArr.length; i++) {
@@ -89,6 +98,16 @@ var GameContainer = (function (_super) {
             tool.changeMovieClipData(this.mc2, 'mc2');
             this.mc2.play(-1);
             this.v = 3;
+        }
+    };
+    __egretProto__.isobitmapanimation = function () {
+        this.isobitmap.update();
+        this.isoworld.sort();
+        if (this.isobitmap.pz > 800) {
+            this.isobitmap.vz = -this.v;
+        }
+        else if (this.isobitmap.pz < 0) {
+            this.isobitmap.vz = this.v;
         }
     };
     return GameContainer;
