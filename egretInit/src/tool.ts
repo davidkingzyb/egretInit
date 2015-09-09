@@ -203,4 +203,20 @@ class tool{
         btn.addEventListener(egret.TouchEvent.TOUCH_END,end,that);
         btn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,releaseoutside,that);
     }
+
+    static setBestScore(score){
+        var bestScore;
+        if(egret.localStorage.getItem('bestScore')){
+            bestScore=Number(egret.localStorage.getItem('bestScore'));
+            if(score>bestScore){
+                bestScore=score;
+                egret.localStorage.setItem('bestScore',bestScore+'');
+            }
+        }else{
+            bestScore=score;
+            egret.localStorage.setItem('bestScore',bestScore+'');
+
+        }
+        return bestScore;
+    }
 }

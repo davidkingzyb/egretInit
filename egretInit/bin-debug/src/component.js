@@ -1,3 +1,4 @@
+//create by DKZ 2015/9/9
 var component = (function () {
     function component() {
     }
@@ -31,7 +32,7 @@ var component = (function () {
         sp.addChild(border);
         var value = tool.initTextField(text, w / 2, h / 2 - fontsize / 10, color, fontsize, fontFamily, egret.HorizontalAlign.CENTER, .5, .5);
         sp.addChild(value);
-        return { "btn": sp, "bg": bg, "border": border };
+        return { "btn": sp, "bg": bg, "border": border, "text": value };
     };
     component.airBtnPress = function (airbtn, callback, that, startfunc) {
         function begin() {

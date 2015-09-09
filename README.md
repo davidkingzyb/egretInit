@@ -405,6 +405,18 @@ button press effect
 tool.btnPress(this.leftBtn,'left_btn_press','left_btn',this.doright,this);
 ```
 
+#####setBestScore(score)
+
+set localstorage bestscore and return bestscore
+
+*score:number 
+
+*return bestScore:number
+
+```
+var bestScore=tool.setBestScore(this.score);
+```
+
 ###component.ts
 
 some useful components like air button
