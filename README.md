@@ -8,6 +8,29 @@
 
 [github](https://github.com/davidkingzyb/egretInit)
 
+* **egretInit** An example of egret project base on egret
+
+* **debug.ts** debug egret project
+
+* **tool.ts** egret tools for Initialize standard egret Object
+
+* **component.ts** some useful components like air button
+
+* **Render.ts** Time-based Animation
+
+* **resource.py** create resource.json automatically
+
+* **runServer.py** a python server
+
+* **simpleserver.py** a python server
+
+* **cgi-bin/response.py** a cgi server
+
+* **egret_loader.js** a solution for iphone and android diffrent screen size
+
+* **Iso** egret isometric projection library.
+
+
 ##egretInit
 
 An example of egret project base on egret 2.0.0
