@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/9/6
+2015/8/4 by DKZ update 2015/9/9
 
 
 
@@ -382,6 +382,71 @@ button press effect
 tool.btnPress(this.leftBtn,'left_btn_press','left_btn',this.doright,this);
 ```
 
+###component.ts
+
+some useful components like air button
+
+#####airBtn(text,w?,h?,x?,y?,ax?,ay?,color?,fontsize?,linewidth?,fontFamily?)
+
+Air Button
+
+* text:string text value of this Button
+
+* w:number width default=150
+
+* h:number height default=60
+
+* x:number x coordinate default=1
+
+* y:number y coordinate default=1
+
+* ax:number anchorX default=.5
+
+* ay:number anchorY default=.5;
+
+* color:colornumber color of this button border background and text default=0xffffff;
+
+* fontsize:number font size default=40
+
+* linewidth:number border width default=3
+
+* fontFamily:string font family default='helvetica'
+
+* return {"btn":sp,"bg":bg,"border":border,"text":value} 
+
+* btn:egret.Sprite this air button
+
+* bg:egret.Shape air button background
+
+* border:egret.Shape air button border
+
+* text:egret.TextField air button value
+
+```
+this.airbtn=component.airBtn('stop',null,null,tool.stageW/2,tool.stageH/2+300);
+this.addChild(this.airbtn.btn);
+```
+
+#####airBtnPress(airbtn,callback,that,startfunc?)
+
+air button press effect
+
+* airbtn:component.airBtn air button
+
+* callback:function callback function execute when touch end
+
+* that:egret.DisplayObjectContainer this context
+
+* startfunc:function touch start function
+
+* void
+
+```
+component.airBtnPress(this.airbtn,stop,this);
+function stop(){
+    this.render.stop();
+}
+```
 
 ###Render.ts
 

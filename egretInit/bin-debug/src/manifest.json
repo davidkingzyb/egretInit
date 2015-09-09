@@ -4,6 +4,7 @@
 	"Iso/BitmapTile.ts",
 	"Iso/IsoWorld.ts",
 	"Render.ts",
+	"component.ts",
 	"debug.ts",
 	"GameContainer.ts",
 	"Iso/Point3D.ts",

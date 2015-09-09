@@ -1,3 +1,5 @@
+
+# created by DKZ 2015/6
 from http.server import HTTPServer,CGIHTTPRequestHandler
 import socket
 localIP = socket.gethostbyname(socket.gethostname()) 

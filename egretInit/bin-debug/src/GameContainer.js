@@ -63,6 +63,12 @@ var GameContainer = (function (_super) {
         this.isobitmap.setPosition(800, 0, 100);
         this.isoworld.addChildToWorld(this.isobitmap);
         this.isobitmap.vz = this.v;
+        this.airbtn = component.airBtn('stop', null, null, tool.stageW / 2, tool.stageH / 2 + 300);
+        this.addChild(this.airbtn.btn);
+        component.airBtnPress(this.airbtn, stop, this);
+        function stop() {
+            this.render.stop();
+        }
     };
     __egretProto__.run = function () {
         this.render = new Render();

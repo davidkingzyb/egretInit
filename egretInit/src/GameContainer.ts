@@ -27,6 +27,8 @@ class GameContainer extends egret.DisplayObjectContainer{
     isoworld;
     isobitmap;
 
+    airbtn;
+
     createGameScene(){
 
         this.bg = new egret.Shape();
@@ -92,6 +94,14 @@ class GameContainer extends egret.DisplayObjectContainer{
 
         this.isoworld.addChildToWorld(this.isobitmap);
         this.isobitmap.vz=this.v;
+
+        this.airbtn=component.airBtn('stop',null,null,tool.stageW/2,tool.stageH/2+300);
+        this.addChild(this.airbtn.btn);
+        component.airBtnPress(this.airbtn,stop,this);
+        function stop(){
+            this.render.stop();
+        }
+        
 
 
 
