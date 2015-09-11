@@ -49,7 +49,7 @@ class GameContainer extends egret.DisplayObjectContainer{
         this.bmt=tool.initBitmapText('font','0',0,400);
         tool.addChildren([this.bm, this.mc, this.mc2, this.tf, this.tf2, this.bmt], this);
         
-        debug.showPosition(this.bm, this);
+        //debug.showPosition(this.bm, this);
 
         // this.bm2.anchorX = 0;
         // this.bm2.anchorY = 0;

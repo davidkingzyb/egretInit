@@ -5,10 +5,10 @@ var game_file_list = [
 	"Iso/IsoWorld.js",
 	"Render.js",
 	"component.js",
-	"debug.js",
 	"GameContainer.js",
 	"Iso/Point3D.js",
 	"LoadingUI.js",
+	"debug.js",
 	"Iso/IsoUtils.js",
 	"Main.js"
 ];

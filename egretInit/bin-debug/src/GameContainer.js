@@ -29,7 +29,7 @@ var GameContainer = (function (_super) {
         this.tf2 = tool.initTextField('msg', 100, 300, 0x000001, 80, 'SimHei');
         this.bmt = tool.initBitmapText('font', '0', 0, 400);
         tool.addChildren([this.bm, this.mc, this.mc2, this.tf, this.tf2, this.bmt], this);
-        debug.showPosition(this.bm, this);
+        //debug.showPosition(this.bm, this);
         // this.bm2.anchorX = 0;
         // this.bm2.anchorY = 0;
         //this.bm2.touchEnabled = true;

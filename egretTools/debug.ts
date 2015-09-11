@@ -148,11 +148,14 @@ module debug{
     export function showDebug(){
         egret.Profiler.getInstance().run();
     }
-
-    if(window){
-        window['ei_pause']=function(){debug.pause();}
-        window['ei_resume']=function(){debug.resume();}
-        window['ei_showdebug']=function(){debug.showDebug();}
+    export function debuging(){
+        debug.showDebug();
+        if(window){
+            window['ei_pause']=function(){debug.pause();}
+            window['ei_resume']=function(){debug.resume();}
+            //window['ei_showdebug']=function(){debug.showDebug();}
+        }
     }
+    
 
 }

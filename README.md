@@ -88,6 +88,17 @@ show a group position
 debug.showGroupPosition([this.bm,this.mc],this);
 ```
 
+#####debuging()
+
+debug game
+
+* void
+
+```
+debug.debuging();
+```
+
+
 #####pause() resume()
 
 pause game and resume game
@@ -105,11 +116,6 @@ ei_resume();
 show debug panel
 
 *void
-
-```
-//console
-ei_showDebug();
-```
 
 ###tool.ts
 

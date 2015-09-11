@@ -5,10 +5,10 @@
 	"Iso/IsoWorld.ts",
 	"Render.ts",
 	"component.ts",
-	"debug.ts",
 	"GameContainer.ts",
 	"Iso/Point3D.ts",
 	"LoadingUI.ts",
+	"debug.ts",
 	"Iso/IsoUtils.ts",
 	"Main.ts"
 ]

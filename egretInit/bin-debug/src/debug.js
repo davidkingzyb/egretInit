@@ -152,15 +152,16 @@ var debug;
         egret.Profiler.getInstance().run();
     }
     debug.showDebug = showDebug;
-    if (window) {
-        window['ei_pause'] = function () {
-            debug.pause();
-        };
-        window['ei_resume'] = function () {
-            debug.resume();
-        };
-        window['ei_showdebug'] = function () {
-            debug.showDebug();
-        };
+    function debuging() {
+        debug.showDebug();
+        if (window) {
+            window['ei_pause'] = function () {
+                debug.pause();
+            };
+            window['ei_resume'] = function () {
+                debug.resume();
+            };
+        }
     }
+    debug.debuging = debuging;
 })(debug || (debug = {}));
