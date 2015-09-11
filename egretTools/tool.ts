@@ -3,6 +3,7 @@ class tool{
 	static stageW;
 	static stageH;
 
+
 	static setWH(that){
         //@that GameContainer
 		if(window["client"]=="android"){
@@ -20,6 +21,7 @@ class tool{
 	}
 
     static stinger(context){
+
         var stingerD=false;
         var stingerK=false;
         var stingerZ=false;

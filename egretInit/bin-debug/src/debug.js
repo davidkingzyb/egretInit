@@ -148,4 +148,19 @@ var debug;
         egret.Ticker.getInstance().resume();
     }
     debug.resume = resume;
+    function showDebug() {
+        egret.Profiler.getInstance().run();
+    }
+    debug.showDebug = showDebug;
+    if (window) {
+        window['ei_pause'] = function () {
+            debug.pause();
+        };
+        window['ei_resume'] = function () {
+            debug.resume();
+        };
+        window['ei_showdebug'] = function () {
+            debug.showDebug();
+        };
+    }
 })(debug || (debug = {}));

@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/9/9
+2015/8/4 by DKZ update 2015/9/11
 
 
 
@@ -95,8 +95,20 @@ pause game and resume game
 * void
 
 ```
-debug.pause();
-debug.resume();
+//console
+ei_pause();
+ei_resume();
+```
+
+#####showDebug()
+
+show debug panel
+
+*void
+
+```
+//console
+ei_showDebug();
 ```
 
 ###tool.ts

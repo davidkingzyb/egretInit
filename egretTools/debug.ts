@@ -145,5 +145,14 @@ module debug{
     export function resume() {
         egret.Ticker.getInstance().resume();
     }
+    export function showDebug(){
+        egret.Profiler.getInstance().run();
+    }
+
+    if(window){
+        window['ei_pause']=function(){debug.pause();}
+        window['ei_resume']=function(){debug.resume();}
+        window['ei_showdebug']=function(){debug.showDebug();}
+    }
 
 }
