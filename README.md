@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/9/11
+2015/8/4 by DKZ update 2015/9/16
 
 
 
@@ -306,6 +306,40 @@ Initialize a Particle object (need the third party library particle support <htt
 this.system = tool.initParticle('evilParticle', 300,300, .5, .5);
 ```
 
+#####initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,width?,height?,x?,y?,ax?,ay?)
+
+Initialize a Scale 9 Grid Bitmap object
+
+* texture:string 
+
+* Rsw Rsh Rw Rh:number
+
+* width height x y ax ay:number default=0
+
+* return:egret.Bitmap
+
+```
+//(x,y)_______________
+// |_Rsw_|Rsh_____|___|
+// |     |        |Rh |height
+// |_____|__Rw____|___|
+// |_____|________|___|
+//        width
+
+this.s9g=tool.initScale9GridBitmap("scale9grid",50,50,100,100);
+```
+
+#####initSound(texture)
+
+Initialize a sound object
+
+* texture:string
+
+```
+var bgm=tool.initSound('bgm');
+bgm.play(true);
+```
+
 #####addChildren(arr,context)
 
 add a group to stage
@@ -332,29 +366,6 @@ remove a group from stage
 
 ```
 tool.removeChildren([this.bm,this.mc],this);
-```
-
-#####initScale9GridBitmap(texture,Rsw,Rsh,Rw,Rh,width?,height?,x?,y?,ax?,ay?)
-
-Initialize a Scale 9 Grid Bitmap object
-
-* texture:string 
-
-* Rsw Rsh Rw Rh:number
-
-* width height x y ax ay:number default=0
-
-* return:egret.Bitmap
-
-```
-//(x,y)_______________
-// |_Rsw_|Rsh_____|___|
-// |     |        |Rh |height
-// |_____|__Rw____|___|
-// |_____|________|___|
-//        width
-
-this.s9g=tool.initScale9GridBitmap("scale9grid",50,50,100,100);
 ```
 
 #####test2RectHit(obj1,obj2)

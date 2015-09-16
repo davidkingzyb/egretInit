@@ -29,7 +29,16 @@ class GameContainer extends egret.DisplayObjectContainer{
 
     airbtn;
 
+    bgm;
+
     createGameScene(){
+
+        // this.bgm=tool.initSound('startpane_bgm');
+        // this.bgm.play(true);
+
+        var bgm=tool.initSound('startpane_bgm');
+        bgm.play(true);
+
 
         this.bg = new egret.Shape();
         this.bg.graphics.beginFill(0x999999);
@@ -118,6 +127,9 @@ class GameContainer extends egret.DisplayObjectContainer{
         this.render=new Render();
         this.render.register(this.loop,this);
         this.render.start();
+
+        var m=tool.initSound('changebody_m');
+        m.play();
         this.animateRegister(this.mc2animation);
         this.animateRegister(this.isobitmapanimation);
     }

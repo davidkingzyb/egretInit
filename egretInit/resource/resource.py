@@ -1,3 +1,5 @@
+
+# created by DKZ 2015/6
 import os
 import json
 
@@ -17,6 +19,8 @@ def getResources(fileName):
 		elif arr[1]=='json':
 			T='json'
 			arr[0]+='MC'
+		elif arr[1]=='mp3':
+			T='sound'
 		
 		d={'name':arr[0],'type':T,'url':'assets/'+x}
 		resources.append(d)

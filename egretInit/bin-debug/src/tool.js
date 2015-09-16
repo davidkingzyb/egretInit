@@ -117,33 +117,6 @@ var tool = (function () {
         bt.anchorY = ay ? ay : 0;
         return bt;
     };
-    tool.getXY = function (event) {
-        var X = window["client"] == "android" ? event.stageX * 2 : event.stageX;
-        var Y = window["client"] == "android" ? event.stageY * 2 : event.stageY;
-        return { "x": X, "y": Y };
-    };
-    // static initParticle(texture,x?,y?,ax?,ay?){
-    //     var txtr = RES.getRes(texture);
-    //     var config = RES.getRes(texture + 'MC');
-    //     var system = new particle.GravityParticleSystem(txtr, config);
-    //     system.x = x ? x : 0;
-    //     system.y = y ? y : 0;
-    //     system.anchorX = ax ? ax : 0;
-    //     system.anchorY = ay ? ay : 0;
-    //     return system;
-    // }
-    tool.addChildren = function (arr, context) {
-        for (var i = 0; i < arr.length; i++) {
-            context.addChild(arr[i]);
-        }
-    };
-    tool.removeChildren = function (arr, context) {
-        for (var i = 0; i < arr.length; i++) {
-            if (context.contains(arr[i])) {
-                context.removeChild(arr[i]);
-            }
-        }
-    };
     tool.initScale9GridBitmap = function (texture, Rsw, Rsh, Rw, Rh, width, height, x, y, ax, ay) {
         var bm = new egret.Bitmap();
         bm.texture = RES.getRes(texture);
@@ -156,6 +129,36 @@ var tool = (function () {
         bm.anchorX = ax ? ax : 0;
         bm.anchorY = ay ? ay : 0;
         return bm;
+    };
+    tool.initSound = function (texture) {
+        return RES.getRes(texture);
+    };
+    // static initParticle(texture,x?,y?,ax?,ay?){
+    //     var txtr = RES.getRes(texture);
+    //     var config = RES.getRes(texture + 'MC');
+    //     var system = new particle.GravityParticleSystem(txtr, config);
+    //     system.x = x ? x : 0;
+    //     system.y = y ? y : 0;
+    //     system.anchorX = ax ? ax : 0;
+    //     system.anchorY = ay ? ay : 0;
+    //     return system;
+    // }
+    tool.getXY = function (event) {
+        var X = window["client"] == "android" ? event.stageX * 2 : event.stageX;
+        var Y = window["client"] == "android" ? event.stageY * 2 : event.stageY;
+        return { "x": X, "y": Y };
+    };
+    tool.addChildren = function (arr, context) {
+        for (var i = 0; i < arr.length; i++) {
+            context.addChild(arr[i]);
+        }
+    };
+    tool.removeChildren = function (arr, context) {
+        for (var i = 0; i < arr.length; i++) {
+            if (context.contains(arr[i])) {
+                context.removeChild(arr[i]);
+            }
+        }
     };
     tool.test2RectHit = function (obj1, obj2) {
         return Math.max(obj1.x, obj2.x) <= Math.min(obj1.x + obj1.width, obj2.x + obj2.width) && Math.max(obj1.y, obj2.y) <= Math.min(obj1.y + obj1.height, obj2.y + obj2.height);
