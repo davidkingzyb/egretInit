@@ -842,8 +842,8 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/extension/resource/core/ResourceConfig.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/extension/resource/events/ResourceEvent.ts"
 		],
-		"D:/egretInit/egretInit/particle/particle/Particle.ts": [],
-		"D:/egretInit/egretInit/particle/particle/ParticleSystem.ts": [
+		"D:/egretInit/egretInit/egretInit/particle/particle/Particle.ts": [],
+		"D:/egretInit/egretInit/egretInit/particle/particle/ParticleSystem.ts": [
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/DisplayObject.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Texture.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/Ticker.ts",
@@ -852,16 +852,16 @@
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/RendererContext.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/context/renderer/RenderFilter.ts",
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/BlendMode.ts",
-			"D:/egretInit/egretInit/particle/particle/Particle.ts"
+			"D:/egretInit/egretInit/egretInit/particle/particle/Particle.ts"
 		],
-		"D:/egretInit/egretInit/particle/particle/GravityParticle.ts": [
-			"D:/egretInit/egretInit/particle/particle/Particle.ts"
+		"D:/egretInit/egretInit/egretInit/particle/particle/GravityParticle.ts": [
+			"D:/egretInit/egretInit/egretInit/particle/particle/Particle.ts"
 		],
-		"D:/egretInit/egretInit/particle/particle/GravityParticleSystem.ts": [
+		"D:/egretInit/egretInit/egretInit/particle/particle/GravityParticleSystem.ts": [
 			"C:/Program Files/Egret/EgretEngine/win/egret/src/egret/display/Texture.ts",
-			"D:/egretInit/egretInit/particle/particle/ParticleSystem.ts",
-			"D:/egretInit/egretInit/particle/particle/GravityParticle.ts",
-			"D:/egretInit/egretInit/particle/particle/Particle.ts"
+			"D:/egretInit/egretInit/egretInit/particle/particle/ParticleSystem.ts",
+			"D:/egretInit/egretInit/egretInit/particle/particle/GravityParticle.ts",
+			"D:/egretInit/egretInit/egretInit/particle/particle/Particle.ts"
 		]
 	},
 	"classNameToPath": {
@@ -1111,9 +1111,9 @@
 		"RES.addEventListener": "C:/Program Files/Egret/EgretEngine/win/egret/src/extension/resource/Resource.ts",
 		"RES.removeEventListener": "C:/Program Files/Egret/EgretEngine/win/egret/src/extension/resource/Resource.ts",
 		"RES.Resource": "C:/Program Files/Egret/EgretEngine/win/egret/src/extension/resource/Resource.ts",
-		"particle.Particle": "D:/egretInit/egretInit/particle/particle/Particle.ts",
-		"particle.ParticleSystem": "D:/egretInit/egretInit/particle/particle/ParticleSystem.ts",
-		"particle.GravityParticle": "D:/egretInit/egretInit/particle/particle/GravityParticle.ts",
-		"particle.GravityParticleSystem": "D:/egretInit/egretInit/particle/particle/GravityParticleSystem.ts"
+		"particle.Particle": "D:/egretInit/egretInit/egretInit/particle/particle/Particle.ts",
+		"particle.ParticleSystem": "D:/egretInit/egretInit/egretInit/particle/particle/ParticleSystem.ts",
+		"particle.GravityParticle": "D:/egretInit/egretInit/egretInit/particle/particle/GravityParticle.ts",
+		"particle.GravityParticleSystem": "D:/egretInit/egretInit/egretInit/particle/particle/GravityParticleSystem.ts"
 	}
 }
