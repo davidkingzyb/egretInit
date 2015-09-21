@@ -223,4 +223,18 @@ class tool{
         }
         return bestScore;
     }
+    static setFullWidthObj(obj,w?,h?){
+        if(obj){
+            var width=w||obj.texture.textureWidth;
+            var height=h||obj.texture.textureHeight;
+            obj.width=tool.stageW;
+            obj.height=tool.stageW*height/width;
+        }
+    }
+    static setBgWH(bg){
+        if(bg){
+            bg.width=tool.stageW;
+            bg.height=tool.stageH;
+        }
+    }
 }
