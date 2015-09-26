@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/9/16
+2015/8/4 by DKZ update 2015/9/26
 
 
 
@@ -539,34 +539,6 @@ loop(){
 }
 ```
 
-**Animation Observer**
-
-```
-render;
-animateArr=[];
-run(){
-    this.render=new Render();
-    this.render.register(this.loop,this);
-    this.render.start();
-}
-loop(){
-    for(var i=0;i<this.animateArr.length;i++){
-        this.animateArr[i].call(this);
-    }
-}
-animateRegister(func){
-    if(this.animateArr.indexOf(func)===-1){
-        this.animateArr.push(func);
-    }
-}
-animateUnregister(func){
-    var index=this.animateArr.indexOf(func);
-    if(index!==-1){
-        this.animateArr.splice(index,1);
-    }
-}
-```
-
 #####FPS
 
 * :number
@@ -650,6 +622,72 @@ resume render
 set fps and dt
 
 * void
+
+###animation.py
+
+Time-base Animation (add a observer to render)
+
+```
+    this.enterframe=new animation(this);
+    this.enterframe.onenterframe(this.animateObj);
+    this.enterframe.start();
+```
+
+#####animationArr
+
+register function array
+
+* :array
+
+#####loop()
+
+loop function call by handle
+
+* void
+
+#####onenterframe(func)
+
+register function to loop
+
+* void
+
+#####offenterframe(func)
+
+unregister function from loop
+
+* void
+
+#####start()
+
+start render
+
+* void
+
+#####stop()
+
+stop render
+
+* void
+
+#####pause()
+
+pause render
+
+* void
+
+#####resume()
+
+resume render
+
+* void
+
+#####set framerate(fps)
+
+set fps and dt
+
+* void
+
+
 
 ###resource.py
 
