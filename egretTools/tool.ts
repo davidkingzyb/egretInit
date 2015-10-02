@@ -137,6 +137,13 @@ class tool{
     static initSound(texture){
         return RES.getRes(texture);
     }
+    static initRect(color,x=0,y=0,w=0,h=0){
+        var rect=new egret.Shape();
+        rect.graphics.beginFill(color);
+        rect.graphics.drawRect(x,y,w,h);
+        rect.graphics.endFill();
+        return rect;
+    }
     // static initParticle(texture,x?,y?,ax?,ay?){
     //     var txtr = RES.getRes(texture);
     //     var config = RES.getRes(texture + 'MC');
