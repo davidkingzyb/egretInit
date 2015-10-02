@@ -5,7 +5,7 @@
 class animation {
     static FPS = 60;
     acc = 0;
-    dt = Number((1000 / Render.FPS).toFixed(1));
+    dt = Number((1000 / animation.FPS).toFixed(1));
     callback;
     context;
 
@@ -71,7 +71,7 @@ class animation {
     }
 
     set framerate(fps) {
-        Render.FPS = fps;
+        animation.FPS = fps;
         this.dt = Number((1000 / fps).toFixed(1));
     }
 }
