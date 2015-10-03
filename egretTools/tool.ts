@@ -244,4 +244,14 @@ class tool{
             bg.height=tool.stageH;
         }
     }
+    static forMatrix(func,that,args:any[]=[],ilength=6,jlength=6){
+        for(var i=0;i<ilength;i++){
+            for(var j=0;j<jlength;j++){
+                var a:any[]=[i,j];
+                a.push(args);
+                func.apply(that,a);
+            }
+        }
+
+    }
 }
