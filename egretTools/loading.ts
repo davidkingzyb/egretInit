@@ -353,12 +353,22 @@ class Loading extends egret.DisplayObjectContainer{
         function dispatch(){
             this.dispatchEventWith('finish');
         }
-        egret.Tween.get(this.textField).to({alpha:0},400);
-        egret.Tween.get(this.logo).to({alpha:0},500).call(dispatch,this);
+        
+        if(this.total===this.current){
+            egret.Tween.get(this.textField).to({alpha:0},400);
+            egret.Tween.get(this.logo).to({alpha:0},500).call(dispatch,this);
+        }else{
+            egret.setTimeout(this.finish, this, 1000);
+        }
+        
         
     }
+    current=0;
+    total=0;
 
     public setProgress(current, total):void {
+        this.current = current;
+        this.total = total;
         this.textField.text = "Loading..." + current + "/" + total;
     }
 

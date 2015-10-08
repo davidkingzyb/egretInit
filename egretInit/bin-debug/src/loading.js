@@ -5,6 +5,8 @@ var Loading = (function (_super) {
         _super.call(this);
         this.isfinish = false;
         this.mood = 'loading';
+        this.current = 0;
+        this.total = 0;
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         this.mood = mood || 'loading';
     }
@@ -338,10 +340,17 @@ var Loading = (function (_super) {
         function dispatch() {
             this.dispatchEventWith('finish');
         }
-        egret.Tween.get(this.textField).to({ alpha: 0 }, 400);
-        egret.Tween.get(this.logo).to({ alpha: 0 }, 500).call(dispatch, this);
+        if (this.total === this.current) {
+            egret.Tween.get(this.textField).to({ alpha: 0 }, 400);
+            egret.Tween.get(this.logo).to({ alpha: 0 }, 500).call(dispatch, this);
+        }
+        else {
+            egret.setTimeout(this.finish, this, 1000);
+        }
     };
     __egretProto__.setProgress = function (current, total) {
+        this.current = current;
+        this.total = total;
         this.textField.text = "Loading..." + current + "/" + total;
     };
     return Loading;
