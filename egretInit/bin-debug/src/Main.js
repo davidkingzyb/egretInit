@@ -7,7 +7,7 @@ var Main = (function (_super) {
     var __egretProto__ = Main.prototype;
     __egretProto__.onAddToStage = function (event) {
         this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-        this.loadingView = new LoadingUI();
+        this.loadingView = new Loading('loading');
         this.addChild(this.loadingView);
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.loadConfig("resource/resource.json", "resource/");
@@ -29,14 +29,20 @@ var Main = (function (_super) {
         }
     };
     __egretProto__.onResourceLoadComplete = function (event) {
-        this.removeChild(this.loadingView);
-        if (event.groupName == "preload") {
-            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
-            var gameContainer = new GameContainer();
-            this.addChild(gameContainer);
-            // debug.showAllPosition(gameContainer);
-            debug.debuging();
+        RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
+        if (this.loadingView.isfinish) {
+            this.initGameContainer();
         }
+        else {
+            this.loadingView.addEventListener('finish', this.initGameContainer, this);
+        }
+    };
+    __egretProto__.initGameContainer = function () {
+        this.removeChild(this.loadingView);
+        var gameContainer = new GameContainer();
+        this.addChild(gameContainer);
+        // debug.showAllPosition(gameContainer);
+        debug.debuging();
     };
     return Main;
 })(egret.DisplayObjectContainer);

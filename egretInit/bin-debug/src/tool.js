@@ -58,10 +58,12 @@ var tool = (function () {
                 var t = context.getChildAt(0);
                 context.removeChild(t);
             }
-            var stingerText = tool.initTextField('Δ by DKZ\nfrom meiriq', tool.stageW / 2, tool.stageH / 2, 0xffffff, 40);
-            stingerText.anchorX = .5;
-            stingerText.anchorY = .5;
-            context.addChild(stingerText);
+            var loadingView = new Loading('stinger');
+            context.addChild(loadingView);
+            // var stingerText=tool.initTextField('Δ by DKZ\nfrom meiriq',tool.stageW/2,tool.stageH/2,0xffffff,40);
+            // stingerText.anchorX=.5;
+            // stingerText.anchorY=.5;
+            // context.addChild(stingerText);
         }
         context.touchEnabled = true;
         context.addEventListener(egret.TouchEvent.TOUCH_BEGIN, tb, context);
@@ -133,6 +135,17 @@ var tool = (function () {
     tool.initSound = function (texture) {
         return RES.getRes(texture);
     };
+    tool.initRect = function (color, x, y, w, h) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (w === void 0) { w = 0; }
+        if (h === void 0) { h = 0; }
+        var rect = new egret.Shape();
+        rect.graphics.beginFill(color);
+        rect.graphics.drawRect(x, y, w, h);
+        rect.graphics.endFill();
+        return rect;
+    };
     // static initParticle(texture,x?,y?,ax?,ay?){
     //     var txtr = RES.getRes(texture);
     //     var config = RES.getRes(texture + 'MC');
@@ -184,15 +197,19 @@ var tool = (function () {
     tool.randomInt = function (n) {
         return Math.floor(Math.random() * n);
     };
-    tool.btnPress = function (btn, presstexture, texture, endfunc, that, startfunc) {
+    tool.btnPress = function (btn, endfunc, that, presstexture, texture, startfunc) {
         function begin() {
-            btn.texture = RES.getRes(presstexture);
+            if (presstexture) {
+                btn.texture = RES.getRes(presstexture);
+            }
             if (startfunc) {
                 startfunc.call(that);
             }
         }
         function end() {
-            btn.texture = RES.getRes(texture);
+            if (texture) {
+                btn.texture = RES.getRes(texture);
+            }
             endfunc.call(that);
         }
         function releaseoutside() {
@@ -217,6 +234,32 @@ var tool = (function () {
             egret.localStorage.setItem('bestScore', bestScore + '');
         }
         return bestScore;
+    };
+    tool.setFullWidthObj = function (obj, w, h) {
+        if (obj) {
+            var width = w || obj.texture.textureWidth;
+            var height = h || obj.texture.textureHeight;
+            obj.width = tool.stageW;
+            obj.height = tool.stageW * height / width;
+        }
+    };
+    tool.setBgWH = function (bg) {
+        if (bg) {
+            bg.width = tool.stageW;
+            bg.height = tool.stageH;
+        }
+    };
+    tool.forMatrix = function (func, that, args, ilength, jlength) {
+        if (args === void 0) { args = []; }
+        if (ilength === void 0) { ilength = 6; }
+        if (jlength === void 0) { jlength = 6; }
+        for (var i = 0; i < ilength; i++) {
+            for (var j = 0; j < jlength; j++) {
+                var a = [i, j];
+                a.push(args);
+                func.apply(that, a);
+            }
+        }
     };
     return tool;
 })();

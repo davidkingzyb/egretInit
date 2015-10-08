@@ -1,5 +1,6 @@
 var game_file_list = [
 	"Iso/IsoObject.js",
+	"loading.js",
 	"tool.js",
 	"Iso/BitmapTile.js",
 	"Iso/IsoWorld.js",
@@ -7,7 +8,6 @@ var game_file_list = [
 	"component.js",
 	"GameContainer.js",
 	"Iso/Point3D.js",
-	"LoadingUI.js",
 	"debug.js",
 	"Iso/IsoUtils.js",
 	"Main.js"

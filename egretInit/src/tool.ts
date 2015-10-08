@@ -60,10 +60,17 @@ class tool{
                 var t=context.getChildAt(0);
                 context.removeChild(t);
             }
-            var stingerText=tool.initTextField('Δ by DKZ\nfrom meiriq',tool.stageW/2,tool.stageH/2,0xffffff,40);
-            stingerText.anchorX=.5;
-            stingerText.anchorY=.5;
-            context.addChild(stingerText);
+
+            
+                var loadingView=new Loading('stinger');
+                context.addChild(loadingView);
+            
+                // var stingerText=tool.initTextField('Δ by DKZ\nfrom meiriq',tool.stageW/2,tool.stageH/2,0xffffff,40);
+                // stingerText.anchorX=.5;
+                // stingerText.anchorY=.5;
+                // context.addChild(stingerText);
+            
+            
         }
         context.touchEnabled=true;
         context.addEventListener(egret.TouchEvent.TOUCH_BEGIN,tb,context);        
@@ -137,6 +144,13 @@ class tool{
     static initSound(texture){
         return RES.getRes(texture);
     }
+    static initRect(color,x=0,y=0,w=0,h=0){
+        var rect=new egret.Shape();
+        rect.graphics.beginFill(color);
+        rect.graphics.drawRect(x,y,w,h);
+        rect.graphics.endFill();
+        return rect;
+    }
     // static initParticle(texture,x?,y?,ax?,ay?){
     //     var txtr = RES.getRes(texture);
     //     var config = RES.getRes(texture + 'MC');
@@ -189,15 +203,19 @@ class tool{
     static randomInt(n){
         return Math.floor(Math.random()*n);
     }
-    static btnPress(btn,presstexture,texture,endfunc,that,startfunc?){
+    static btnPress(btn,endfunc,that,presstexture?,texture?,startfunc?){
         function begin(){
-            btn.texture=RES.getRes(presstexture);
+            if(presstexture){
+                btn.texture=RES.getRes(presstexture);
+            }
             if(startfunc){
                 startfunc.call(that);
             }
         }
         function end(){
-            btn.texture=RES.getRes(texture);
+            if(texture){
+                btn.texture=RES.getRes(texture);
+            }
             endfunc.call(that);
         }
         function releaseoutside(){
@@ -222,5 +240,29 @@ class tool{
 
         }
         return bestScore;
+    }
+    static setFullWidthObj(obj,w?,h?){
+        if(obj){
+            var width=w||obj.texture.textureWidth;
+            var height=h||obj.texture.textureHeight;
+            obj.width=tool.stageW;
+            obj.height=tool.stageW*height/width;
+        }
+    }
+    static setBgWH(bg){
+        if(bg){
+            bg.width=tool.stageW;
+            bg.height=tool.stageH;
+        }
+    }
+    static forMatrix(func,that,args:any[]=[],ilength=6,jlength=6){
+        for(var i=0;i<ilength;i++){
+            for(var j=0;j<jlength;j++){
+                var a:any[]=[i,j];
+                a.push(args);
+                func.apply(that,a);
+            }
+        }
+
     }
 }

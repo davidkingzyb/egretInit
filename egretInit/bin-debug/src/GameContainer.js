@@ -15,8 +15,8 @@ var GameContainer = (function (_super) {
     __egretProto__.createGameScene = function () {
         // this.bgm=tool.initSound('startpane_bgm');
         // this.bgm.play(true);
-        var bgm = tool.initSound('startpane_bgm');
-        bgm.play(true);
+        // var bgm=tool.initSound('startpane_bgm');
+        // bgm.play(true);
         this.bg = new egret.Shape();
         this.bg.graphics.beginFill(0x999999);
         this.bg.graphics.drawRect(0, 0, tool.stageW, tool.stageH);

@@ -36,8 +36,8 @@ class GameContainer extends egret.DisplayObjectContainer{
         // this.bgm=tool.initSound('startpane_bgm');
         // this.bgm.play(true);
 
-        var bgm=tool.initSound('startpane_bgm');
-        bgm.play(true);
+        // var bgm=tool.initSound('startpane_bgm');
+        // bgm.play(true);
 
 
         this.bg = new egret.Shape();

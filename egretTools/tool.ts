@@ -60,10 +60,17 @@ class tool{
                 var t=context.getChildAt(0);
                 context.removeChild(t);
             }
-            var stingerText=tool.initTextField('Δ by DKZ\nfrom meiriq',tool.stageW/2,tool.stageH/2,0xffffff,40);
-            stingerText.anchorX=.5;
-            stingerText.anchorY=.5;
-            context.addChild(stingerText);
+
+            
+                var loadingView=new Loading('stinger');
+                context.addChild(loadingView);
+            
+                // var stingerText=tool.initTextField('Δ by DKZ\nfrom meiriq',tool.stageW/2,tool.stageH/2,0xffffff,40);
+                // stingerText.anchorX=.5;
+                // stingerText.anchorY=.5;
+                // context.addChild(stingerText);
+            
+            
         }
         context.touchEnabled=true;
         context.addEventListener(egret.TouchEvent.TOUCH_BEGIN,tb,context);        
@@ -196,15 +203,19 @@ class tool{
     static randomInt(n){
         return Math.floor(Math.random()*n);
     }
-    static btnPress(btn,presstexture,texture,endfunc,that,startfunc?){
+    static btnPress(btn,endfunc,that,presstexture?,texture?,startfunc?){
         function begin(){
-            btn.texture=RES.getRes(presstexture);
+            if(presstexture){
+                btn.texture=RES.getRes(presstexture);
+            }
             if(startfunc){
                 startfunc.call(that);
             }
         }
         function end(){
-            btn.texture=RES.getRes(texture);
+            if(texture){
+                btn.texture=RES.getRes(texture);
+            }
             endfunc.call(that);
         }
         function releaseoutside(){
