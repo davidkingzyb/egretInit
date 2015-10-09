@@ -219,7 +219,9 @@ class tool{
             endfunc.call(that);
         }
         function releaseoutside(){
-            btn.texture=RES.getRes(texture);
+            if(texture){
+                btn.texture=RES.getRes(texture);
+            }
         }
         btn.touchEnabled=true;
         btn.addEventListener(egret.TouchEvent.TOUCH_BEGIN,begin,that);
