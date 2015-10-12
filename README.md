@@ -18,6 +18,8 @@
 
 * **Render.ts** Time-based Animation
 
+* **loading.ts** DKZ loading panel 
+
 * **resource.py** create resource.json automatically
 
 * **runServer.py** a python server
@@ -116,6 +118,26 @@ ei_resume();
 show debug panel
 
 *void
+
+#####unitTest(func,context,argsarr,funcname)
+
+unit test
+
+* func:function test function
+
+* context:any this context
+
+* argsarr:[] arguments array
+
+* funcname:string function name
+
+```
+    //define
+    debug.unitTest(this.print,this,['aaa'],'print');
+
+    //console
+    print();
+```
 
 ###tool.ts
 
@@ -412,19 +434,19 @@ return a random int between 0 to n-1
 var r=tool.randomInt(10);
 ```
 
-#####btnPress(btn,presstexture,texture,endfunc,that,startfunc?)
+#####btnPress(btn,endfunc,that,presstexture?,texture?,startfunc?)
 
 button press effect
 
 * btn:egret.DisplayObject the button
 
-* presstexture:string texture when button press
-
-* texture:string normal texture
-
 * endfunc:function touch end function
 
 * that:egret.DisplayObjectContainer this context
+
+* presstexture:string texture when button press
+
+* texture:string normal texture
 
 * startfunc:function touch start function
 
@@ -444,6 +466,42 @@ set localstorage bestscore and return bestscore
 
 ```
 var bestScore=tool.setBestScore(this.score);
+```
+
+#####setFullWidthObj(obj,w?,h?)
+
+set full width obj 's width equel to stage width and scale height
+
+* obj:egret.DisplayObject obj
+
+* w:number texture width
+
+* h:number texture height
+
+#####setBgWH(bg)
+
+set background image width and height
+
+* bg:egret.DisplayObject background
+
+#####forMatrix(func,that,args:any[]=[],ilength=6,jlength=6)
+
+array matrix function 
+
+* func:function execute function
+
+* that:egret.DisplayObjectContainer context
+
+* args:any[] arguments of func
+
+* ilength:number line length
+
+* jlength:number column length
+
+```
+    tool.forMatrix(function(i,j){
+        this.mapfloorarr[i][j].alpha=.05;
+    },this);
 ```
 
 ###component.ts
@@ -687,7 +745,9 @@ set fps and dt
 
 * void
 
+###loading.ts
 
+loading panel and new stinger panel
 
 ###resource.py
 

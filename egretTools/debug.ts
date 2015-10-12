@@ -149,13 +149,22 @@ module debug{
         egret.Profiler.getInstance().run();
     }
     export function debuging(){
+        
         debug.showDebug();
+
         if(window){
-            window['ei_pause']=function(){debug.pause();}
-            window['ei_resume']=function(){debug.resume();}
+            window['ei_debuging']=true;
+            window['ei_pause']=function(){debug.pause();};
+            window['ei_resume']=function(){debug.resume();};
             //window['ei_showdebug']=function(){debug.showDebug();}
         }
     }
-    
-
+    export function unitTest(func,context,argsarr=[],funcname='test'){
+        if(window['ei_debuging']){
+            console.log('unit test: '+funcname+'()')
+            window[funcname]=function(){
+                func.apply(context,argsarr);
+            };
+        }
+    }
 }
