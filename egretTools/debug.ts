@@ -162,8 +162,14 @@ module debug{
     export function unitTest(func,context,argsarr=[],funcname='test'){
         if(window['ei_debuging']){
             console.log('unit test: '+funcname+'()')
-            window[funcname]=function(){
-                func.apply(context,argsarr);
+            window[funcname]=function(args){
+                var applyargs;
+                if(args){
+                    applyargs=args;
+                }else{
+                    applyargs=argsarr;
+                }
+                func.apply(context,applyargs);
             };
         }
     }

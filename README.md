@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/9/26
+2015/8/4 by DKZ update 2015/10/14
 
 
 
@@ -137,6 +137,7 @@ unit test
 
     //console
     print();
+    print(['//args']);
 ```
 
 ###tool.ts
