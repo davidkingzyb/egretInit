@@ -6,17 +6,10 @@ class tool{
 
 	static setWH(that){
         //@that GameContainer
-		if(window["client"]=="android"){
-            that.scaleX=0.5;
-            that.scaleY=0.5;
-        }
-        if(window['stage_width']&&window['stage_height']){
-            tool.stageW = window['stage_width'];
-            tool.stageH = window['stage_height'];
-        }else{
-            tool.stageW=that.stage.stageWidth;
-            tool.stageH=that.stage.stageHeight;
-        }
+
+        tool.stageW=that.stage.stageWidth;
+        tool.stageH=that.stage.stageHeight;
+        
         tool.stinger(that);
 	}
 
@@ -162,8 +155,8 @@ class tool{
     //     return system;
     // }
     static getXY(event){
-    	var X=window["client"]=="android"?event.stageX*2:event.stageX;
-    	var Y=window["client"]=="android"?event.stageY*2:event.stageY;
+    	var X=event.stageX;
+    	var Y=event.stageY;
         return {"x":X,"y":Y};
     }
     static addChildren(arr,context){

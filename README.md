@@ -28,8 +28,6 @@
 
 * **cgi-bin/response.py** a cgi server
 
-* **egret_loader.js** a solution for iphone and android diffrent screen size
-
 * **Iso** egret isometric projection library.
 
 
@@ -769,14 +767,6 @@ a python server (base on python 2.7)
 ###cgi-bin/response.py
 
 a cgi server
-
-###egret_loader.js
-
-a solution for iphone and android diffrent screen size
-
-android need scale stage to .5 and the tap event stageX and stageY need times 2
-
-use tool.ts setWH and getXY function set stage to .5 and get tap event stageX and Y
 
 ###Iso
 
