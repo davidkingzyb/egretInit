@@ -1,4 +1,5 @@
-//created by DKZ on 2015/7/10
+//created by DKZ on 2015/7/10 update 2015/10/22
+//https://github.com/davidkingzyb/egretInit
 class tool{
 	static stageW;
 	static stageH;
@@ -257,6 +258,24 @@ class tool{
 
         }
         return bestScore;
+    }
+    static dolocalStorage(name,value?,defaultV='0'){
+        if(egret.localStorage.getItem(name)){
+            if(value){
+                egret.localStorage.setItem(name,value);
+                return egret.localStorage.getItem(name);
+            }else{
+                return egret.localStorage.getItem(name);
+            }
+        }else{
+            if(value){
+                egret.localStorage.setItem(name,value);
+                return egret.localStorage.getItem(name);
+            }else{
+                egret.localStorage.setItem(name,defaultV);
+                return egret.localStorage.getItem(name);
+            }
+        }
     }
     static setFullWidthObj(obj,w?,h?){
         if(obj){

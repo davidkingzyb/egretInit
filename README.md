@@ -495,6 +495,20 @@ set localstorage bestscore and return bestscore
 var bestScore=tool.setBestScore(this.score);
 ```
 
+#####dolocalStorage(name,value?,defaultV='0')
+
+set & get & init egret localStorge
+
+* name:string key
+
+* value:string value
+
+* defaultV:string init value
+
+```
+bestScore=tool.setBestScore('bestScore');
+```
+
 #####setFullWidthObj(obj,w?,h?)
 
 set full width obj 's width equel to stage width and scale height
