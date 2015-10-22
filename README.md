@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/10/14
+2015/8/4 by DKZ update 2015/10/22
 
 
 
@@ -419,6 +419,34 @@ egret Ajax connect with server
 tool.getData('http://127.0.0.1:8888/cgi-bin/response.py','data=dkz',function(data){
     console.log(data);
 });
+```
+
+#####ajax(url,data,success,error,context,type?)
+
+egret ajax have error callback function and call context
+
+* url:string URL
+
+* data:string data string like "name=value&id=0"
+
+* success:function success callback function have 1 data argument
+
+* error:function error callback function
+
+* context:egret.DisplayObjectContainer this
+
+* type:string connect type default GET
+
+```
+var url=connect.HOST+'load';
+var reqstr='worldName='+worldName;
+function loadSuccess(data){
+    console.log(data)
+}
+function loadError(){
+    console.log('error')
+}
+tool.ajax(url,reqstr,loadSuccess,loadError,this,'post');
 ```
 
 #####randomInt(n)

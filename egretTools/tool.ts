@@ -193,6 +193,28 @@ class tool{
         }
         urlloader.load(urlreq);
     }
+    static ajax(url,data,success,error,context,type?){
+        function onLoadSuccess(){
+            success.call(context,urlloader.data);
+        }
+        function onLoadError(){
+            error.call(context);
+        }
+        var urlloader=new egret.URLLoader();
+        urlloader.addEventListener(egret.Event.COMPLETE,onLoadSuccess,this);
+        urlloader.addEventListener(egret.IOErrorEvent.IO_ERROR,onLoadError, this);
+
+        var urlreq=new egret.URLRequest();
+        urlreq.url=url;
+        urlreq.requestHeaders = [
+            new egret.URLRequestHeader("Access-Control-Allow-Origin", "*")
+        ];
+        if(type==='post'){
+            urlreq.method = egret.URLRequestMethod.POST;
+        }
+        urlreq.data = new egret.URLVariables(data);
+        urlloader.load(urlreq);
+    }
     static randomInt(n){
         return Math.floor(Math.random()*n);
     }
