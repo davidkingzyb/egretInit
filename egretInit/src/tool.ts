@@ -1,4 +1,5 @@
-//created by DKZ on 2015/7/10
+//created by DKZ on 2015/7/10 update 2015/10/22
+//https://github.com/davidkingzyb/egretInit
 class tool{
 	static stageW;
 	static stageH;
@@ -6,17 +7,10 @@ class tool{
 
 	static setWH(that){
         //@that GameContainer
-		if(window["client"]=="android"){
-            that.scaleX=0.5;
-            that.scaleY=0.5;
-        }
-        if(window['stage_width']&&window['stage_height']){
-            tool.stageW = window['stage_width'];
-            tool.stageH = window['stage_height'];
-        }else{
-            tool.stageW=that.stage.stageWidth;
-            tool.stageH=that.stage.stageHeight;
-        }
+
+        tool.stageW=that.stage.stageWidth;
+        tool.stageH=that.stage.stageHeight;
+        
         tool.stinger(that);
 	}
 
@@ -162,8 +156,8 @@ class tool{
     //     return system;
     // }
     static getXY(event){
-    	var X=window["client"]=="android"?event.stageX*2:event.stageX;
-    	var Y=window["client"]=="android"?event.stageY*2:event.stageY;
+    	var X=event.stageX;
+    	var Y=event.stageY;
         return {"x":X,"y":Y};
     }
     static addChildren(arr,context){
@@ -198,6 +192,28 @@ class tool{
             urlreq.method = egret.URLRequestMethod.POST;
             urlreq.data = new egret.URLVariables(reqdata);
         }
+        urlloader.load(urlreq);
+    }
+    static ajax(url,data,success,error,context,type?){
+        function onLoadSuccess(){
+            success.call(context,urlloader.data);
+        }
+        function onLoadError(){
+            error.call(context);
+        }
+        var urlloader=new egret.URLLoader();
+        urlloader.addEventListener(egret.Event.COMPLETE,onLoadSuccess,this);
+        urlloader.addEventListener(egret.IOErrorEvent.IO_ERROR,onLoadError, this);
+
+        var urlreq=new egret.URLRequest();
+        urlreq.url=url;
+        urlreq.requestHeaders = [
+            new egret.URLRequestHeader("Access-Control-Allow-Origin", "*")
+        ];
+        if(type==='post'){
+            urlreq.method = egret.URLRequestMethod.POST;
+        }
+        urlreq.data = new egret.URLVariables(data);
         urlloader.load(urlreq);
     }
     static randomInt(n){
@@ -242,6 +258,24 @@ class tool{
 
         }
         return bestScore;
+    }
+    static dolocalStorage(name,value?,defaultV='0'){
+        if(egret.localStorage.getItem(name)){
+            if(value){
+                egret.localStorage.setItem(name,value);
+                return egret.localStorage.getItem(name);
+            }else{
+                return egret.localStorage.getItem(name);
+            }
+        }else{
+            if(value){
+                egret.localStorage.setItem(name,value);
+                return egret.localStorage.getItem(name);
+            }else{
+                egret.localStorage.setItem(name,defaultV);
+                return egret.localStorage.getItem(name);
+            }
+        }
     }
     static setFullWidthObj(obj,w?,h?){
         if(obj){

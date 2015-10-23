@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/10/22
+2015/8/4 by DKZ update 2015/10/23
 
 
 
@@ -21,6 +21,8 @@
 * **loading.ts** DKZ loading panel 
 
 * **resource.py** create resource.json automatically
+
+* **update.py** update egretInit automatically
 
 * **runServer.py** a python server
 
@@ -797,6 +799,10 @@ create resource.json automatically
 standard naming rule use file name as texture name
 
 sprite sheet must be named like /^\w*SS.json$/
+
+###update.py
+
+update egretInit automatically
 
 ###runServer.py
 

@@ -28,8 +28,8 @@ class component{
         border.graphics.lineStyle(linewidth,color);
         border.graphics.drawRect(0,0,w,h);
         border.graphics.endFill();
-        sp.addChild(border)
-        var value=tool.initTextField(text,w/2,h/2-fontsize/10,color,fontsize,fontFamily,egret.HorizontalAlign.CENTER,.5,.5);
+        sp.addChild(border);
+        var value=tool.initTextField(text,w/2,h/2,color,fontsize,fontFamily,egret.HorizontalAlign.CENTER,.5,.5);
         sp.addChild(value);
         return {"btn":sp,"bg":bg,"border":border,"text":value};
     }
