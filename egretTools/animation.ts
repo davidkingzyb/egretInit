@@ -74,4 +74,19 @@ class animation {
         animation.FPS = fps;
         this.dt = Number((1000 / fps).toFixed(1));
     }
+
+    static tween(valueName,startV,endV,time,context){
+        var step=(endV-startV)/(time/10);
+        function doTween(){
+            context[valueName]+=step;
+            if(step>0&&context[valueName]>=endV){
+                egret.clearInterval(interval);
+            }
+            if(step<0&&context[valueName]<=endV){
+                egret.clearInterval(interval);
+            }
+        }
+        var interval=egret.setInterval(doTween,context,10);
+        return interval;
+    }
 }

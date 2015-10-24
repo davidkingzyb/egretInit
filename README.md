@@ -788,6 +788,25 @@ set fps and dt
 
 * void
 
+#####tween(valueName,startV,endV,time,context)
+
+linear tweens static function 
+
+* valueName:string this.value's Name
+
+* startV:number start value this.value
+
+* endV:number end value 
+
+* time:number during time
+
+* context:egret.DisplayObjectContainer context this
+
+```
+this.v=0;
+var interval=animation.tween('v',this.v,100,1000,this);
+```
+
 ###loading.ts
 
 loading panel and new stinger panel

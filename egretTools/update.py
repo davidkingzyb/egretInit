@@ -23,6 +23,6 @@ def save(filename,con):
     with open(filename,'wb') as f:
         f.write(con)
 
-updatelist=getUpdateList('updatelist.txt')
+updatelist=['tool.ts','debug.ts','loading.ts']#getUpdateList('updatelist.txt')
 doUpdata(updatelist)
 
