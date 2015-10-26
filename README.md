@@ -16,7 +16,7 @@
 
 * **component.ts** some useful components like air button
 
-* **Render.ts** Time-based Animation
+* **animation.ts** Time-based Animation
 
 * **loading.ts** DKZ loading panel 
 
@@ -613,31 +613,16 @@ function stop(){
 }
 ```
 
-###Render.ts
+###animation.py
 
-Time-based Animation
+Time-base Animation 
 
 solve fps drop problems when using Frame-based Animation
 
-**example**
-
 ```
-var render=new Render();
-
-render.register(this.loop,this);
-render.start();
-
-render.pause();
-render.stop();
-render.resume();
-
-render.unregister();
-
-render.framerate=30;
-
-loop(){
-    //enterFrame
-}
+    this.enterframe=new animation(this);
+    this.enterframe.onenterframe(this.animateObj);
+    this.enterframe.start();
 ```
 
 #####FPS
@@ -693,46 +678,6 @@ unregister render
 notify call loop function
 
 * d:number real interval time
-
-#####start()
-
-start render
-
-* void
-
-#####stop()
-
-stop render
-
-* void
-
-#####pause()
-
-pause render
-
-* void
-
-#####resume()
-
-resume render
-
-* void
-
-#####set framerate(fps)
-
-set fps and dt
-
-* void
-
-###animation.py
-
-Time-base Animation (add a observer to render)
-
-```
-    this.enterframe=new animation(this);
-    this.enterframe.onenterframe(this.animateObj);
-    this.enterframe.start();
-```
 
 #####animationArr
 
