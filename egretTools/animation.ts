@@ -70,6 +70,7 @@ class animation {
         egret.Ticker.getInstance().unregister(this.handle, this);
         this.acc = 0;
         this.framerate = 60;
+        this.animationArr=[]
     }
 
     pause() {

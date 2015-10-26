@@ -405,6 +405,24 @@ tool.removeChildren([this.bm,this.mc],this);
 tool.test2RectHit(this.bm, this.bm2);
 ```
 
+#####test2PointHit(obj1,obj2,range)
+
+test 2 point distance whether less than range or not
+
+* obj1:egret.DisplayObject
+
+* obj2:egret.DisplayObject
+
+* range:number range
+
+* return:boolean ishit?
+
+```
+if(tool.test2PointHit(this.obstacleArr[i],this.player,60)){
+    //gameover
+}
+```
+
 #####getData(url,reqdata?,callback?)
 
 egret Ajax connect with server 
