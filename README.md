@@ -117,7 +117,7 @@ ei_resume();
 
 show debug panel
 
-*void
+* void
 
 #####unitTest(func,context,argsarr,funcname)
 
