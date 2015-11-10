@@ -6,7 +6,9 @@
 
 
 
-##Examples
+[github](https://github.com/davidkingzyb/egretInit)
+
+##Demo
 
 * [solardefence](http://gameslibrary.meiriq.com/home/g/600)
 * [findspy](http://gameslibrary.meiriq.com/home/g/604)
@@ -28,8 +30,6 @@ ios
 * [aution](https://www.appannie.com/apps/ios/app/qi-huan-pai-mai-xing)
 
 ##List
-
-[github](https://github.com/davidkingzyb/egretInit)
 
 * **egretInit** An example of egret project base on egret
 
