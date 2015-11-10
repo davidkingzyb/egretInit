@@ -2,9 +2,32 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/10/23
+2015/8/4 by DKZ update 2015/11/10
 
 
+
+##Examples
+
+* [solardefence](http://gameslibrary.meiriq.com/home/g/600)
+* [findspy](http://gameslibrary.meiriq.com/home/g/604)
+* [doublecolor](http://gameslibrary.meiriq.com/home/g/621)
+* [strata](http://gameslibrary.meiriq.com/home/g/626)
+* [cubejump](http://gameslibrary.meiriq.com/home/g/644)
+* [qiuqiu](http://gameslibrary.meiriq.com/home/g/655)
+* [fallingshit](http://gameslibrary.meiriq.com/home/g/658)
+* [hotteacher](http://gameslibrary.meiriq.com/home/g/664)
+* [moonfish](http://gameslibrary.meiriq.com/home/g/665)
+* [aution](http://gameslibrary.meiriq.com/home/g/669)
+* [floor](http://gameslibrary.meiriq.com/home/g/672)
+* [ET](http://gameslibrary.meiriq.com/home/g/676)
+
+ios
+
+* [esther](https://www.appannie.com/apps/ios/app/alex-memory/)
+* [hotteacher](https://www.appannie.com/apps/ios/app/ma-la-jiao-shi)
+* [aution](https://www.appannie.com/apps/ios/app/qi-huan-pai-mai-xing)
+
+##List
 
 [github](https://github.com/davidkingzyb/egretInit)
 
