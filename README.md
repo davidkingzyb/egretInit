@@ -128,12 +128,6 @@ pause game and resume game
 
 * void
 
-```
-//console
-ei_pause();
-ei_resume();
-```
-
 #####showDebug()
 
 show debug panel
@@ -806,6 +800,11 @@ sprite sheet must be named like /^\w*SS.json$/
 ###update.py
 
 update egretInit automatically
+
+```
+>cd your_egret_src_path
+>python update.py
+```
 
 ###Iso
 
