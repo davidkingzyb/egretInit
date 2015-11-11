@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/11/10
+2015/8/4 by DKZ update 2015/11/11
 
 
 
@@ -33,6 +33,10 @@ ios
 
 * **egretInit** An example of egret project base on egret
 
+* **Iso** egret isometric projection library.
+
+***
+
 * **debug.ts** debug egret project
 
 * **tool.ts** egret tools for Initialize standard egret Object
@@ -47,13 +51,7 @@ ios
 
 * **update.py** update egretInit automatically
 
-* **runServer.py** a python server
 
-* **simpleserver.py** a python server
-
-* **cgi-bin/response.py** a cgi server
-
-* **Iso** egret isometric projection library.
 
 
 ##egretInit
@@ -808,18 +806,6 @@ sprite sheet must be named like /^\w*SS.json$/
 ###update.py
 
 update egretInit automatically
-
-###runServer.py
-
-a python server
-
-###simpleserver.py
-
-a python server (base on python 2.7)
-
-###cgi-bin/response.py
-
-a cgi server
 
 ###Iso
 
