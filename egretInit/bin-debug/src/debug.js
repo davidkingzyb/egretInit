@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////////////////////
+//   ________                                 ______                      
+//  |   _____|                        _      |_    _|           __  _     
+//  |  |____    _____  __  __  _____ | \_      |  |    ______  |__|| \_   
+//  |   ____|  / _   ||  |/_/ /  _  \|   _|    |  |   |      \ |  ||   _| 
+//  |  |_____ _\___  ||   |  /  ____/|  |___  _|  |_  |   _   ||  ||  |___
+//  |________|\______||___|  \______/\_____/ |______| |__| |__||__|\_____/
+////////////////////////////////////////////////////////////////////////////
+//  2015/10/26 by DKZ https://davidkingzyb.github.io
 //created by DKZ on 2015/7/10
 var debug;
 (function (debug) {
@@ -155,6 +164,7 @@ var debug;
     function debuging() {
         debug.showDebug();
         if (window) {
+            window['ei_debuging'] = true;
             window['ei_pause'] = function () {
                 debug.pause();
             };
@@ -164,4 +174,22 @@ var debug;
         }
     }
     debug.debuging = debuging;
+    function unitTest(func, context, argsarr, funcname) {
+        if (argsarr === void 0) { argsarr = []; }
+        if (funcname === void 0) { funcname = 'test'; }
+        if (window['ei_debuging']) {
+            console.log('unit test: ' + funcname + '()');
+            window[funcname] = function (args) {
+                var applyargs;
+                if (args) {
+                    applyargs = args;
+                }
+                else {
+                    applyargs = argsarr;
+                }
+                func.apply(context, applyargs);
+            };
+        }
+    }
+    debug.unitTest = unitTest;
 })(debug || (debug = {}));

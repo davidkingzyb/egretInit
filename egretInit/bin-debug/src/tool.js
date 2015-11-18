@@ -1,22 +1,22 @@
-//created by DKZ on 2015/7/10
+////////////////////////////////////////////////////////////////////////////
+//   ________                                 ______                      
+//  |   _____|                        _      |_    _|           __  _     
+//  |  |____    _____  __  __  _____ | \_      |  |    ______  |__|| \_   
+//  |   ____|  / _   ||  |/_/ /  _  \|   _|    |  |   |      \ |  ||   _| 
+//  |  |_____ _\___  ||   |  /  ____/|  |___  _|  |_  |   _   ||  ||  |___
+//  |________|\______||___|  \______/\_____/ |______| |__| |__||__|\_____/
+////////////////////////////////////////////////////////////////////////////
+//  2015/10/26 by DKZ https://davidkingzyb.github.io
+//created by DKZ on 2015/7/10 update 2015/10/22
+//https://github.com/davidkingzyb/egretInit
 var tool = (function () {
     function tool() {
     }
     var __egretProto__ = tool.prototype;
     tool.setWH = function (that) {
         //@that GameContainer
-        if (window["client"] == "android") {
-            that.scaleX = 0.5;
-            that.scaleY = 0.5;
-        }
-        if (window['stage_width'] && window['stage_height']) {
-            tool.stageW = window['stage_width'];
-            tool.stageH = window['stage_height'];
-        }
-        else {
-            tool.stageW = that.stage.stageWidth;
-            tool.stageH = that.stage.stageHeight;
-        }
+        tool.stageW = that.stage.stageWidth;
+        tool.stageH = that.stage.stageHeight;
         tool.stinger(that);
     };
     tool.stinger = function (context) {
@@ -146,19 +146,19 @@ var tool = (function () {
         rect.graphics.endFill();
         return rect;
     };
-    // static initParticle(texture,x?,y?,ax?,ay?){
-    //     var txtr = RES.getRes(texture);
-    //     var config = RES.getRes(texture + 'MC');
-    //     var system = new particle.GravityParticleSystem(txtr, config);
-    //     system.x = x ? x : 0;
-    //     system.y = y ? y : 0;
-    //     system.anchorX = ax ? ax : 0;
-    //     system.anchorY = ay ? ay : 0;
-    //     return system;
-    // }
+    tool.initParticle = function (texture, x, y, ax, ay) {
+        var txtr = RES.getRes(texture);
+        var config = RES.getRes(texture + 'MC');
+        var system = new particle.GravityParticleSystem(txtr, config);
+        system.x = x ? x : 0;
+        system.y = y ? y : 0;
+        system.anchorX = ax ? ax : 0;
+        system.anchorY = ay ? ay : 0;
+        return system;
+    };
     tool.getXY = function (event) {
-        var X = window["client"] == "android" ? event.stageX * 2 : event.stageX;
-        var Y = window["client"] == "android" ? event.stageY * 2 : event.stageY;
+        var X = event.stageX;
+        var Y = event.stageY;
         return { "x": X, "y": Y };
     };
     tool.addChildren = function (arr, context) {
@@ -176,6 +176,9 @@ var tool = (function () {
     tool.test2RectHit = function (obj1, obj2) {
         return Math.max(obj1.x, obj2.x) <= Math.min(obj1.x + obj1.width, obj2.x + obj2.width) && Math.max(obj1.y, obj2.y) <= Math.min(obj1.y + obj1.height, obj2.y + obj2.height);
     };
+    tool.test2PointHit = function (obj1, obj2, range) {
+        return (obj1.x - obj2.x) * (obj1.x - obj2.x) + (obj1.y - obj2.y) * (obj1.y - obj2.y) < range * range;
+    };
     tool.getData = function (url, reqdata, callback) {
         function onComplete(e) {
             callback(urlloader.data);
@@ -192,6 +195,27 @@ var tool = (function () {
             urlreq.method = egret.URLRequestMethod.POST;
             urlreq.data = new egret.URLVariables(reqdata);
         }
+        urlloader.load(urlreq);
+    };
+    tool.ajax = function (url, data, success, error, context, type) {
+        function onLoadSuccess() {
+            success.call(context, urlloader.data);
+        }
+        function onLoadError() {
+            error.call(context);
+        }
+        var urlloader = new egret.URLLoader();
+        urlloader.addEventListener(egret.Event.COMPLETE, onLoadSuccess, this);
+        urlloader.addEventListener(egret.IOErrorEvent.IO_ERROR, onLoadError, this);
+        var urlreq = new egret.URLRequest();
+        urlreq.url = url;
+        urlreq.requestHeaders = [
+            new egret.URLRequestHeader("Access-Control-Allow-Origin", "*")
+        ];
+        if (type === 'post') {
+            urlreq.method = egret.URLRequestMethod.POST;
+        }
+        urlreq.data = new egret.URLVariables(data);
         urlloader.load(urlreq);
     };
     tool.randomInt = function (n) {
@@ -213,7 +237,9 @@ var tool = (function () {
             endfunc.call(that);
         }
         function releaseoutside() {
-            btn.texture = RES.getRes(texture);
+            if (texture) {
+                btn.texture = RES.getRes(texture);
+            }
         }
         btn.touchEnabled = true;
         btn.addEventListener(egret.TouchEvent.TOUCH_BEGIN, begin, that);
@@ -234,6 +260,28 @@ var tool = (function () {
             egret.localStorage.setItem('bestScore', bestScore + '');
         }
         return bestScore;
+    };
+    tool.dolocalStorage = function (name, value, defaultV) {
+        if (defaultV === void 0) { defaultV = '0'; }
+        if (egret.localStorage.getItem(name)) {
+            if (value) {
+                egret.localStorage.setItem(name, value);
+                return egret.localStorage.getItem(name);
+            }
+            else {
+                return egret.localStorage.getItem(name);
+            }
+        }
+        else {
+            if (value) {
+                egret.localStorage.setItem(name, value);
+                return egret.localStorage.getItem(name);
+            }
+            else {
+                egret.localStorage.setItem(name, defaultV);
+                return egret.localStorage.getItem(name);
+            }
+        }
     };
     tool.setFullWidthObj = function (obj, w, h) {
         if (obj) {

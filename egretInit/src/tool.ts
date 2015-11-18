@@ -1,3 +1,12 @@
+////////////////////////////////////////////////////////////////////////////
+//   ________                                 ______                      
+//  |   _____|                        _      |_    _|           __  _     
+//  |  |____    _____  __  __  _____ | \_      |  |    ______  |__|| \_   
+//  |   ____|  / _   ||  |/_/ /  _  \|   _|    |  |   |      \ |  ||   _| 
+//  |  |_____ _\___  ||   |  /  ____/|  |___  _|  |_  |   _   ||  ||  |___
+//  |________|\______||___|  \______/\_____/ |______| |__| |__||__|\_____/
+////////////////////////////////////////////////////////////////////////////
+//  2015/10/26 by DKZ https://davidkingzyb.github.io
 //created by DKZ on 2015/7/10 update 2015/10/22
 //https://github.com/davidkingzyb/egretInit
 class tool{
@@ -145,16 +154,16 @@ class tool{
         rect.graphics.endFill();
         return rect;
     }
-    // static initParticle(texture,x?,y?,ax?,ay?){
-    //     var txtr = RES.getRes(texture);
-    //     var config = RES.getRes(texture + 'MC');
-    //     var system = new particle.GravityParticleSystem(txtr, config);
-    //     system.x = x ? x : 0;
-    //     system.y = y ? y : 0;
-    //     system.anchorX = ax ? ax : 0;
-    //     system.anchorY = ay ? ay : 0;
-    //     return system;
-    // }
+    static initParticle(texture,x?,y?,ax?,ay?){
+        var txtr = RES.getRes(texture);
+        var config = RES.getRes(texture + 'MC');
+        var system = new particle.GravityParticleSystem(txtr, config);
+        system.x = x ? x : 0;
+        system.y = y ? y : 0;
+        system.anchorX = ax ? ax : 0;
+        system.anchorY = ay ? ay : 0;
+        return system;
+    }
     static getXY(event){
     	var X=event.stageX;
     	var Y=event.stageY;
@@ -174,6 +183,9 @@ class tool{
     }
     static test2RectHit(obj1,obj2){
         return Math.max(obj1.x,obj2.x) <= Math.min(obj1.x+obj1.width,obj2.x+obj2.width) && Math.max(obj1.y,obj2.y) <= Math.min(obj1.y+obj1.height,obj2.y+obj2.height);
+    }
+    static test2PointHit(obj1,obj2,range){
+        return (obj1.x-obj2.x)*(obj1.x-obj2.x)+(obj1.y-obj2.y)*(obj1.y-obj2.y)<range*range
     }
     static getData(url,reqdata?,callback?){
         function onComplete(e){

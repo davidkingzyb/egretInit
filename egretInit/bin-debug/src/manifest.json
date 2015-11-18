@@ -1,14 +1,7 @@
 [
-	"Iso/IsoObject.ts",
 	"loading.ts",
 	"tool.ts",
-	"Iso/BitmapTile.ts",
-	"Iso/IsoWorld.ts",
-	"Render.ts",
-	"component.ts",
 	"GameContainer.ts",
-	"Iso/Point3D.ts",
 	"debug.ts",
-	"Iso/IsoUtils.ts",
 	"Main.ts"
 ]

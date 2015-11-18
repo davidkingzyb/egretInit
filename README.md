@@ -31,7 +31,7 @@ ios
 
 ##List
 
-* **egretInit** An example of egret project base on egret
+* **egretInit** An example of egret project base on egret 2.0
 
 * **Iso** egret isometric projection library.
 
