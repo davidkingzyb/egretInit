@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/11/11
+2015/8/4 by DKZ update 2015/11/19
 
 
 
