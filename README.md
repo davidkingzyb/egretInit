@@ -8,6 +8,8 @@
 
 [github](https://github.com/davidkingzyb/egretInit)
 
+[demo](https://davidkingzyb.github.io/egretInit)
+
 ##List
 
 * **demo** An egret demo game build by egretInit 
