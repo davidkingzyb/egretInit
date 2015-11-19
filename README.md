@@ -8,27 +8,6 @@
 
 [github](https://github.com/davidkingzyb/egretInit)
 
-##Demo
-
-* [solardefence](http://gameslibrary.meiriq.com/home/g/600)
-* [findspy](http://gameslibrary.meiriq.com/home/g/604)
-* [doublecolor](http://gameslibrary.meiriq.com/home/g/621)
-* [strata](http://gameslibrary.meiriq.com/home/g/626)
-* [cubejump](http://gameslibrary.meiriq.com/home/g/644)
-* [qiuqiu](http://gameslibrary.meiriq.com/home/g/655)
-* [fallingshit](http://gameslibrary.meiriq.com/home/g/658)
-* [hotteacher](http://gameslibrary.meiriq.com/home/g/664)
-* [moonfish](http://gameslibrary.meiriq.com/home/g/665)
-* [aution](http://gameslibrary.meiriq.com/home/g/669)
-* [floor](http://gameslibrary.meiriq.com/home/g/672)
-* [ET](http://gameslibrary.meiriq.com/home/g/676)
-
-ios
-
-* [esther](https://www.appannie.com/apps/ios/app/alex-memory/)
-* [hotteacher](https://www.appannie.com/apps/ios/app/ma-la-jiao-shi)
-* [aution](https://www.appannie.com/apps/ios/app/qi-huan-pai-mai-xing)
-
 ##List
 
 * **egretInit** An example of egret project base on egret 2.0
@@ -125,12 +104,6 @@ debug.debuging();
 #####pause() resume()
 
 pause game and resume game
-
-* void
-
-#####showDebug()
-
-show debug panel
 
 * void
 
@@ -646,6 +619,22 @@ function stop(){
 }
 ```
 
+#####initScorePane(score,context,callback)
+
+Score Pane
+
+* score:int game score
+
+* context:obj this object
+
+* callback:function retry button callback function
+
+* void
+
+```
+component.initScorePane(e.data,this,this.home);
+```
+
 ###animation.ts
 
 Time-base Animation 
@@ -690,39 +679,11 @@ loop function
 
 context this
 
-#####register(callback, context)
-
-register render
-
-* callback:function
-
-* context:egret.DisplayObjectContainer
-
-* void
-
-#####unregister()
-
-unregister render
-
-* void
-
-#####handle(d)
-
-notify call loop function
-
-* d:number real interval time
-
 #####animationArr
 
 register function array
 
 * :array
-
-#####loop()
-
-loop function call by handle
-
-* void
 
 #####onenterframe(func)
 
