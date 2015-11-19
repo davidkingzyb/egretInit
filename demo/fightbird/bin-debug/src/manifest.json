@@ -1,0 +1,10 @@
+[
+	"loading.ts",
+	"animation.ts",
+	"tool.ts",
+	"GamePane.ts",
+	"component.ts",
+	"GameContainer.ts",
+	"debug.ts",
+	"Main.ts"
+]

@@ -10,6 +10,8 @@
 
 ##List
 
+* **demo** An egret demo game build by egretInit 
+
 * **egretInit** An example of egret project base on egret 2.0
 
 * **Iso** egret isometric projection library.
