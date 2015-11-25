@@ -7,7 +7,7 @@
 //  |________|\______||___|  \______/\_____/ |______| |__| |__||__|\_____/
 ////////////////////////////////////////////////////////////////////////////
 //  2015/10/26 by DKZ https://davidkingzyb.github.io
-//create by DKZ 2015/9/9
+//create by DKZ 2015/9/9 update 2015/11/19
 var component = (function () {
     function component() {
     }

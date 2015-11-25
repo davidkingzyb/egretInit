@@ -39,7 +39,7 @@ class Main extends egret.DisplayObjectContainer{
         this.removeChild(this.loadingView);
         var gameContainer=new GameContainer();
         this.addChild(gameContainer);
-        // debug.showAllPosition(gameContainer);
+        debug.showAllPosition(gameContainer);
         debug.debuging();
     }
 

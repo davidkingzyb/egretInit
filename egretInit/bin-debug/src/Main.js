@@ -41,7 +41,7 @@ var Main = (function (_super) {
         this.removeChild(this.loadingView);
         var gameContainer = new GameContainer();
         this.addChild(gameContainer);
-        // debug.showAllPosition(gameContainer);
+        debug.showAllPosition(gameContainer);
         debug.debuging();
     };
     return Main;

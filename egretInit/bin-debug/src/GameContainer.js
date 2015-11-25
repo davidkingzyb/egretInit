@@ -13,10 +13,11 @@ var GameContainer = (function (_super) {
     __egretProto__.createGameScene = function () {
         this.bg = tool.initRect(0x999999, 0, 0, tool.stageW, tool.stageH);
         this.addChild(this.bg);
-        component.initScorePane(8, this, this.home);
+    };
+    __egretProto__.gameover = function (e) {
+        component.initScorePane(e.data, this, this.home);
     };
     __egretProto__.home = function () {
-        console.log('home');
     };
     return GameContainer;
 })(egret.DisplayObjectContainer);
