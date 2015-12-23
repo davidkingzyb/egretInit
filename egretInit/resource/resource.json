@@ -1,1 +1,1 @@
-{"resources": [], "groups": [{"name": "preload", "keys": ""}]}
+{"resources": [{"type": "image", "name": "bg", "url": "assets/bg.jpg"}, {"type": "image", "name": "egret_icon", "url": "assets/egret_icon.png"}], "groups": [{"name": "preload", "keys": "bg,egret_icon"}]}

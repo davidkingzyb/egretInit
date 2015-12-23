@@ -44,3 +44,4 @@ class Main extends egret.DisplayObjectContainer{
     }
 
 }
+

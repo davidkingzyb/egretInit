@@ -1,14 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////
-//   ________                                 ______                      
-//  |   _____|                        _      |_    _|           __  _     
-//  |  |____    _____  __  __  _____ | \_      |  |    ______  |__|| \_   
-//  |   ____|  / _   ||  |/_/ /  _  \|   _|    |  |   |      \ |  ||   _| 
-//  |  |_____ _\___  ||   |  /  ____/|  |___  _|  |_  |   _   ||  ||  |___
-//  |________|\______||___|  \______/\_____/ |______| |__| |__||__|\_____/
+//                                          ______                        //  
+//                                  _      |_    _|           __  _       //  
+//    _____   _____  __  __  _____ | \_      |  |    ______  |__|| \_     //  
+//   /  _  \ / _   ||  |/_/ /  _  \|   _|    |  |   |      \ |  ||   _|   //  
+//  /  ____/_\___  ||   |  /  ____/|  |___  _|  |_  |   _   ||  ||  |___  //  
+//  \______/\______||___|  \______/\_____/ |______| |__| |__||__|\_____/  //  
 ////////////////////////////////////////////////////////////////////////////
-//  2015/10/26 by DKZ https://davidkingzyb.github.io
-//created by DKZ on 2015/7/10 update 2015/10/22
-//https://github.com/davidkingzyb/egretInit
+//  2015/11/25 by DKZ https://davidkingzyb.github.io
+// github: https://github.com/davidkingzyb/egretInit
+//created by DKZ on 2015/7/10 
+//update 2015/12/23 egret 2.5.x no anchorX/anchorY 
 class tool{
 	static stageW;
 	static stageH;
@@ -63,16 +64,8 @@ class tool{
                 var t=context.getChildAt(0);
                 context.removeChild(t);
             }
-
-            
                 var loadingView=new Loading('stinger');
-                context.addChild(loadingView);
-            
-                // var stingerText=tool.initTextField('Δ by DKZ\nfrom meiriq',tool.stageW/2,tool.stageH/2,0xffffff,40);
-                // stingerText.anchorX=.5;
-                // stingerText.anchorY=.5;
-                // context.addChild(stingerText);
-            
+                context.addChild(loadingView);           
             
         }
         context.touchEnabled=true;
@@ -84,8 +77,9 @@ class tool{
         bm.texture = RES.getRes(texture);
         bm.x = x?x:0;
         bm.y = y?y:0;
-        bm.anchorX = ax?ax:0;
-        bm.anchorY = ay?ay:0;
+
+        bm.anchorOffsetX = ax?bm.width*ax:0;
+        bm.anchorOffsetY = ay?bm.height*ay:0;
         return bm;
     }
     static initMovieClip(texture,x?,y?,ax?,ay?){
@@ -95,8 +89,8 @@ class tool{
         var mc=new egret.MovieClip(mcf.generateMovieClipData(texture));
         mc.x=x?x:0;
         mc.y=y?y:0;
-        mc.anchorX=ax?ax:0;
-        mc.anchorY=ay?ay:0;
+        mc.anchorOffsetX=ax?mc.width*ax:0;
+        mc.anchorOffsetY=ay?mc.height*ay:0;
         return mc;
     }
     static changeMovieClipData(target,texture){
@@ -114,11 +108,16 @@ class tool{
         tf.textColor = textColor ? textColor : 0xffffff;
         tf.size = size ? size : 30;
         tf.fontFamily = fontFamily ? fontFamily : 'SimHei';
+        tf.anchorOffsetX=tf.width*ax||0;
+        tf.anchorOffsetY=tf.height*ay||0;
         tf.textAlign=align||egret.HorizontalAlign.LEFT;
-        tf.anchorX=ax||0;
-        tf.anchorY=ay||0;
+        
         tf.lineSpacing=lineSpacing||0;
         return tf;
+    }
+    static resetAnchor(o,ax,ay){
+        o.anchorOffsetX=o.width*ax;
+        o.anchorOffsetY=o.height*ay;
     }
     static initBitmapText(font,text,x?,y?,ax?,ay?){
 		var bt = new egret.BitmapText();
@@ -126,8 +125,8 @@ class tool{
 		bt.text = ''+text;
 		bt.x = x ? x : 0;
 		bt.y = y ? y : 0;
-		bt.anchorX = ax ? ax : 0;
-		bt.anchorY = ay ? ay : 0;
+		bt.anchorOffsetX = ax ? bt.width*ax : 0;
+		bt.anchorOffsetY = ay ? bt.height*ay : 0;
 		return bt;
 
     }
@@ -140,8 +139,8 @@ class tool{
         bm.height=height?height:0;
         bm.x = x?x:0;
         bm.y = y?y:0;
-        bm.anchorX = ax?ax:0;
-        bm.anchorY = ay?ay:0;
+        bm.anchorOffsetX = ax?bm.width*ax:0;
+        bm.anchorOffsetY = ay?bm.height*ay:0;
         return bm;
     }
     static initSound(texture){
@@ -154,16 +153,16 @@ class tool{
         rect.graphics.endFill();
         return rect;
     }
-    static initParticle(texture,x?,y?,ax?,ay?){
-        var txtr = RES.getRes(texture);
-        var config = RES.getRes(texture + 'MC');
-        var system = new particle.GravityParticleSystem(txtr, config);
-        system.x = x ? x : 0;
-        system.y = y ? y : 0;
-        system.anchorX = ax ? ax : 0;
-        system.anchorY = ay ? ay : 0;
-        return system;
-    }
+    // static initParticle(texture,x?,y?,ax?,ay?){
+    //     var txtr = RES.getRes(texture);
+    //     var config = RES.getRes(texture + 'MC');
+    //     var system = new particle.GravityParticleSystem(txtr, config);
+    //     system.x = x ? x : 0;
+    //     system.y = y ? y : 0;
+    //     system.anchorX = ax ? system.width*ax : 0;
+    //     system.anchorY = ay ? system.height*ay : 0;
+    //     return system;
+    // }
     static getXY(event){
     	var X=event.stageX;
     	var Y=event.stageY;

@@ -11,8 +11,6 @@
 #  2015/11/25 by DKZ https://davidkingzyb.github.io
 # github: https://github.com/davidkingzyb/egretInit
 
-
-
 import os
 import json
 

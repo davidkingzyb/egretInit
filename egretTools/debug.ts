@@ -10,6 +10,7 @@
 // github: https://github.com/davidkingzyb/egretInit
 
 //created by DKZ on 2015/7/10
+//update 2015/12/23
 module debug{
     export function showPosition(target,context){
                   
@@ -22,8 +23,8 @@ module debug{
         rect.graphics.endFill();
         rect.x=target.x;
         rect.y=target.y;
-        rect.anchorX=target.anchorX;
-        rect.anchorY=target.anchorY;
+        rect.anchorOffsetX=target.anchorOffsetX;
+        rect.anchorOffsetY=target.anchorOffsetY;
         context.addChild(rect);
 
         var point=new egret.Shape();
@@ -101,7 +102,7 @@ module debug{
                 keydown = 'ctrl';
             }
             else if(keydown==='alt'){
-                console.log('x',target.x,'y',target.y,'index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorX:',target.anchorX,'anchorY:',target.anchorY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
+                console.log('x',target.x,'y',target.y,'index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorOffsetX:',target.anchorOffsetX,'anchorOffsetY:',target.anchorOffsetY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
                 keydown ='null';
             }
         }
@@ -133,7 +134,7 @@ module debug{
                 keydown = 'ctrl';
             }
             else if(keydown==='alt'){
-                console.log('index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorX:',target.anchorX,'anchorY:',target.anchorY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
+                console.log('index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorOffsetX:',target.anchorOffsetX,'anchorOffsetY:',target.anchorOffsetY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
                 keydown ='null';
             }
         }
@@ -157,7 +158,7 @@ module debug{
         egret.Ticker.getInstance().resume();
     }
     export function showDebug(){
-        egret.Profiler.getInstance().run();
+        //egret.Profiler.getInstance().run();
     }
     export function debuging(){
         

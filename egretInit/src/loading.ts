@@ -1,12 +1,13 @@
 ////////////////////////////////////////////////////////////////////////////
-//   ________                                 ______                      
-//  |   _____|                        _      |_    _|           __  _     
-//  |  |____    _____  __  __  _____ | \_      |  |    ______  |__|| \_   
-//  |   ____|  / _   ||  |/_/ /  _  \|   _|    |  |   |      \ |  ||   _| 
-//  |  |_____ _\___  ||   |  /  ____/|  |___  _|  |_  |   _   ||  ||  |___
-//  |________|\______||___|  \______/\_____/ |______| |__| |__||__|\_____/
+//                                          ______                        //  
+//                                  _      |_    _|           __  _       //  
+//    _____   _____  __  __  _____ | \_      |  |    ______  |__|| \_     //  
+//   /  _  \ / _   ||  |/_/ /  _  \|   _|    |  |   |      \ |  ||   _|   //  
+//  /  ____/_\___  ||   |  /  ____/|  |___  _|  |_  |   _   ||  ||  |___  //  
+//  \______/\______||___|  \______/\_____/ |______| |__| |__||__|\_____/  //  
 ////////////////////////////////////////////////////////////////////////////
-//  2015/10/26 by DKZ https://davidkingzyb.github.io
+//  2015/11/25 by DKZ https://davidkingzyb.github.io
+// github: https://github.com/davidkingzyb/egretInit
 
 //2015/10/8 by DKZ
 class Loading extends egret.DisplayObjectContainer{
@@ -32,8 +33,10 @@ class Loading extends egret.DisplayObjectContainer{
         this.textField=tool.initTextField('',tool.stageW/2,tool.stageH-100,0xffffff,25,'helvetica',egret.HorizontalAlign.CENTER,.5,1);
         if(this.mood==='stinger'){
             this.textField.text='Δ by DKZ\nhttps://davidkingzyb.github.io\n';
+            tool.resetAnchor(this.textField,.5,1);
         }
         this.addChild(this.textField);
+        debug.showPosition(this.textField,this);
         this.doLogo();
     }
 
@@ -346,14 +349,14 @@ class Loading extends egret.DisplayObjectContainer{
         
 
         this.logo=new egret.Shape();
-        this.logo.x=tool.stageW/2;
-        this.logo.y=tool.stageH/2;
-        this.logo.anchorX=.6;
-        this.logo.anchorY=.6;
         this.logo.graphics.clear();
         var w=Math.sqrt(3)*20;
         var h=20;
         drawDKZ(this.logo.graphics,w,h);
+        this.logo.x=tool.stageW/2;
+        this.logo.y=tool.stageH/2-100;
+        this.logo.anchorOffsetX=13*w*0.5;
+        this.logo.anchorOffsetY=15*h*0.5;
         this.addChild(this.logo);
         animateDKZ(this.logo.graphics,w,h,this);
         
@@ -380,6 +383,7 @@ class Loading extends egret.DisplayObjectContainer{
         this.current = current;
         this.total = total;
         this.textField.text = "Loading..." + current + "/" + total;
+        tool.resetAnchor(this.textField,.5,1);
     }
 
 }

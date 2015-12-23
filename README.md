@@ -2,7 +2,7 @@
 
 **Build egret project quickly.**
 
-2015/8/4 by DKZ update 2015/11/19
+2015/8/4 by DKZ update 2015/12/23
 
 
 
@@ -14,7 +14,7 @@
 
 * **demo** An egret demo game build by egretInit 
 
-* **egretInit** An example of egret project base on egret 2.0
+* **egretInit** An example of egret project base on egret 2.5.x
 
 * **Iso** egret isometric projection library.
 
@@ -39,9 +39,10 @@
 
 ##egretInit
 
-An example of egret project base on egret 2.0.0
+An example of egret project base on egret 2.5.x
 
 ##egretTools
+
 some useful tools for egret 
 
 ###debug.ts
@@ -334,15 +335,35 @@ Initialize a Scale 9 Grid Bitmap object
 * return:egret.Bitmap
 
 ```
-//(x,y)_______________
-// |_Rsw_|Rsh_____|___|
-// |     |        |Rh |height
-// |_____|__Rw____|___|
-// |_____|________|___|
-//        width
+    //(x,y)_______________
+    // |_Rsw_|Rsh_____|___|
+    // |     |        |Rh |height
+    // |_____|__Rw____|___|
+    // |_____|________|___|
+    //        width
 
-this.s9g=tool.initScale9GridBitmap("scale9grid",50,50,100,100);
+    this.s9g=tool.initScale9GridBitmap("scale9grid",50,50,100,100);
 ```
+
+#####resetAnchor(o,ax,ay)
+
+Reset anchor 
+
+egret delete anchorX/anchorY at egret 2.5.x 
+
+this function use anchorOffset instead of anchor
+
+- o:egret.DisplayObject 
+
+- ax:number anchorX
+
+- ay:number anchorY
+
+```
+    tool.resetAnchor(this.o,.5,.5);
+```
+
+
 
 #####initSound(texture)
 

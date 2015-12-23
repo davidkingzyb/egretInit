@@ -1,14 +1,15 @@
 ////////////////////////////////////////////////////////////////////////////
-//   ________                                 ______                      
-//  |   _____|                        _      |_    _|           __  _     
-//  |  |____    _____  __  __  _____ | \_      |  |    ______  |__|| \_   
-//  |   ____|  / _   ||  |/_/ /  _  \|   _|    |  |   |      \ |  ||   _| 
-//  |  |_____ _\___  ||   |  /  ____/|  |___  _|  |_  |   _   ||  ||  |___
-//  |________|\______||___|  \______/\_____/ |______| |__| |__||__|\_____/
+//                                          ______                        //  
+//                                  _      |_    _|           __  _       //  
+//    _____   _____  __  __  _____ | \_      |  |    ______  |__|| \_     //  
+//   /  _  \ / _   ||  |/_/ /  _  \|   _|    |  |   |      \ |  ||   _|   //  
+//  /  ____/_\___  ||   |  /  ____/|  |___  _|  |_  |   _   ||  ||  |___  //  
+//  \______/\______||___|  \______/\_____/ |______| |__| |__||__|\_____/  //  
 ////////////////////////////////////////////////////////////////////////////
-//  2015/10/26 by DKZ https://davidkingzyb.github.io
+//  2015/11/25 by DKZ https://davidkingzyb.github.io
+// github: https://github.com/davidkingzyb/egretInit
 
-//create by DKZ 2015/9/9 update 2015/11/19
+//create by DKZ 2015/9/9 update 2015/12/23
 
 class component{
 
@@ -26,8 +27,8 @@ class component{
         var sp=new egret.Sprite();
         sp.x=x;
         sp.y=y;
-        sp.anchorX=ax;
-        sp.anchorY=ay;
+        sp.anchorOffsetX=sp.width*ax;
+        sp.anchorOffsetY=sp.height*ay;
         var bg=new egret.Shape();
         bg.graphics.beginFill(color);
         bg.graphics.drawRect(0,0,w,h);
