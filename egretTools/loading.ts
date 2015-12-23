@@ -37,7 +37,6 @@ class Loading extends egret.DisplayObjectContainer{
             tool.resetAnchor(this.textField,.5,1);
         }
         this.addChild(this.textField);
-        debug.showPosition(this.textField,this);
         this.doLogo();
     }
 
