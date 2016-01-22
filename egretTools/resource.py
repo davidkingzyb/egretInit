@@ -9,7 +9,9 @@
 #  \______/\______||___|  \______/\_____/ |______| |__| |__||__|\_____/  #  
 ##########################################################################
 #  2015/11/25 by DKZ https://davidkingzyb.github.io
-# github: https://github.com/davidkingzyb/egretInit
+#  github: https://github.com/davidkingzyb/egretInit
+#  guide: http://davidkingzyb.github.io/blogmd/4.html
+# auto build resoure.json
 
 
 

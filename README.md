@@ -6,7 +6,7 @@
 
 
 
-[github](https://github.com/davidkingzyb/egretInit)
+[guide](http://davidkingzyb.github.io/blogmd/4.html)
 
 [demo](https://davidkingzyb.github.io/egretInit)
 
