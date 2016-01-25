@@ -18,19 +18,19 @@
 
 ***
 
-* **[debug.ts](#debug.ts)** debug egret project
+* **[debug.ts](#debugts)** debug egret project
 
-* **[tool.ts](#tool.ts)** egret tools for Initialize standard egret Object
+* **[tool.ts](#toolts)** egret tools for Initialize standard egret Object
 
-* **[component.ts](#component.ts)** some useful components like air button
+* **[component.ts](#componentts)** some useful components like air button
 
-* **[animation.ts](#animation.ts)** Time-based Animation
+* **[animation.ts](#animationts)** Time-based Animation
 
-* **[loading.ts](#loading.ts)** DKZ loading panel 
+* **[loading.ts](#loadingts)** DKZ loading panel 
 
-* **[resource.py](#resource.py)** create resource.json automatically
+* **[resource.py](#resourcepy)** create resource.json automatically
 
-* **[update.py](#update.py)** update egretInit automatically
+* **[update.py](#updatepy)** update egretInit automatically
 
 
 
