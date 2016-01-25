@@ -12,9 +12,9 @@
 
 * **[demo](https://davidkingzyb.github.io/egretInit)** An egret demo game build by egretInit 
 
-* **[egretInit](#egretInit)** An example of egret project base on egret 2.5.x
+* **[egretInit](#egretinit-1)** An example of egret project base on egret 2.5.x
 
-* **[Iso](#Iso)** egret isometric projection library.
+* **[Iso](#iso)** egret isometric projection library.
 
 ***
 
