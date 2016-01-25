@@ -6,33 +6,31 @@
 
 
 
-[guide](http://davidkingzyb.github.io/blogmd/4.html)
-
-[demo](https://davidkingzyb.github.io/egretInit)
+##[guide](http://davidkingzyb.github.io/blogmd/4.html)
 
 ##List
 
-* **demo** An egret demo game build by egretInit 
+* **[demo](https://davidkingzyb.github.io/egretInit)** An egret demo game build by egretInit 
 
-* **egretInit** An example of egret project base on egret 2.5.x
+* **[egretInit](#egretInit)** An example of egret project base on egret 2.5.x
 
-* **Iso** egret isometric projection library.
+* **[Iso](#Iso)** egret isometric projection library.
 
 ***
 
-* **debug.ts** debug egret project
+* **[debug.ts](#debug.ts)** debug egret project
 
-* **tool.ts** egret tools for Initialize standard egret Object
+* **[tool.ts](#tool.ts)** egret tools for Initialize standard egret Object
 
-* **component.ts** some useful components like air button
+* **[component.ts](#component.ts)** some useful components like air button
 
-* **animation.ts** Time-based Animation
+* **[animation.ts](#animation.ts)** Time-based Animation
 
-* **loading.ts** DKZ loading panel 
+* **[loading.ts](#loading.ts)** DKZ loading panel 
 
-* **resource.py** create resource.json automatically
+* **[resource.py](#resource.py)** create resource.json automatically
 
-* **update.py** update egretInit automatically
+* **[update.py](#update.py)** update egretInit automatically
 
 
 
