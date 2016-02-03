@@ -57,13 +57,19 @@ var GameContainer = (function (_super) {
             this.questionpane = new questionPane(this.questionNum);
             this.addChild(this.questionpane);
             this.questionpane.addEventListener('next', this.next, this);
-            console.log(questionPane.questionArr);
+        }
+        else {
+            this.answerpane = new answerPane(questionPane.questionArr);
+            this.addChild(this.answerpane);
+            this.answerpane.addEventListener('again', this.again, this);
         }
     };
-    p.gameover = function (e) {
-        component.initScorePane(e.data, this, this.home);
-    };
-    p.home = function () {
+    p.again = function () {
+        this.removeChild(this.answerpane);
+        this.questionNum = 1;
+        this.startpane = new startPane();
+        this.addChild(this.startpane);
+        this.startpane.addEventListener('start', this.start, this);
     };
     return GameContainer;
 })(egret.DisplayObjectContainer);

@@ -11,6 +11,7 @@ var game_file_list = [
 	"bin-debug/GameContainer.js",
 	"bin-debug/Main.js",
 	"bin-debug/animation.js",
+	"bin-debug/answerPane.js",
 	"bin-debug/component.js",
 	"bin-debug/debug.js",
 	"bin-debug/loading.js",

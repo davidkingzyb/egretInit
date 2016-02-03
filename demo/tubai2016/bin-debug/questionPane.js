@@ -16,8 +16,8 @@ var questionPane = (function (_super) {
     }
     var d = __define,c=questionPane;p=c.prototype;
     p.createScene = function () {
-        this.questionT = tool.initBitmap('q' + this.num + 't', tool.stageW / 2, 260, .5, .5);
-        this.question = tool.initBitmap('q' + this.num, tool.stageW / 2, 390, .5);
+        this.questionT = tool.initBitmap('q' + this.num + 't', tool.stageW / 2, 240, .5, .5);
+        this.question = tool.initBitmap('q' + this.num, tool.stageW / 2, 360, .5);
         this.questionT.scaleX = .1;
         this.questionT.scaleY = .1;
         this.question.alpha = 0;

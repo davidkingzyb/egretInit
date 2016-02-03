@@ -68,6 +68,7 @@ class GameContainer extends egret.DisplayObjectContainer{
         this.questionpane.addEventListener('next',this.next,this);
 
     }
+    answerpane;
     next(){
         this.removeChild(this.questionpane);
         this.questionNum+=1;
@@ -75,14 +76,19 @@ class GameContainer extends egret.DisplayObjectContainer{
             this.questionpane=new questionPane(this.questionNum);
             this.addChild(this.questionpane);
             this.questionpane.addEventListener('next',this.next,this);
-            console.log(questionPane.questionArr);
+        }else{
+            this.answerpane=new answerPane(questionPane.questionArr);
+            this.addChild(this.answerpane);
+            this.answerpane.addEventListener('again',this.again,this);
         }
         
     }
-    gameover(e){
-        component.initScorePane(e.data,this,this.home);
+    again(){
+        this.removeChild(this.answerpane);
+        this.questionNum=1;
+        this.startpane=new startPane();
+        this.addChild(this.startpane);
+        this.startpane.addEventListener('start',this.start,this);
     }
-    home(){
-        
-    }
+
 }
