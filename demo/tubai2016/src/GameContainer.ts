@@ -14,6 +14,12 @@ class GameContainer extends egret.DisplayObjectContainer{
     topcurtain;
     curtainL;
     curtainR;
+    bgm;
+    channel;
+    musicswitch;
+
+    static isBgm=true;
+    
 
     startpane;
 
@@ -30,7 +36,15 @@ class GameContainer extends egret.DisplayObjectContainer{
         this.curtainR=tool.initBitmap('curtain',tool.stageW+166);
         this.curtainR.scaleX=-1;
 
-        tool.addChildren([this.curtainL,this.curtainR,this.topcurtain],this);
+        this.bgm=tool.initSound('bgm');
+        this.channel=this.bgm.play(0,-1);
+        this.musicswitch=tool.initBitmap('musicon',tool.stageW-60,60,.5,.5);
+
+        tool.btnPress(this.musicswitch,this.doBgm,this);
+
+
+
+        tool.addChildren([this.curtainL,this.curtainR,this.topcurtain,this.musicswitch],this);
         egret.Tween.get(this.topcurtain).to({y:0},500).call(function(){
             egret.Tween.get(this.curtainL).to({x:-20},400);
             egret.Tween.get(this.curtainR).to({x:tool.stageW+20},400);
@@ -89,6 +103,17 @@ class GameContainer extends egret.DisplayObjectContainer{
         this.startpane=new startPane();
         this.addChild(this.startpane);
         this.startpane.addEventListener('start',this.start,this);
+    }
+    doBgm(){
+        if(GameContainer.isBgm){
+            GameContainer.isBgm=false;
+            this.channel.volume=0;
+            this.musicswitch.texture=RES.getRes('musicoff');
+        }else{
+            GameContainer.isBgm=true;
+            this.musicswitch.texture=RES.getRes('musicon');
+            this.channel.volume=1;
+        }
     }
 
 }

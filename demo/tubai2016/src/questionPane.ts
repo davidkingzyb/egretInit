@@ -44,8 +44,8 @@ class questionPane extends egret.DisplayObjectContainer{
             this.questionB.scaleX=0;
             this.questionB.scaleY=0;
             tool.addChildren([this.questionA,this.questionB],this);
-            egret.Tween.get(this.questionA).to({scaleX:1,scaleY:1},500).call(function(){
-                egret.Tween.get(this.questionB).to({scaleX:1,scaleY:1},500);
+            egret.Tween.get(this.questionA).to({scaleX:1,scaleY:1},300).call(function(){
+                egret.Tween.get(this.questionB).to({scaleX:1,scaleY:1},300);
             },this);
             this.btnPress(this.questionA,function(){
                 questionPane.questionArr[this.num-1]=1;
@@ -69,10 +69,10 @@ class questionPane extends egret.DisplayObjectContainer{
             this.questionD.scaleY=0;
             this.questionD.scaleX=0;
             tool.addChildren([this.questionA,this.questionB,this.questionC,this.questionD],this);
-            egret.Tween.get(this.questionA).to({scaleX:1,scaleY:1},300).call(function(){
-                egret.Tween.get(this.questionB).to({scaleX:1,scaleY:1},300).call(function(){
-                    egret.Tween.get(this.questionC).to({scaleY:1,scaleX:1},300).call(function(){
-                        egret.Tween.get(this.questionD).to({scaleY:1,scaleX:1},300);
+            egret.Tween.get(this.questionA).to({scaleX:1,scaleY:1},200).call(function(){
+                egret.Tween.get(this.questionB).to({scaleX:1,scaleY:1},200).call(function(){
+                    egret.Tween.get(this.questionC).to({scaleY:1,scaleX:1},200).call(function(){
+                        egret.Tween.get(this.questionD).to({scaleY:1,scaleX:1},200);
                     },this);
                 },this);
             },this);
