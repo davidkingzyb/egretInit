@@ -18,30 +18,38 @@ class answerPane extends egret.DisplayObjectContainer{
                 switch(questionArr[2]){
                     case 1:
                     characterid=1;
+                    document.title='人民的艾力哥给我拜年了，看看哪个扛把子给你拜年呢！';
                     break;
                     case 2:
                     characterid=2;
+                    document.title='二宫的黑艾力给我拜年了，看看哪个扛把子给你拜年呢！';
                     break;
                     case 3:
                     characterid=10;
+                    document.title='红旗路龙龙给我拜年了，看看哪个扛把子给你拜年呢！';
                     break;
                     case 4:
                     characterid=10;
+                    document.title='红旗路龙龙给我拜年了，看看哪个扛把子给你拜年呢！';
                     break;
                 }
             }else{
                 switch(questionArr[8]){
                     case 1:
                     characterid=8;
+                    document.title='天津路明明给我拜年了，看看哪个扛把子给你拜年呢！';
                     break;
                     case 2:
                     characterid=9;
+                    document.title='六道湾木合买给我拜年了，看看哪个扛把子给你拜年呢！';
                     break;
                     case 3:
                     characterid=3;
+                    document.title='人民的亮亮给我拜年了，看看哪个扛把子给你拜年呢！';
                     break;
                     case 4:
                     characterid=9;
+                    document.title='六道湾木合买给我拜年了，看看哪个扛把子给你拜年呢！';
                     break;
 
                 }
@@ -50,15 +58,19 @@ class answerPane extends egret.DisplayObjectContainer{
             switch(questionArr[1]){
                 case 1:
                 characterid=5;
+                document.title='六道湾法图门给我拜年了，看看哪个扛把子给你拜年呢！';
                 break;
                 case 2:
                 characterid=6;
+                document.title='友好的古丽给我拜年了，看看哪个扛把子给你拜年呢！';
                 break;
                 case 3:
                 characterid=7;
+                document.title='骑马山花姐给我拜年了，看看哪个扛把子给你拜年呢！';
                 break;
                 case 4:
                 characterid=4;
+                document.title='劳动街凤姐给我拜年了，看看哪个扛把子给你拜年呢！';
                 break;
             }
         }
