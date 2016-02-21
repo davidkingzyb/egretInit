@@ -24,7 +24,7 @@ class tool{
         tool.stageW=that.stage.stageWidth;
         tool.stageH=that.stage.stageHeight;
         
-        tool.stinger(that);
+        Loading.stinger(that);
 	}
 	static initBitmap(texture,x?,y?,ax?,ay?){
         var bm = new egret.Bitmap();
@@ -267,51 +267,4 @@ class tool{
 
     }
 
-    static stinger(context){
-
-        var stingerD=false;
-        var stingerK=false;
-        var stingerZ=false;
-        function tb(e){
-            stingerD=false;
-            stingerK=false;
-            stingerZ=false;
-            var x=tool.getXY(e).x;
-            var y=tool.getXY(e).y;
-            if(x>tool.stageW/2-50&&x<tool.stageW/2+50&&y<100){
-                context.addEventListener(egret.TouchEvent.TOUCH_MOVE,tm,context);
-                context.addEventListener(egret.TouchEvent.TOUCH_END,te,context);
-            }
-        }
-        function tm(e){
-            var x=tool.getXY(e).x;
-            var y=tool.getXY(e).y;
-            if(x<100&&y>tool.stageH-100){
-                stingerK=true;
-            }
-            if(x>tool.stageW-100&&y>tool.stageH-100&&stingerK){
-                stingerZ=true;
-            }
-            if(x>tool.stageW/2-50&&x<tool.stageW/2+50&&y<100&&stingerK&&stingerZ){
-                stingerD=true;
-            }
-        }
-        function te(e){
-            if(stingerD&&stingerK&&stingerZ){
-                doStinger(context);
-            }
-        }
-        function doStinger(context){
-            var length=context.numChildren;
-            for(var i=0;i<length;i++){
-                var t=context.getChildAt(0);
-                context.removeChild(t);
-            }
-                var loadingView=new Loading('stinger');
-                context.addChild(loadingView);           
-            
-        }
-        context.touchEnabled=true;
-        context.addEventListener(egret.TouchEvent.TOUCH_BEGIN,tb,context);        
-    }
 }
