@@ -14,7 +14,7 @@
 
 // update 2015/12/23 egret 2.5.x no anchorX/anchorY 
 class tool{
-	static stageW;
+	static stageW; 
 	static stageH;
 
 
@@ -23,6 +23,7 @@ class tool{
 
         tool.stageW=that.stage.stageWidth;
         tool.stageH=that.stage.stageHeight;
+        console.log('set w h',tool.stageW,tool.stageH);
         
         Loading.stinger(that);
 	}
@@ -69,7 +70,7 @@ class tool{
         tf.lineSpacing=lineSpacing||0;
         return tf;
     }
-    static resetAnchor(o,ax,ay){
+    static resetAnchor(o,ax=0,ay=0){
         o.anchorOffsetX=o.width*ax;
         o.anchorOffsetY=o.height*ay;
     }
@@ -107,16 +108,16 @@ class tool{
         rect.graphics.endFill();
         return rect;
     }
-    // static initParticle(texture,x?,y?,ax?,ay?){
-    //     var txtr = RES.getRes(texture);
-    //     var config = RES.getRes(texture + 'MC');
-    //     var system = new particle.GravityParticleSystem(txtr, config);
-    //     system.x = x ? x : 0;
-    //     system.y = y ? y : 0;
-    //     system.anchorX = ax ? system.width*ax : 0;
-    //     system.anchorY = ay ? system.height*ay : 0;
-    //     return system;
-    // }
+    static initParticle(texture,x?,y?,ax?,ay?){
+        var txtr = RES.getRes(texture);
+        var config = RES.getRes(texture + 'MC');
+        var system = new particle.GravityParticleSystem(txtr, config);
+        system.x = x ? x : 0;
+        system.y = y ? y : 0;
+        system.anchorOffsetX = ax ? system.width*ax : 0;
+        system.anchorOffsetY = ay ? system.height*ay : 0;
+        return system;
+    }
     static getXY(event){
     	var X=event.stageX;
     	var Y=event.stageY;
@@ -139,47 +140,6 @@ class tool{
     }
     static test2PointHit(obj1,obj2,range){
         return (obj1.x-obj2.x)*(obj1.x-obj2.x)+(obj1.y-obj2.y)*(obj1.y-obj2.y)<range*range
-    }
-    static getData(url,reqdata?,callback?){
-        function onComplete(e){
-            callback(urlloader.data);
-        }
-        var urlloader=new egret.URLLoader();
-        //urlloader.dataFormat = egret.URLLoaderDataFormat.VARIABLES;
-        urlloader.addEventListener(egret.Event.COMPLETE,onComplete,this);
-
-        var urlreq=new egret.URLRequest();
-        urlreq.url=url;
-        urlreq.requestHeaders = [
-            new egret.URLRequestHeader("Access-Control-Allow-Origin", "*")
-        ];
-        if(reqdata){
-            urlreq.method = egret.URLRequestMethod.POST;
-            urlreq.data = new egret.URLVariables(reqdata);
-        }
-        urlloader.load(urlreq);
-    }
-    static ajax(url,data,success,error,context,type?){
-        function onLoadSuccess(){
-            success.call(context,urlloader.data);
-        }
-        function onLoadError(){
-            error.call(context);
-        }
-        var urlloader=new egret.URLLoader();
-        urlloader.addEventListener(egret.Event.COMPLETE,onLoadSuccess,this);
-        urlloader.addEventListener(egret.IOErrorEvent.IO_ERROR,onLoadError, this);
-
-        var urlreq=new egret.URLRequest();
-        urlreq.url=url;
-        urlreq.requestHeaders = [
-            new egret.URLRequestHeader("Access-Control-Allow-Origin", "*")
-        ];
-        if(type==='post'){
-            urlreq.method = egret.URLRequestMethod.POST;
-        }
-        urlreq.data = new egret.URLVariables(data);
-        urlloader.load(urlreq);
     }
     static randomInt(n){
         return Math.floor(Math.random()*n);
@@ -224,24 +184,28 @@ class tool{
         }
         return bestScore;
     }
-    static dolocalStorage(name,value?,defaultV='0'){
-        if(egret.localStorage.getItem(name)){
-            if(value){
-                egret.localStorage.setItem(name,value);
-                return egret.localStorage.getItem(name);
-            }else{
-                return egret.localStorage.getItem(name);
-            }
+
+    static localStorage(name,value?){
+        if(value===null){
+            var vobj={'d':null};
+            egret.localStorage.setItem(name,JSON.stringify(vobj));
+            return value;
+        }
+        else if(value){
+            var vobj={'d':value};
+            egret.localStorage.setItem(name,JSON.stringify(vobj));
+            return value;
         }else{
-            if(value){
-                egret.localStorage.setItem(name,value);
-                return egret.localStorage.getItem(name);
+            var vstr=egret.localStorage.getItem(name);
+            if(vstr){
+                var r=JSON.parse(vstr);
+                return r.d;
             }else{
-                egret.localStorage.setItem(name,defaultV);
-                return egret.localStorage.getItem(name);
+                return null;
             }
         }
     }
+
     static setFullWidthObj(obj,w?,h?){
         if(obj){
             var width=w||obj.texture.textureWidth;
@@ -256,15 +220,8 @@ class tool{
             bg.height=tool.stageH;
         }
     }
-    static forMatrix(func,that,args:any[]=[],ilength=6,jlength=6){
-        for(var i=0;i<ilength;i++){
-            for(var j=0;j<jlength;j++){
-                var a:any[]=[i,j];
-                a.push(args);
-                func.apply(that,a);
-            }
-        }
 
-    }
+    // static term=window['terminal'];
+    // static wtf=window['wtf'];
 
 }

@@ -38,6 +38,8 @@ def getPreload():
                 arr[0]+='MC'
             elif arr[1]=='mp3':
                 T='sound'
+            elif arr[1]=='DS_Store':
+                continue
             d={'name':arr[0],'type':T,'url':'assets/'+x}
             resource.append(d)
         else:
@@ -69,6 +71,8 @@ def getGroup(groupName):
                 arr[0]+='MC'
             elif arr[1]=='mp3':
                 T='sound'       
+            elif arr[1]=='DS_Store':
+                continue
         d={'name':arr[0],'type':T,'url':'assets/'+groupName+'/'+x}
         resource.append(d)
     return resource
@@ -88,6 +92,6 @@ for gn in groupsName:
     groups.append({'name':gn,'keys':key})
 jsonDict={'resources':resources,'groups':groups} 
 with open('resource.json','w') as f:
-    f.write(json.dumps(jsonDict))
+    f.write(json.dumps(jsonDict,indent=4))
 
 print ('ok')

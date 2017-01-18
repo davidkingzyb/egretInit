@@ -105,6 +105,7 @@ module debug{
             }
             else if(keydown==='alt'){
                 console.log('x',target.x,'y',target.y,'index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorOffsetX:',target.anchorOffsetX,'anchorOffsetY:',target.anchorOffsetY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
+                console.log(target);
                 keydown ='null';
             }
         }
@@ -161,10 +162,15 @@ module debug{
     }
     export function showDebug(){
         //egret.Profiler.getInstance().run();
+        if(window['terminal']){
+            window['terminal'].init()
+        }else{
+            alert('terminal init fail')
+        };
     }
     export function debuging(){
         
-        debug.showDebug();
+        // debug.showDebug();
 
         if(window){
             window['ei_debuging']=true;

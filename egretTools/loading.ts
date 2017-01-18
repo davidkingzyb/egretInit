@@ -15,7 +15,8 @@
 //update 2015/12/23
 class Loading extends egret.DisplayObjectContainer{
 
-    isfinish=false;
+    isfinish=true;//test
+    // isfinish=false;
     mood='loading';
 
     constructor(mood?){
@@ -35,7 +36,7 @@ class Loading extends egret.DisplayObjectContainer{
         this.addChild(this.bg);
         this.textField=tool.initTextField('',tool.stageW/2,tool.stageH-100,0xffffff,25,'helvetica',egret.HorizontalAlign.CENTER,.5,1);
         if(this.mood==='stinger'){
-            this.textField.text='Δ by DKZ\nhttps://davidkingzyb.github.io\n';
+            this.textField.text='For PcCold\nΔ by DKZ\nhttps://davidkingzyb.github.io\n';
             tool.resetAnchor(this.textField,.5,1);
         }
         this.addChild(this.textField);
@@ -278,8 +279,9 @@ class Loading extends egret.DisplayObjectContainer{
         }
 
         function animateDKZ(context,w,h,that){
-            drawDKZ(context,w,h,0x000001);
+            // drawDKZ(context,w,h,0x000001);
             var i=1;
+            context.lineStyle(2,0x000001);
             function loop(){
                 context.beginFill(0xcccccc);  
                 d['drawWhite'+i](context,w,h);
@@ -309,6 +311,7 @@ class Loading extends egret.DisplayObjectContainer{
                 context.endFill()
                 k++;
                 if(k<=5){
+                
                     egret.setTimeout(arguments.callee,that,550);
                 }
             }
@@ -321,7 +324,7 @@ class Loading extends egret.DisplayObjectContainer{
                 }
                 that.logo.touchEnabled=true;
                 that.logo.addEventListener(egret.TouchEvent.TOUCH_TAP,ontap,that);
-
+                that.logo.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,that.quit,that);
             }
 
             
@@ -421,19 +424,29 @@ class Loading extends egret.DisplayObjectContainer{
             if(stingerD&&stingerK&&stingerZ){
                 doStinger(context);
             }
+            var x=tool.getXY(e).x;
+            var y=tool.getXY(e).y;
+            if(x>tool.stageW/2-50&&x<tool.stageW/2+50&&y>tool.stageH-100){
+                // doStinger(context);
+            }
         }
         function doStinger(context){
-            var length=context.numChildren;
-            for(var i=0;i<length;i++){
-                var t=context.getChildAt(0);
-                context.removeChild(t);
-            }
+            // var length=context.numChildren;
+            // for(var i=0;i<length;i++){
+            //     var t=context.getChildAt(0);
+            //     context.removeChild(t);
+            // }
                 var loadingView=new Loading('stinger');
                 context.addChild(loadingView);           
             
         }
         context.touchEnabled=true;
         context.addEventListener(egret.TouchEvent.TOUCH_BEGIN,tb,context);        
+    }
+
+    quit(){
+        console.log('quit stinger')
+        this.parent.removeChild(this);
     }
 
 }

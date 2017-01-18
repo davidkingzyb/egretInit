@@ -14,7 +14,7 @@
 
 
 class animation {
-    static FPS = 60;
+    static FPS = 30;
     acc = 0;
     dt = Number((1000 / animation.FPS).toFixed(1));
     callback;
@@ -70,7 +70,7 @@ class animation {
     stop() {
         egret.Ticker.getInstance().unregister(this.handle, this);
         this.acc = 0;
-        this.framerate = 60;
+        this.framerate = 30;
         this.animationArr=[]
     }
 
