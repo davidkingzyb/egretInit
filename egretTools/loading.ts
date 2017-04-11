@@ -430,8 +430,6 @@ class Loading extends egret.DisplayObjectContainer{
             var y=tool.getXY(e).y;
             if(x>tool.stageW/2-50&&x<tool.stageW/2+50&&y>tool.stageH-100){
                 // doStinger(context);
-                var coldpane=new ColdPane();
-                context.addChild(coldpane);
             }
         }
         function doStinger(context){

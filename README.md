@@ -68,6 +68,8 @@ tool.stageW
 
 tool.stageH
 
+tool.log(...args)
+
 tool.setWH(that)
 
 tool.initBitmap(texture,x?,y?,ax?,ay?)
