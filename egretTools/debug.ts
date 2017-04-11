@@ -37,7 +37,7 @@ module debug{
         point.y=target.y-1;
         context.addChild(point);
 
-        console.log("stageW=",tool.stageW,'stageH=',tool.stageH);
+        tool.log("stageW=",tool.stageW,'stageH=',tool.stageH);
 
         
         target.touchEnabled=true;
@@ -56,7 +56,7 @@ module debug{
             targetStartX=target.x;
             targetStartY=target.y;
             
-                document.onkeydown = function(event) {
+            document.onkeydown = function(event) {
                 if(event.altKey){
                     keydown = 'alt';
                 }else if(event.ctrlKey){
@@ -66,7 +66,7 @@ module debug{
                 }else{
                     keydown = 'null';
                 }
-                }
+            }
         }
         function touchMove(e){
             if(keydown==='ctrl'){
@@ -80,7 +80,7 @@ module debug{
                 point.x=target.x-1;
                 point.y=target.y-1;
             }   
-   
+
         }
         function touchEnd(e){
             if(keydown==='shift'){
@@ -104,8 +104,8 @@ module debug{
                 keydown = 'ctrl';
             }
             else if(keydown==='alt'){
-                console.log('x',target.x,'y',target.y,'index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorOffsetX:',target.anchorOffsetX,'anchorOffsetY:',target.anchorOffsetY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
-                console.log(target);
+                tool.log('x',target.x,'y',target.y,'index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorOffsetX:',target.anchorOffsetX,'anchorOffsetY:',target.anchorOffsetY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
+                tool.log(target);
                 keydown ='null';
             }
         }
@@ -137,7 +137,7 @@ module debug{
                 keydown = 'ctrl';
             }
             else if(keydown==='alt'){
-                console.log('index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorOffsetX:',target.anchorOffsetX,'anchorOffsetY:',target.anchorOffsetY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
+                tool.log('index:',context.getChildIndex(target),'width:',target.width,'height',target.height,'anchorOffsetX:',target.anchorOffsetX,'anchorOffsetY:',target.anchorOffsetY,'rotation:',target.rotation,'scaleX:',target.scaleX,'scaleY:',target.scaleY,'alpha:',target.alpha);
                 keydown ='null';
             }
         }
@@ -162,27 +162,15 @@ module debug{
     }
     export function showDebug(){
         //egret.Profiler.getInstance().run();
-        if(window['terminal']){
-            window['terminal'].init()
-        }else{
-            alert('terminal init fail')
-        };
     }
     export function debuging(){
-        
-        // debug.showDebug();
-
-        if(window){
-            window['ei_debuging']=true;
-            window['ei_pause']=function(){debug.pause();};
-            window['ei_resume']=function(){debug.resume();};
-            //window['ei_showdebug']=function(){debug.showDebug();}
-        }
+        tool['test']={};
     }
+
     export function unitTest(func,context,argsarr=[],funcname='test'){
-        if(window['ei_debuging']){
-            console.log('unit test: '+funcname+'()')
-            window[funcname]=function(args){
+        if(tool.test){
+            tool.log('unit test: '+funcname+'()')
+            tool.test[funcname]=function(args){
                 var applyargs;
                 if(args){
                     applyargs=args;

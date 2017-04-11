@@ -6,9 +6,9 @@
 
 
 
-##[guide](http://davidkingzyb.github.io/blogmd/4.html)
+## [guide](http://davidkingzyb.github.io/blogmd/4.html)
 
-##List
+## List
 
 * **[demo](https://davidkingzyb.github.io/egretInit)** An egret demo game build by egretInit 
 
@@ -36,15 +36,15 @@
 
 
 
-##egretInit
+## egretInit
 
 An example of egret project base on egret 2.5.x
 
-##egretTools
+## egretTools
 
 some useful tools for egret 
 
-###debug.ts
+### debug.ts
 
 debug egret project
 
@@ -60,7 +60,7 @@ debug.showGroupPosition(group,context)
 debug.unitTest(func,context,argsarr,funcname)
 ```
 
-###tool.ts
+### tool.ts
 
 ```
 
@@ -118,7 +118,7 @@ tool.setFullWidthObj(obj,w?,h?)
 tool.setBgWH(bg)
 ```
 
-###wtf.ts
+### wtf.ts
 
 web tool functions
 
@@ -134,7 +134,7 @@ wtf.urlquery(name, url)
 wtf.typeOf(o)
 ```
 
-###component.ts
+### component.ts
 
 some useful components like air button
 
@@ -146,7 +146,7 @@ component.airBtnPress(airbtn,callback,that,startfunc?)
 component.initScorePane(score,context,callback)
 ```
 
-###animation.ts
+### animation.ts
 
 Time-base Animation 
 
@@ -162,11 +162,11 @@ this.enterframe.pause();
 this.enterframe.stop();
 ```
 
-###loading.ts
+### loading.ts
 
 loading panel and new stinger panel
 
-###resource.py
+### resource.py
 
 create resource.json automatically
 
@@ -174,11 +174,11 @@ standard naming rule use file name as texture name
 
 sprite sheet must be named like /^\w*SS.json$/
 
-###update.py
+### update.py
 
 update egretInit automatically
 
-###Iso
+### Iso
 
 egret isometric projection library.
 

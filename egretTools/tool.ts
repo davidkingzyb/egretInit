@@ -23,10 +23,40 @@ class tool{
 
         tool.stageW=that.stage.stageWidth;
         tool.stageH=that.stage.stageHeight;
-        console.log('set w h',tool.stageW,tool.stageH);
+        tool.log('set w h',tool.stageW,tool.stageH);
         
         Loading.stinger(that);
 	}
+
+
+    static log(...args){
+
+        var class2type = {};
+        "Boolean Number String Function Array Date RegExp Object Error".split(" ").forEach(function(e, i) {
+            class2type["[object " + e + "]"] = e.toLowerCase();
+        });
+
+        function _typeof(obj) {
+            if (obj == null) {
+                return String(obj);
+            }
+            return typeof obj === "object" || typeof obj === "function" ?
+                class2type[class2type.toString.call(obj)] || "object" :
+                typeof obj;
+        }
+
+        var output = '';
+        for (var i = 0; i < args.length; i++) {
+            if (_typeof(args[i]) === 'object') {
+                output += JSON.stringify(args[i], null, 4) + '\n';
+            } else {
+                output += args[i] + ' ';
+            }
+        }
+
+        // console.log(output);
+        egret.log(output)
+    }
 	static initBitmap(texture,x?,y?,ax?,ay?){
         var bm = new egret.Bitmap();
         bm.texture = RES.getRes(texture);

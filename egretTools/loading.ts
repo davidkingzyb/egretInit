@@ -288,7 +288,7 @@ class Loading extends egret.DisplayObjectContainer{
                 context.endFill()
                 i++;
                 if(i<=21){
-                    egret.setTimeout(arguments.callee,that,100);
+                    egret.setTimeout(loop,that,100);
                 }
             }
             loop();
@@ -299,7 +299,7 @@ class Loading extends egret.DisplayObjectContainer{
                 context.endFill()
                 j++;
                 if(j<=4){
-                    egret.setTimeout(arguments.callee,that,700);
+                    egret.setTimeout(loop2,that,700);
                 }
             }
             loop2();
@@ -312,16 +312,18 @@ class Loading extends egret.DisplayObjectContainer{
                 k++;
                 if(k<=5){
                 
-                    egret.setTimeout(arguments.callee,that,550);
+                    egret.setTimeout(loop3,that,550);
                 }
             }
             loop3();
+
+            function ontap(){
+                fillrandomDKZ(that.logo.graphics,w,h,that);
+            }
             if(that.mood!=='stinger'){
                 egret.setTimeout(that.finish,that,3500);
             }else{
-                function ontap(){
-                    fillrandomDKZ(that.logo.graphics,w,h,that);
-                }
+                
                 that.logo.touchEnabled=true;
                 that.logo.addEventListener(egret.TouchEvent.TOUCH_TAP,ontap,that);
                 that.logo.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,that.quit,that);
@@ -345,7 +347,7 @@ class Loading extends egret.DisplayObjectContainer{
                 context.endFill();
                 i++;
                 if(i<50){
-                    egret.setTimeout(arguments.callee,that,50);
+                    egret.setTimeout(loop,that,50);
                 }
             }
             loop();
@@ -428,6 +430,8 @@ class Loading extends egret.DisplayObjectContainer{
             var y=tool.getXY(e).y;
             if(x>tool.stageW/2-50&&x<tool.stageW/2+50&&y>tool.stageH-100){
                 // doStinger(context);
+                var coldpane=new ColdPane();
+                context.addChild(coldpane);
             }
         }
         function doStinger(context){
@@ -445,7 +449,7 @@ class Loading extends egret.DisplayObjectContainer{
     }
 
     quit(){
-        console.log('quit stinger')
+        tool.log('quit stinger')
         this.parent.removeChild(this);
     }
 
