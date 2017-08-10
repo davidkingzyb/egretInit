@@ -17,7 +17,6 @@ class tool{
 	static stageW; 
 	static stageH;
 
-
 	static setWH(that){
         //@that GameContainer
 
@@ -30,7 +29,12 @@ class tool{
 
 
     static log(...args){
+        egret.log(args[0]);
+        console.log.apply(this,args);
+        
+    }
 
+    static debug(...args){
         var class2type = {};
         "Boolean Number String Function Array Date RegExp Object Error".split(" ").forEach(function(e, i) {
             class2type["[object " + e + "]"] = e.toLowerCase();
@@ -48,15 +52,20 @@ class tool{
         var output = '';
         for (var i = 0; i < args.length; i++) {
             if (_typeof(args[i]) === 'object') {
-                output += JSON.stringify(args[i], null, 4) + '\n';
+                try{
+                   output += JSON.stringify(args[i], null, 4) + '\n'; 
+               }catch(e){
+                   output+=args[i]+' ';
+               }
+                
             } else {
                 output += args[i] + ' ';
             }
         }
-
-        // console.log(output);
-        egret.log(output)
+        egret.log(output);
+        console.log.apply(this,args);
     }
+
 	static initBitmap(texture,x?,y?,ax?,ay?){
         var bm = new egret.Bitmap();
         bm.texture = RES.getRes(texture);
@@ -199,59 +208,88 @@ class tool{
         btn.addEventListener(egret.TouchEvent.TOUCH_END,end,that);
         btn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,releaseoutside,that);
     }
-    static setBestScore(score){
-        var bestScore;
-        if(egret.localStorage.getItem('bestScore')){
-            bestScore=Number(egret.localStorage.getItem('bestScore'));
-            if(score>bestScore){
-                bestScore=score;
-                egret.localStorage.setItem('bestScore',bestScore+'');
-            }
-        }else{
-            bestScore=score;
-            egret.localStorage.setItem('bestScore',bestScore+'');
-
+    static btnLongPress(btn,time,endfunc,that){
+        function touchBegin(){
+            btn['$long_press_timeout_id']=egret.setTimeout(onTimeout,this,time);
         }
-        return bestScore;
-    }
 
-    static localStorage(name,value?){
-        if(value===null){
-            var vobj={'d':null};
-            egret.localStorage.setItem(name,JSON.stringify(vobj));
-            return value;
+        function onTimeout(){
+            btn.touchEnabled=false;
+            btn.removeEventListener(egret.TouchEvent.TOUCH_BEGIN,touchBegin,that);
+            btn.removeEventListener(egret.TouchEvent.TOUCH_END,touchEnd,that);
+            btn.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,touchEnd,that);
+            endfunc.call(that);
         }
-        else if(value){
-            var vobj={'d':value};
-            egret.localStorage.setItem(name,JSON.stringify(vobj));
-            return value;
-        }else{
-            var vstr=egret.localStorage.getItem(name);
-            if(vstr){
-                var r=JSON.parse(vstr);
-                return r.d;
-            }else{
-                return null;
+
+        function touchEnd(){
+            if(btn['$long_press_timeout_id']){
+                egret.clearTimeout(btn['$long_press_timeout_id']);
+                btn['$long_press_timeout_id']=null;
             }
         }
+
+        btn.touchEnabled=true;
+        btn.addEventListener(egret.TouchEvent.TOUCH_BEGIN,touchBegin,that);
+        btn.addEventListener(egret.TouchEvent.TOUCH_END,touchEnd,that);
+        btn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,touchEnd,that);
     }
 
-    static setFullWidthObj(obj,w?,h?){
-        if(obj){
-            var width=w||obj.texture.textureWidth;
-            var height=h||obj.texture.textureHeight;
-            obj.width=tool.stageW;
-            obj.height=tool.stageW*height/width;
-        }
-    }
-    static setBgWH(bg){
-        if(bg){
-            bg.width=tool.stageW;
-            bg.height=tool.stageH;
-        }
+    static imgLoader(url,cb,that){
+        var loader = new egret.ImageLoader();
+        loader.addEventListener(egret.Event.COMPLETE, cb, that);
+        loader.load(url);
     }
 
-    // static term=window['terminal'];
-    // static wtf=window['wtf'];
+    static initBitmapFromLoader(loaderevent){
+        var loader=loaderevent.target;
+        var texture = new egret.Texture();
+        texture.bitmapData = loader.data;
+        var bm=new egret.Bitmap(texture)
+        return bm;
+    }
+
+    static resLoader(resoure,context?,onComplete?,onError?,onProgress?){
+        var that=context||this;
+        var onResourceProgress=function(e){
+            onProgress&&onProgress.call(that,e);
+        };
+        var onResourceLoadComplete=function(e){
+            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, onResourceLoadComplete, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, onResourceLoadError, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, onResourceProgress, this);
+            console.log(resoure,'complete')
+            onComplete&&onComplete.call(that,e);
+        }
+        var onResourceLoadError=function(e){
+            RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, onResourceLoadComplete, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, onResourceLoadError, this);
+            RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, onResourceProgress, this);
+            console.log(resoure,'Error',e)
+            onError&&onError.call(that,e);
+        }
+        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, onResourceLoadComplete, this);
+        RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, onResourceLoadError, this);
+        RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, onResourceProgress, this);
+        RES.loadGroup(resoure);
+    }
+
+    static storage(name?,value?){
+        return wtf.localStorage(name,value);
+    }
+
+    static is_ios_sound_tap=false;
+    static initBgmTap(func,context){
+        var onIOSSoundTap=function(e){
+            tool.is_ios_sound_tap=true;
+            func.call(context);
+        }
+        if((wtf.ua.indexOf('ipad')>0||wtf.ua.indexOf('iphone')>0)&&!tool.is_ios_sound_tap){
+            tool.log('init ios sound tap');
+            context.touchEnabled=true;
+            context.once(egret.TouchEvent.TOUCH_BEGIN,onIOSSoundTap,this);
+        }else{
+            func.call(context);
+        }
+    }
 
 }

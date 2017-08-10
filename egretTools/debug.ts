@@ -164,13 +164,12 @@ module debug{
         //egret.Profiler.getInstance().run();
     }
     export function debuging(){
-        tool['test']={};
     }
 
     export function unitTest(func,context,argsarr=[],funcname='test'){
-        if(tool.test){
+        if(window){
             tool.log('unit test: '+funcname+'()')
-            tool.test[funcname]=function(args){
+            window[funcname]=function(args){
                 var applyargs;
                 if(args){
                     applyargs=args;

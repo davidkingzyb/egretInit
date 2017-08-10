@@ -46,6 +46,7 @@ class component{
         sp.addChild(value);
         return {"btn":sp,"bg":bg,"border":border,"text":value};
     }
+
     static airBtnPress(airbtn,callback,that,startfunc?){
         function begin(){
             airbtn.bg.alpha=.3;
@@ -65,6 +66,7 @@ class component{
         airbtn.btn.addEventListener(egret.TouchEvent.TOUCH_END,end,that);
         airbtn.btn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE,releaseoutside,that);
     }
+
     static ScorePane(score){
         var lenscore=score.toString().length>1?score.toString().length:1.5;
         var scorepane=new egret.DisplayObjectContainer();
@@ -74,6 +76,7 @@ class component{
         tool.addChildren([title,scoretf,retrybtn.btn],scorepane);
         return {'scorepane':scorepane,'title':title,'scoretf':scoretf,'retrybtn':retrybtn};
     }
+    
     static initScorePane(score,context,callback){
         var displayscore=score;
         var startscore=0;

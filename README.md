@@ -12,9 +12,7 @@
 
 * **[demo](https://davidkingzyb.github.io/egretInit)** An egret demo game build by egretInit 
 
-* **[egretInit](#egretinit-1)** An example of egret project base on egret 2.5.x
-
-* **[Iso](#iso)** egret isometric projection library.
+* **egretTool** egret utils
 
 ***
 
@@ -24,11 +22,9 @@
 
 * **[component.ts](#componentts)** some useful components like air button
 
-* **[animation.ts](#animationts)** Time-based Animation
+* **[Animation.ts](#animationts)** Time-based Animation
 
-* **[loading.ts](#loadingts)** DKZ loading panel
-
-* **[wtf.ts](#wtfts)** web tool functions 
+* **[Loading.ts](#loadingts)** DKZ loading panel
 
 * **[resource.py](#resourcepy)** create resource.json automatically
 
@@ -49,8 +45,6 @@ some useful tools for egret
 debug egret project
 
 ```
-debug.debuging()
-
 debug.showPosition(target,context)
 
 debug.showAllPosition(context)
@@ -68,9 +62,11 @@ tool.stageW
 
 tool.stageH
 
+tool.setWH(that)
+
 tool.log(...args)
 
-tool.setWH(that)
+tool.debug(...args)
 
 tool.initBitmap(texture,x?,y?,ax?,ay?)
 
@@ -111,29 +107,18 @@ tool.randomInt(n)
 
 tool.btnPress(btn,endfunc,that,presstexture?,texture?,startfunc?)
 
-tool.setBestScore(score)
+tool.btnLongPress(btn,time,endfunc,that)
 
-tool.localStorage(name,value?)
+tool.storage(name?,value?)
 
-tool.setFullWidthObj(obj,w?,h?)
+tool.imgLoader(url,cb,that)
 
-tool.setBgWH(bg)
-```
+tool.initBitmapFromLoader(loaderevent)
 
-### wtf.ts
+tool.resLoader(resoure,context?,onComplete?,onError?,onProgress?)
 
-web tool functions
+tool.initBgmTap(func,context)
 
-```
-wtf.get(url, callback, onerror?)
-
-wtf.post(url, data, callback, onerror?, content_type?)
-
-wtf.reqstr(o)
-
-wtf.urlquery(name, url)
-
-wtf.typeOf(o)
 ```
 
 ### component.ts
@@ -155,13 +140,19 @@ Time-base Animation
 solve fps drop problems when using Frame-based Animation
 
 ```
-this.enterframe=new animation(this);
-this.enterframe.onenterframe(this.animateObj);
-this.enterframe.start();
+this.anmt=new Animation();
+this.anmt.on(this.anmtObj,this);
+this.anmt.off(this.anmtObj);
 
-this.enterframe.offenterframe(this.animateObj);
-this.enterframe.pause();
-this.enterframe.stop();
+this.anmt.start();
+this.anmt.pause();
+this.anmt.stop();
+
+//old one Container
+this.anmt=new Animation(this);
+this.anmt.onenterframe(this.anmtObj);
+this.anmt.offenterframe(this.anmtObj);
+
 ```
 
 ### loading.ts
@@ -176,17 +167,8 @@ standard naming rule use file name as texture name
 
 sprite sheet must be named like /^\w*SS.json$/
 
-### update.py
 
-update egretInit automatically
 
-### Iso
-
-egret isometric projection library.
-
-create by may
-
-[how to use?](http://davidkingzyb.github.io/blogmd/8.html)
 
 
 

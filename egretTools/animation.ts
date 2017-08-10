@@ -13,18 +13,51 @@
 // Time-base Animation
 
 
-class animation {
+class Animation {
     static FPS = 30;
     acc = 0;
-    dt = Number((1000 / animation.FPS).toFixed(1));
+    dt = Number((1000 / Animation.FPS).toFixed(1));
     callback;
     context;
 
-    constructor(context) {
-        this.register(this.loop,context);
+    constructor(context?) {
+        if(context){
+            this.register(this.loop,context);
+        }else{
+            this.init()
+        }
+        
     }
 
     animationArr=[];
+    contextArr=[];
+
+    //new api, global context
+
+    on(func,context?){
+        if(this.animationArr.indexOf(func)===-1){
+            this.animationArr.push(func);
+            this.contextArr.push(context);
+        }
+    }
+    off(func){
+        var index=this.animationArr.indexOf(func);
+        if(index!==-1){
+            this.animationArr.splice(index,1);
+            this.contextArr.splice(index,1);
+        }
+    }
+
+    init(){
+        this.callback=function(){
+            for(var i=0;i<this.animationArr.length;i++){
+                this.animationArr[i].call(this.contextArr[i]);
+            }
+        }
+        this.acc=0;
+    }
+
+    //old api, only one context
 
     onenterframe(func){
         if(this.animationArr.indexOf(func)===-1){
@@ -55,13 +88,7 @@ class animation {
         this.stop();
     }
 
-    handle(d) {
-        this.acc += d;
-        while (this.acc >= this.dt) {
-            this.callback.call(this);
-            this.acc -= this.dt;
-        }
-    }
+    //ctrl
 
     start() {
         egret.Ticker.getInstance().register(this.handle, this);
@@ -71,7 +98,8 @@ class animation {
         egret.Ticker.getInstance().unregister(this.handle, this);
         this.acc = 0;
         this.framerate = 30;
-        this.animationArr=[]
+        this.animationArr=[];
+        this.contextArr=[];
     }
 
     pause() {
@@ -82,8 +110,15 @@ class animation {
         egret.Ticker.getInstance().register(this.handle, this);
     }
 
+    handle(d) {
+        this.acc += d;
+        while (this.acc >= this.dt) {
+            this.callback.call(this);
+            this.acc -= this.dt;
+        }
+    }
     set framerate(fps) {
-        animation.FPS = fps;
+        Animation.FPS = fps;
         this.dt = Number((1000 / fps).toFixed(1));
     }
 

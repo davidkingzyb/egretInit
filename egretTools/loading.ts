@@ -21,11 +21,10 @@ class Loading extends egret.DisplayObjectContainer{
 
     constructor(mood?){
         super();
-        this.addEventListener(egret.Event.ADDED_TO_STAGE,this.onAddToStage,this);
+        this.once(egret.Event.ADDED_TO_STAGE,this.onAddToStage,this);
         this.mood=mood||'loading';
     }
     onAddToStage(event){
-        this.removeEventListener(egret.Event.ADDED_TO_STAGE,this.onAddToStage,this);
         tool.setWH(this);
         this.createView();
     }
@@ -386,10 +385,10 @@ class Loading extends egret.DisplayObjectContainer{
     current=0;
     total=0;
 
-    public setProgress(current, total):void {
+    public setProgress(current, total, group_name?):void {
         this.current = current;
         this.total = total;
-        this.textField.text = "Loading..." + current + "/" + total;
+        this.textField.text = "Loading "+group_name+" " + current + "/" + total;
         tool.resetAnchor(this.textField,.5,1);
     }
 
@@ -428,8 +427,11 @@ class Loading extends egret.DisplayObjectContainer{
             }
             var x=tool.getXY(e).x;
             var y=tool.getXY(e).y;
-            if(x>tool.stageW/2-50&&x<tool.stageW/2+50&&y>tool.stageH-100){
+            if(x>tool.stageW/2-50&&x<tool.stageW/2+50&&y>tool.stageH-100&&Loading.is_stinger){
+                Loading.is_stinger=false;
                 // doStinger(context);
+                var coldpane=new ColdPane();
+                context.addChild(coldpane);
             }
         }
         function doStinger(context){
@@ -439,12 +441,15 @@ class Loading extends egret.DisplayObjectContainer{
             //     context.removeChild(t);
             // }
                 var loadingView=new Loading('stinger');
-                context.addChild(loadingView);           
+                context.addChild(loadingView); 
+                connect.logout();//test          
             
         }
         context.touchEnabled=true;
         context.addEventListener(egret.TouchEvent.TOUCH_BEGIN,tb,context);        
     }
+
+    static is_stinger=true;
 
     quit(){
         tool.log('quit stinger')
