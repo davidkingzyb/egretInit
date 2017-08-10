@@ -133,7 +133,7 @@ component.airBtnPress(airbtn,callback,that,startfunc?)
 component.initScorePane(score,context,callback)
 ```
 
-### animation.ts
+### Animation.ts
 
 Time-base Animation 
 
@@ -155,7 +155,7 @@ this.anmt.offenterframe(this.anmtObj);
 
 ```
 
-### loading.ts
+### Loading.ts
 
 loading panel and new stinger panel
 
