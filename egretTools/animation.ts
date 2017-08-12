@@ -14,100 +14,115 @@
 
 
 class Animation {
+    static MODE='startTick';
     static FPS = 30;
     acc = 0;
     dt = Number((1000 / Animation.FPS).toFixed(1));
     callback;
     context;
+    timestamp;
 
-    constructor(context?) {
-        if(context){
-            this.register(this.loop,context);
-        }else{
+    animationArr = [];
+    contextArr = [];
+
+    constructor(context ? ) {
+        if (context) {
+            this.initCon(context);
+        } else {
             this.init()
         }
-        
+
     }
 
-    animationArr=[];
-    contextArr=[];
-
-    //new api, global context
-
-    on(func,context?){
-        if(this.animationArr.indexOf(func)===-1){
+    on(func, context ? ) {
+        if (this.animationArr.indexOf(func) === -1) {
             this.animationArr.push(func);
-            this.contextArr.push(context);
-        }
-    }
-    off(func){
-        var index=this.animationArr.indexOf(func);
-        if(index!==-1){
-            this.animationArr.splice(index,1);
-            this.contextArr.splice(index,1);
-        }
-    }
-
-    init(){
-        this.callback=function(){
-            for(var i=0;i<this.animationArr.length;i++){
-                this.animationArr[i].call(this.contextArr[i]);
+            if(context){
+                this.contextArr.push(context);
+            }else{
+                this.contextArr.push(this.context);
             }
         }
-        this.acc=0;
     }
 
-    //old api, only one context
-
-    onenterframe(func){
-        if(this.animationArr.indexOf(func)===-1){
-            this.animationArr.push(func);
-        }
-    }
-    offenterframe(func){
-        var index=this.animationArr.indexOf(func);
-        if(index!==-1){
-            this.animationArr.splice(index,1);
-        }
-    }
-    loop(){
-        for(var i=0;i<this.animationArr.length;i++){
-            this.animationArr[i].call(this.context);
+    off(func) {
+        var index = this.animationArr.indexOf(func);
+        if (index !== -1) {
+            this.animationArr.splice(index, 1);
+            this.contextArr.splice(index, 1);
         }
     }
 
-    register(callback, context) {
-        this.callback = callback;
-        this.context = context;
-        this.acc = 0;
+    //old api, only one context **abandon**
+    onenterframe(func) {
+        this.on(func);
     }
 
-    unregister() {
-        this.callback = null;
-        this.context = null;
-        this.stop();
+    offenterframe(func) {
+        this.off(func);
     }
 
     //ctrl
 
     start() {
-        egret.Ticker.getInstance().register(this.handle, this);
+        if(Animation.MODE=='startTick'){
+            this.timestamp=egret.getTimer();
+            egret.startTick(this.handleStartTick,this);
+        }else{
+            egret.Ticker.getInstance().register(this.handle, this);
+        } 
     }
 
     stop() {
-        egret.Ticker.getInstance().unregister(this.handle, this);
-        this.acc = 0;
-        this.framerate = 30;
-        this.animationArr=[];
-        this.contextArr=[];
+        if(Animation.MODE=='startTick'){
+            egret.stopTick(this.handleStartTick,this);
+        }else{
+            egret.Ticker.getInstance().unregister(this.handle, this);
+        }
+        this.halt();
     }
 
     pause() {
-        egret.Ticker.getInstance().unregister(this.handle, this);
+        if(Animation.MODE=='startTick'){
+            egret.stopTick(this.handleStartTick,this);
+        }else{
+            egret.Ticker.getInstance().unregister(this.handle, this);
+        }
     }
 
     resume() {
-        egret.Ticker.getInstance().register(this.handle, this);
+        if(Animation.MODE=='startTick'){
+            this.timestamp=egret.getTimer();
+            egret.startTick(this.handleStartTick,this);
+        }else{
+            egret.Ticker.getInstance().register(this.handle, this);
+        }
+    }
+
+    halt(){
+        this.acc = 0;
+        this.animationArr = [];
+        this.contextArr = [];
+        this.context=null
+    }
+
+    init() {
+        this.callback = () => {
+            for (var i = 0; i < this.animationArr.length; i++) {
+                this.animationArr[i].call(this.contextArr[i]);
+            }
+        }
+        this.acc = 0;
+    }
+
+    initCon(context) {
+        this.callback = () => {
+            for (var i = 0; i < this.animationArr.length; i++) {
+                this.animationArr[i].call(this.context);
+            }
+        }
+        this.context = context;
+        this.acc = 0;
     }
 
     handle(d) {
@@ -117,23 +132,21 @@ class Animation {
             this.acc -= this.dt;
         }
     }
+
+    handleStartTick(ts){
+        var timespace=ts-this.timestamp;
+        this.acc+=timespace;
+        while (this.acc >= this.dt) {
+            this.callback.call(this);
+            this.acc -= this.dt;
+        }
+        this.timestamp=egret.getTimer();
+        return false;
+    }
+
     set framerate(fps) {
         Animation.FPS = fps;
         this.dt = Number((1000 / fps).toFixed(1));
     }
 
-    static tween(valueName,startV,endV,time,context){
-        var step=(endV-startV)/(time/10);
-        function doTween(){
-            context[valueName]+=step;
-            if(step>0&&context[valueName]>=endV){
-                egret.clearInterval(interval);
-            }
-            if(step<0&&context[valueName]<=endV){
-                egret.clearInterval(interval);
-            }
-        }
-        var interval=egret.setInterval(doTween,context,10);
-        return interval;
-    }
 }
